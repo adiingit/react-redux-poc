@@ -1,4 +1,5 @@
 import {
+  redA700,
   cyan500, cyan700,
   grey100, grey300, grey400, grey500,
   pinkA200, red900,
@@ -30,6 +31,7 @@ export default {
     accent1Color: pinkA200,
     accent2Color: grey100,
     accent3Color: grey500,
+    colorRed: redA700,
     textColor: darkBlack,
     iconColor: sickSecondaryColor,
     alternateTextColor: white,

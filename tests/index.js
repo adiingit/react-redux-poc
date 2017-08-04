@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import * as SICKPlatform from '../src'
-import * as WidgetConfig from '../src/WidgetsConfig'
 import AppBar from '../src/components/AppBar'
-import GaugeWidget from '../src/components/GaugeWidget/Gauge'
 import theme from './theme'
 import SICKIntlProvider from './components/Localization'
 
@@ -28,25 +26,17 @@ SICKPlatform.configure({
 })
 
 
-
-
 // React method to create AppBar component
 const App = () => (
     <div>
-    <AppBar url = { 'http://localhost:3000/system/systemList' } />
-    <GaugeWidget/>
-    </div>
+    <AppBar url = { 'http://10.0.8.165:3000/system/systemList' } ></AppBar>
+  </div>
 )
 
-WidgetConfig.configureGaugeWidget('http://localhost:3000/gauge/ranges').then(function(s){
-  ReactDOM.render(
+ReactDOM.render(
     <App />,
     document.getElementById('container')
-)  
-})
-
-
-
+)
 
 
 // Vanilla javascript method to create AppBar component

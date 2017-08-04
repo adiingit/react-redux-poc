@@ -11,10 +11,3 @@ export function getBoundingBoxDimensions (crossAxis, mainAxis, angle) {
     mainAxis: (absSin * crossAxis) + (absCos * mainAxis)
   }
 }
-
-export function getPointOnCircle(radius,centerX,centerY,angle){
-	return{
-		x:centerX + radius * Math.cos(angle * Math.PI / 180),
-		y:centerY + radius * Math.sin(angle * Math.PI / 180)
-	}
-}

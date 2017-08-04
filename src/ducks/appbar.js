@@ -12,7 +12,7 @@ export const UPDATE_SYSTEM = 'UPDATE_SYSTEM'
 // ------------------------------------
 const systemsReceived = (payload) => ({ type: SYSTEM_LIST_RECEIVED, payload })
 
-const updateSystem = (systemName,prvSystemName) => ({ type: UPDATE_SYSTEM, systemName ,prvSystemName})
+const updateSystem = (systemName) => ({ type: UPDATE_SYSTEM, systemName })
 
 export const getSystems = (url) => {
   return (dispatch) => {
@@ -26,9 +26,9 @@ export const getSystems = (url) => {
   }
 }
 
-export const switchSystem = (systemName,prvSystemName) => {
+export const switchSystem = (systemName) => {
   return (dispatch) => {
-    dispatch(updateSystem(systemName,prvSystemName))
+    dispatch(updateSystem(systemName))
   }
 }
 // ------------------------------------
@@ -37,12 +37,19 @@ export const switchSystem = (systemName,prvSystemName) => {
 const System = Record({
   systemName: '',
   systemLabel: 'Default System',
-  disabled: false
+  disabled: false,
+  systemImage: 'https://encrypted-tbn0.gstatic.com/images?' +
+  'q=tbn:ANd9GcTQehDUC9hh3QRSmuMdZuTpi7Q3s0TPNsXCKK7tJwSUiAKhNBI54A',
+  systemSensorLocation: [{"x": 10,"y" :20, state: 0},{"x": 15,"y": 30, state: 0}],
+  systemSensorCount: 0
+
+
 })
 
 const ACTION_HANDLERS = {
   [SYSTEM_LIST_RECEIVED]: (state, { payload }) => {
     let nextState = state
+
 
     let systemMap = OrderedMap()
 
@@ -58,20 +65,26 @@ const ACTION_HANDLERS = {
 
     return nextState
   },
-  [UPDATE_SYSTEM]: (state, { systemName ,prvSystemName}) => {
+  [UPDATE_SYSTEM]: (state, { systemName }) => {
     let nextState = state
 
     const systemLabel = nextState.get('systems').get(systemName)
     ? nextState.get('systems').get(systemName).systemLabel : ''
 
-    const prvSystemLabel = nextState.get('systems').get(prvSystemName)
-    ? nextState.get('systems').get(prvSystemName).systemLabel : ''
+    const systemImage = nextState.get('systems').get(systemName)
+      ? nextState.get('systems').get(systemName).systemImage : ''
+
+    const systemSensorLocation = nextState.get('systems').get(systemName)
+      ? nextState.get('systems').get(systemName).systemSensorLocation : ''
+
+    const systemSensorCount = nextState.get('systems').get(systemName)
+      ? nextState.get('systems').get(systemName).systemSensorCount : ''
 
     nextState = nextState.setIn(['selectedSystem', 'systemName'], systemName)
     nextState = nextState.setIn(['selectedSystem', 'systemLabel'], systemLabel)
-    nextState = nextState.setIn(['prvSelectedSystem', 'systemName'], prvSystemName)
-    nextState = nextState.setIn(['prvSelectedSystem', 'systemLabel'], prvSystemLabel)
-
+    nextState = nextState.setIn(['selectedSystem', 'systemImage'], systemImage)
+    nextState = nextState.setIn(['selectedSystem', 'systemSensorLocation'], systemSensorLocation)
+    nextState = nextState.setIn(['selectedSystem', 'systemSensorCount'], systemSensorCount)
     return nextState
   }
 }

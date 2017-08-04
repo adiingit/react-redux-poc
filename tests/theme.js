@@ -1,5 +1,5 @@
-import {lightBlue700, lightBlue800, lightBlue900,blueA700,
-        yellowA700, orangeA400, blueGrey50, lightBlue100, darkBlack , greenA700,redA700} from 'material-ui/styles/colors'
+import {lightBlue700, lightBlue800, lightBlue900,
+        yellowA700, orangeA400, blueGrey50, lightBlue100, darkBlack} from 'material-ui/styles/colors'
 
 const palette = {
   primary1Color: lightBlue700,
@@ -11,9 +11,6 @@ const palette = {
   accent2Color: yellowA700,
   accentYellow: yellowA700,
   accentOrange: orangeA400,
-  accentRed:redA700 ,
-  accentGreen:greenA700,
-  accentBlue:blueA700,
   canvasColor: blueGrey50,
   titleColor: lightBlue100,
   iconColor: '#6C6D6E',
