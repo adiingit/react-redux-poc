@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
 import * as d3 from 'd3'
 import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
 import theme from '../../../tests/theme'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
+import {renderCurrentReading,removeCurrentReading} from '../../ducks/gauge'
 import {getPointOnCircle} from '../../utils/shape'
 
 const mapStateToProps = (state) => {
@@ -11,9 +13,12 @@ const mapStateToProps = (state) => {
         max: state.appbar.size?state.appbar.get('systems').size:100,
         currentValue : state.appbar.size?Number(state.appbar.get('selectedSystem').get('systemName'))||0:0,
         previousValue : (state.appbar.size && state.appbar.get('prvSelectedSystem'))?Number(state.appbar.get('prvSelectedSystem').get('systemName'))||0:0,
-        rangeData : state.config.gauge?state.config.gauge.get('range'):[]
+        rangeData : state.config.gauge?state.config.gauge.get('range'):[],
+        buttonData : state.gauge.get('raisedButton')
     }
 }
+
+const mapDispatchToProps = {renderCurrentReading,removeCurrentReading};
 
 const palette = theme.palette;
 
@@ -33,7 +38,7 @@ const svgStyle = {
 }
 
 const gaugeStyle = {
-	height: 500,
+	height: 250,
     width: 500,
     radius:250,
     innerRadius:100
@@ -47,22 +52,30 @@ export class GaugeWidget extends SICKComponent {
         previousValue:PropTypes.number
 	}
 
-   /* static defaultProps = {
-        rangeData : [{"min": 0 ,'max':20,'color':palette.accentBlue},
-            { "min": 20 ,'max':70,'color':palette.accentYellow},
-            { "min": 70 ,'max':100,'color':palette.accentRed}
-        ]
-    }*/
-
     constructor(props) {
         super(props);
         this.showValue = this.showValue.bind(this);
+        this.buttonData = undefined;
+        this.rendered = false;
+    }
+
+    showValue(){
+        const currentValue = this.props.currentValue;
+        const perUnitAngle = 180/this.props.max;
+        this.props.renderCurrentReading({x:d3.event.pageX,y:d3.event.pageY,label:currentValue});
+        /*d3.select('g.pointer')
+        .append('text')
+        .attr("x",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).x})
+        .attr("dy",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).y})
+        .text(currentValue)
+        .attr("stroke",palette.textColor);*/
     }
 
     componentDidUpdate(){
+        this.buttonData = this.props.buttonData;
         const perUnitAngle = 180/this.props.max;
         const angle = this.props.currentValue * perUnitAngle;
-
+        const mouseEvent = false;
         const pointer=d3.select("g.pointer")
         const needle=pointer.select("#needle")
 
@@ -70,22 +83,11 @@ export class GaugeWidget extends SICKComponent {
             .duration(2000)
             .attr('transform',`rotate(${angle})`);
 
-        needle.on('mouseover',this.showValue);
-
-        needle.on('mouseout',function(){
-            pointer.select('text').remove();
-        });    
-    }
-
-    showValue(){
-        const currentValue = this.props.currentValue;
-        const perUnitAngle = 180/this.props.max;
-        d3.select("g.pointer")
-        .append('text')
-        .attr("x",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).x})
-        .attr("dy",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).y})
-        .text(currentValue)
-        .attr("stroke",palette.textColor);
+        if(!this.rendered){    
+            needle.on('mouseout',this.showValue);
+            needle.on('mouseover',this.props.removeCurrentReading); 
+            this.rendered=true;   
+        }
     }
 
     componentDidMount() {
@@ -100,13 +102,7 @@ export class GaugeWidget extends SICKComponent {
                 value : range.max - range.min,
                 color : colors[i]
             }
-        });/*[{"value": 25 ,'color':palette.accentBlue},
-            { "value": 25 ,'color':palette.accentGreen},
-            { "value": 25 ,'color':palette.accentYellow},
-            { "value": 25 ,'color':palette.accentRed}
-        ];*/
-
-        
+        });
 
         var vis = d3.select("#gauge-widget svg")
             .data([data])
@@ -182,11 +178,14 @@ export class GaugeWidget extends SICKComponent {
         	<div id="gauge-widget" style={divStyle}>
             	<Paper circle = {true} style={pageStyle} zDepth={2}>
             		<svg style={svgStyle}/>
+                    {this.buttonData && 
+                        <RaisedButton 
+                        style={{position:'absolute',top:this.buttonData.y,left:this.buttonData.x}}
+                        label={this.buttonData.label}/>}
             	</Paper> 
-                
             </div>
         )
     }
 }
 
-export default connect(mapStateToProps, {})(GaugeWidget);
+export default connect(mapStateToProps,mapDispatchToProps)(GaugeWidget);

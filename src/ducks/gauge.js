@@ -1,41 +1,37 @@
-import { Map, OrderedMap, Record ,List} from 'immutable'
-import { get } from '../utils/httpRequest'
+import { Map } from 'immutable'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const GAUGE_RANGES_RECEIVED = 'GAUGE_RANGES_RECEIVED'
+export const SHOW_GAUGE_READING = 'SHOW_GAUGE_READING'
+export const HIDE_GAUGE_READING = 'HIDE_GAUGE_READING'
 // ------------------------------------
 // Actions
 // ------------------------------------
-const rangesReceived = (ranges) => ({ type: GAUGE_RANGES_RECEIVED,ranges })
 
-export const getRanges = (url) => {
-  return (dispatch) => {
-    return get(url)
-      .then((ranges) => {
-        dispatch(rangesReceived(ranges))
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+export const renderCurrentReading = (buttonData) => {
+    return { type: SHOW_GAUGE_READING, buttonData };
+}
+
+export const removeCurrentReading = () => {
+    return { type: HIDE_GAUGE_READING };
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-/*const range = Record({
-  "id":0,"min": 0 ,"max":0
-})*/
 
 const ACTION_HANDLERS = {
-  [GAUGE_RANGES_RECEIVED]: (state, { ranges }) => {
+  [SHOW_GAUGE_READING]: (state, data) => {
     let nextState = state
-    if(ranges && ranges.length){
-      //const rangeList = List(ranges.map(value=>new range(value)));
-      nextState = nextState.setIn(['range'], List(ranges));
+    if(data){
+      nextState = nextState.setIn(['raisedButton'], data.buttonData);
     }
+    return nextState
+  },
+  [HIDE_GAUGE_READING]: (state, data) => {
+    let nextState = state
+    nextState = nextState.setIn(['raisedButton'], undefined);
     return nextState
   }
 }
@@ -47,6 +43,5 @@ const initialState = new Map()
 
 export default function reducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
   return handler ? handler(state, action) : state
 }

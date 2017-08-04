@@ -6,5 +6,6 @@ import * as gauge from './gauge'
 export default {
   config,
   userSettings,
-  appbar
+  appbar,
+  gauge
 }

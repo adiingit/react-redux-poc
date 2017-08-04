@@ -71,6 +71,4 @@ app.listen(port, '0.0.0.0', function (err) {
     console.log(err)
     return
   }
-
-  console.log('Listening at http://0.0.0.0:' + port)
 })

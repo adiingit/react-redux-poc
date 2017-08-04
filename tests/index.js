@@ -33,12 +33,12 @@ SICKPlatform.configure({
 // React method to create AppBar component
 const App = () => (
     <div>
-    <AppBar url = { 'http://localhost:3000/system/systemList' } />
+    <AppBar url = { 'http://10.0.30.161:3000/system/systemList' } />
     <GaugeWidget/>
     </div>
 )
 
-WidgetConfig.configureGaugeWidget('http://localhost:3000/gauge/ranges').then(function(s){
+WidgetConfig.configureGaugeWidget('http://10.0.30.161:3000/gauge/ranges').then(function(s){
   ReactDOM.render(
     <App />,
     document.getElementById('container')
