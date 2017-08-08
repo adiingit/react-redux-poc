@@ -6,8 +6,7 @@ import { get } from '../utils/httpRequest'
 // ------------------------------------
 export const ERROR = 'ERROR'
 export const FETCH_GAUGE_READING = 'FETCH_GAUGE_READING'
-export const SHOW_GAUGE_READING = 'SHOW_GAUGE_READING'
-export const HIDE_GAUGE_READING = 'HIDE_GAUGE_READING'
+export const TOGGLE_GAUGE_READING = 'TOGGLE_GAUGE_READING'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -20,12 +19,8 @@ export const fetchCurrentReading = url => {
     }  
 }
 
-export const renderCurrentReading = (buttonData) => {
-    return { type: SHOW_GAUGE_READING, buttonData };
-}
-
-export const removeCurrentReading = () => {
-    return { type: HIDE_GAUGE_READING };
+export const renderCurrentReading = () => {
+    return { type: TOGGLE_GAUGE_READING };
 }
 
 // ------------------------------------
@@ -33,16 +28,9 @@ export const removeCurrentReading = () => {
 // ------------------------------------
 
 const ACTION_HANDLERS = {
-  [SHOW_GAUGE_READING]: (state, data) => {
+  [TOGGLE_GAUGE_READING]: (state, data) => {
     let nextState = state
-    if(data){
-      nextState = nextState.setIn(['raisedButton'], data.buttonData);
-    }
-    return nextState
-  },
-  [HIDE_GAUGE_READING]: (state, data) => {
-    let nextState = state
-    nextState = nextState.setIn(['raisedButton'], undefined);
+    nextState = nextState.setIn(['raisedButton'], !nextState.get('raisedButton'));
     return nextState
   },
   [FETCH_GAUGE_READING]: (state,data) => {

@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import theme from '../../../tests/theme'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
-import {renderCurrentReading,removeCurrentReading,fetchCurrentReading} from '../../ducks/gauge'
+import {renderCurrentReading,fetchCurrentReading} from '../../ducks/gauge'
 import {getPointOnCircle} from '../../utils/shape'
 
 const mapStateToProps = (state) => {
@@ -13,12 +13,12 @@ const mapStateToProps = (state) => {
         max: state.config.gauge?Math.max(...state.config.gauge.get('range').map((r)=>r.max)):100,
         min : state.config.gauge?Math.min(...state.config.gauge.get('range').map((r)=>r.min)):0,
         rangeData : state.config.gauge?state.config.gauge.get('range'):[],
-        buttonData : state.gauge.get('raisedButton'),
+        raisedButton : state.gauge.get('raisedButton'),
         currentValue : state.gauge.get('currentValue')
     }
 }
 
-const mapDispatchToProps = {renderCurrentReading,removeCurrentReading,fetchCurrentReading};
+const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};
 
 const palette = theme.palette;
 
@@ -50,16 +50,16 @@ const gaugeStyle = {
 export class GaugeWidget extends SICKComponent {
 
 	static PropTypes ={
+        min:PropTypes.number.isRequired,
         max:PropTypes.number.isRequired,
-        currentValue:PropTypes.number
+        rangeData:PropTypes.array.isRequired
 	}
 
     constructor(props) {
         super(props);
         const currentValue = this.props.min;
         this.showValue = this.showValue.bind(this);
-        this.buttonData = undefined;
-        this.rendered = false;
+        this.hideValue = this.hideValue.bind(this);
         this.updateReading = this.updateReading.bind(this); 
     }
 
@@ -73,18 +73,24 @@ export class GaugeWidget extends SICKComponent {
             needle.transition()
                 .duration(2000)
                 .attr('transform',`rotate(${angle})`);
+
+
         });
         
     }
 
     showValue(){
-        
-        this.props.renderCurrentReading({x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue || this.props.min});
+        this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};
+        this.props.renderCurrentReading();
+    }
+
+    hideValue(){
+        this.buttonData = undefined;
+        this.props.renderCurrentReading();
     }
 
     componentDidUpdate(){
-        
-        this.buttonData = this.props.buttonData;
+        this.buttonData = undefined;
     }
     
     componentWillMount(){
@@ -169,12 +175,8 @@ export class GaugeWidget extends SICKComponent {
             .attr("stroke",palette.textColor);
         }    
 
-        needle.on('mouseout',this.showValue);
-        needle.on('mouseover',this.props.removeCurrentReading); 
-
-        
-
-        
+        needle.on('mouseover',this.showValue);
+        needle.on('mouseout',this.hideValue); 
 
     }
 
