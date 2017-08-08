@@ -9,6 +9,9 @@ import SICKIntlProvider from './components/Localization'
 
 import mockData from './mock/mockFetch'
 
+
+window.baseUrl = 'http://localhost';
+
 SICKPlatform.registerTapEvents()
 
 SICKPlatform.configure({
@@ -33,12 +36,12 @@ SICKPlatform.configure({
 // React method to create AppBar component
 const App = () => (
     <div>
-    <AppBar url = { 'http://10.0.30.161:3000/system/systemList' } />
+    <AppBar url = { `${baseUrl}:3000/system/systemList` } />
     <GaugeWidget/>
     </div>
 )
 
-WidgetConfig.configureGaugeWidget('http://10.0.30.161:3000/gauge/ranges').then(function(s){
+WidgetConfig.configureGaugeWidget(`${baseUrl}:3000/gauge/ranges`).then(function(s){
   ReactDOM.render(
     <App />,
     document.getElementById('container')

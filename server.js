@@ -25,7 +25,11 @@ app.use(require('webpack-hot-middleware')(compiler))
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './tests/index.html'))
-})
+});
+
+app.get('/gauge/reading',(req,res)=>{
+  res.json(Math.ceil(Math.random()*100));
+});
 
 app.get('/gauge/details',(req,res)=>{
   res.json({title:'Gauge Widget',description:'Meter Gauge'});

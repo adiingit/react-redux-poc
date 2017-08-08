@@ -5,26 +5,28 @@ import RaisedButton from 'material-ui/RaisedButton'
 import theme from '../../../tests/theme'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
-import {renderCurrentReading,removeCurrentReading} from '../../ducks/gauge'
+import {renderCurrentReading,removeCurrentReading,fetchCurrentReading} from '../../ducks/gauge'
 import {getPointOnCircle} from '../../utils/shape'
 
 const mapStateToProps = (state) => {
     return {
-        max: state.appbar.size?state.appbar.get('systems').size:100,
-        currentValue : state.appbar.size?Number(state.appbar.get('selectedSystem').get('systemName'))||0:0,
-        previousValue : (state.appbar.size && state.appbar.get('prvSelectedSystem'))?Number(state.appbar.get('prvSelectedSystem').get('systemName'))||0:0,
+        max: state.config.gauge?Math.max(...state.config.gauge.get('range').map((r)=>r.max)):100,
+        min : state.config.gauge?Math.min(...state.config.gauge.get('range').map((r)=>r.min)):0,
         rangeData : state.config.gauge?state.config.gauge.get('range'):[],
-        buttonData : state.gauge.get('raisedButton')
+        buttonData : state.gauge.get('raisedButton'),
+        currentValue : state.gauge.get('currentValue')
     }
 }
 
-const mapDispatchToProps = {renderCurrentReading,removeCurrentReading};
+const mapDispatchToProps = {renderCurrentReading,removeCurrentReading,fetchCurrentReading};
 
 const palette = theme.palette;
 
 const divStyle = {
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 50,
+    overflowY:'hidden',
+    height:266
 };
 const pageStyle = {
     height: 500,
@@ -41,60 +43,59 @@ const gaugeStyle = {
 	height: 250,
     width: 500,
     radius:250,
-    innerRadius:100
+    innerRadius:100,
+    marginTop : 15
 };
 
 export class GaugeWidget extends SICKComponent {
 
 	static PropTypes ={
         max:PropTypes.number.isRequired,
-        currentValue:PropTypes.number,
-        previousValue:PropTypes.number
+        currentValue:PropTypes.number
 	}
 
     constructor(props) {
         super(props);
+        const currentValue = this.props.min;
         this.showValue = this.showValue.bind(this);
         this.buttonData = undefined;
         this.rendered = false;
+        this.updateReading = this.updateReading.bind(this); 
+    }
+
+    updateReading(){
+        this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=>{
+            
+            const perUnitAngle = 180/this.props.max;
+            const angle = this.props.currentValue * perUnitAngle;
+            const needle=d3.select("#needle")
+
+            needle.transition()
+                .duration(2000)
+                .attr('transform',`rotate(${angle})`);
+        });
+        
     }
 
     showValue(){
-        const currentValue = this.props.currentValue;
-        const perUnitAngle = 180/this.props.max;
-        this.props.renderCurrentReading({x:d3.event.pageX,y:d3.event.pageY,label:currentValue});
-        /*d3.select('g.pointer')
-        .append('text')
-        .attr("x",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).x})
-        .attr("dy",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+currentValue*perUnitAngle)).y})
-        .text(currentValue)
-        .attr("stroke",palette.textColor);*/
+        
+        this.props.renderCurrentReading({x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue || this.props.min});
     }
 
     componentDidUpdate(){
+        
         this.buttonData = this.props.buttonData;
-        const perUnitAngle = 180/this.props.max;
-        const angle = this.props.currentValue * perUnitAngle;
-        const mouseEvent = false;
-        const pointer=d3.select("g.pointer")
-        const needle=pointer.select("#needle")
-
-        needle.transition()
-            .duration(2000)
-            .attr('transform',`rotate(${angle})`);
-
-        if(!this.rendered){    
-            needle.on('mouseout',this.showValue);
-            needle.on('mouseover',this.props.removeCurrentReading); 
-            this.rendered=true;   
-        }
+    }
+    
+    componentWillMount(){
+        setInterval(this.updateReading,10000);
     }
 
     componentDidMount() {
         
         const pi = Math.PI;
         const perUnitAngle = 180/this.props.max;
-        const angle = this.props.currentValue * perUnitAngle;
+        const angle = this.props.min * perUnitAngle;
         const colors = [palette.accentBlue,palette.accentGreen,palette.accentYellow,palette.accentRed];
         const rangeData = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
         const data = rangeData.map((range,i)=>{
@@ -167,6 +168,11 @@ export class GaugeWidget extends SICKComponent {
             .text(function(d) { return d.max; })
             .attr("stroke",palette.textColor);
         }    
+
+        needle.on('mouseout',this.showValue);
+        needle.on('mouseover',this.props.removeCurrentReading); 
+
+        
 
         
 
