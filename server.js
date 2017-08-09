@@ -28,7 +28,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/gauge/reading',(req,res)=>{
-  res.json(Math.ceil(Math.random()*100));
+  const negative = Math.random()*0;
+  const positive = Math.random()*200;
+  res.json(Math.ceil(negative+positive));
 });
 
 app.get('/gauge/details',(req,res)=>{
@@ -55,7 +57,7 @@ app.get('/gauge/ranges',(req,res)=>{
     {
       id:4,
       min:75,
-      max:100
+      max:200
     }
   ]);
 });

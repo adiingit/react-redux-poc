@@ -26,13 +26,15 @@ const divStyle = {
     textAlign: 'center',
     marginTop: 50,
     overflowY:'hidden',
-    height:266
+    height:335
 };
 const pageStyle = {
-    height: 500,
-    width: 500,
+    height: 600,
+    width: 600,
     textAlign: 'center',
-    display: 'inline-block'
+    display: 'inline-block',
+    paddingTop : 50,
+    marginTop:10
 };
 
 const svgStyle = {
@@ -43,8 +45,8 @@ const gaugeStyle = {
 	height: 250,
     width: 500,
     radius:250,
-    innerRadius:100,
-    marginTop : 15
+    innerRadius:100
+    
 };
 
 export class GaugeWidget extends SICKComponent {
@@ -66,15 +68,13 @@ export class GaugeWidget extends SICKComponent {
     updateReading(){
         this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=>{
             
-            const perUnitAngle = 180/this.props.max;
+            const perUnitAngle = 180/(this.props.max-this.props.min);
             const angle = this.props.currentValue * perUnitAngle;
             const needle=d3.select("#needle")
 
             needle.transition()
                 .duration(2000)
                 .attr('transform',`rotate(${angle})`);
-
-
         });
         
     }
@@ -100,8 +100,7 @@ export class GaugeWidget extends SICKComponent {
     componentDidMount() {
         
         const pi = Math.PI;
-        const perUnitAngle = 180/this.props.max;
-        const angle = this.props.min * perUnitAngle;
+        const perUnitAngle = 180/(this.props.max-this.props.min);
         const colors = [palette.accentBlue,palette.accentGreen,palette.accentYellow,palette.accentRed];
         const rangeData = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
         const data = rangeData.map((range,i)=>{
@@ -111,25 +110,24 @@ export class GaugeWidget extends SICKComponent {
             }
         });
 
-        var vis = d3.select("#gauge-widget svg")
-            .data([data])
+        const svg = d3.select("#gauge-widget svg");
+        const vis=svg.data([data])
             .attr("width", gaugeStyle.width)
             .attr("height", gaugeStyle.height)
             .append("svg:g")
             .attr("transform", "translate(" + gaugeStyle.radius + "," + gaugeStyle.radius + ")")
 
-        var arc = d3.arc()
+        const arc = d3.arc()
             .outerRadius(gaugeStyle.radius)
             .innerRadius(gaugeStyle.innerRadius);
 
-        var pie = d3.pie()
+        const pie = d3.pie()
             .value(function(d) { return d.value; })
             .startAngle(-90 * (pi / 180))
             .endAngle(90 * (pi / 180))
-            .padAngle(0.02)
             .sort(null);
 
-        var arcs = vis.selectAll("g.slice")
+        const arcs = vis.selectAll("g.slice")
             .data(pie)
             .enter()
             .append("svg:g")
@@ -141,13 +139,16 @@ export class GaugeWidget extends SICKComponent {
             .attr("class", "range")
             .attr("id",function(d,i){return `range-${i}`});
 
-        var needle = vis.append('g')
+        const needle = vis.append('g')
             .attr('class','pointer')
             .append("path")
             .attr("id","needle")
             .attr("d", "M0 0 L-240 0")
             .attr("stroke-width",2)
-            .attr("stroke",palette.textColor)
+            .attr("stroke",palette.textColor);
+
+        needle.on('mouseover',this.showValue);
+        needle.on('mouseout',this.hideValue);     
 
         vis.append("circle")
         	.attr('cx',0)
@@ -157,40 +158,45 @@ export class GaugeWidget extends SICKComponent {
             .attr("stroke",palette.textColor);
 
 
-        if(rangeData.length){
-            arcs.data(rangeData)
-            .append("text")
-            .attr("x",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+d.min*perUnitAngle)).x})
-            .attr("dy",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+d.min*perUnitAngle)).y})
-            .attr("class", "range-text")
-            .text(function(d) { return d.min; })
-            .attr("stroke",palette.textColor);
+        const labelData = [];
 
-            arcs.data(rangeData)    
-            .append("text")
-            .attr("x",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+d.max*perUnitAngle)).x})
-            .attr("dy",function(d){return getPointOnCircle(gaugeStyle.radius,0,0,(-180+d.max*perUnitAngle)).y})
-            .attr("class", "range-text")
-            .text(function(d) { return d.max; })
-            .attr("stroke",palette.textColor);
-        }    
+        rangeData.forEach((range,i)=>{
+            if(i)
+                labelData.push(range.max);
+            else
+                labelData.push(...[range.min,range.max]);
+                
+        });
 
-        needle.on('mouseover',this.showValue);
-        needle.on('mouseout',this.hideValue); 
+        const labelsContainer = d3.select("#gauge-widget svg")
+        .append("g")
+        .attr("transform", "translate(" + gaugeStyle.radius + "," + gaugeStyle.radius + ")");
 
+        labelsContainer.selectAll('text.label')
+        .data(labelData)
+        .enter()
+        .append("text")
+        .attr('transform',function(d){
+            const labelAngle = -90+d*perUnitAngle;
+            const labelDistance = -1*(gaugeStyle.radius+10);
+            return `rotate(${labelAngle}) translate(0,${labelDistance})`;
+        })
+        .text(function(d) { return d; })
+        .attr("stroke",palette.textColor);
     }
 
 
     render() {
         return ( 
         	<div id="gauge-widget" style={divStyle}>
-            	<Paper circle = {true} style={pageStyle} zDepth={2}>
+                <Paper circle={true} style={pageStyle} zDepth={5}>
             		<svg style={svgStyle}/>
                     {this.buttonData && 
                         <RaisedButton 
+                        primary={true}
                         style={{position:'absolute',top:this.buttonData.y,left:this.buttonData.x}}
                         label={this.buttonData.label}/>}
-            	</Paper> 
+                </Paper>        
             </div>
         )
     }
