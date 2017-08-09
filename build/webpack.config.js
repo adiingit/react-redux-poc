@@ -27,13 +27,13 @@ module.exports = {
         }
       },
 
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
+      { test: /\.(png|jpg|PNG)$/, loader: 'url-loader?limit=8192' }
 
     ]
   },
   resolve: {
     root: path.resolve('./src'),
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.css', '.png', '.PNG']
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
