@@ -83,13 +83,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {GaugeWidget} from &apos;<span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber72">ap-widget-repo/src/components/GaugeWidget/Gauge.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {GaugeWidget} from &apos;<span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber84">ap-widget-repo/src/components/GaugeWidget/Gauge.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber72">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber84">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -109,7 +109,18 @@
 
   
   
-  <div class="description" data-ice="description"><p>this is GaugeWidget class.</p>
+  <div class="description" data-ice="description"><p>This is GaugeWidget class.</p>
+<p></p><p>Setup:-</p>
+Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.<p></p>
+<p></p><p> Precondition:-</p><p></p>
+<p></p><p>After successful response from REST API, initial requirement is to set values for propTypes. </p><p></p>
+<p></p><p> Prop 1: min, type: number, isRequired</p><p></p>
+<p></p><p> Prop 2: max, type: number, isRequired</p><p></p>
+<p></p><p> Prop 3: rangeData, type: array, isRequired</p><p></p>
+<p></p><p>Integration:-</p><p></p>
+<p></p><p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.</p>
+<p></p><p>Description:-</p>
+The work of Gauge Widget is to show the reading between minimum &amp; maximum values(includes min. &amp; max.). The reading can liewithin any range specified in config.<p></p>
 </div>
 
   
@@ -426,7 +437,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber77">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber89">source</a></span></span>
     </span>
   </h3>
 
@@ -480,7 +491,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber104">source</a></span></span>
     </span>
   </h3>
 
@@ -568,7 +579,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber121">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber133">source</a></span></span>
     </span>
   </h3>
 
@@ -611,7 +622,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber151">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber163">source</a></span></span>
     </span>
   </h3>
 
@@ -652,7 +663,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber137">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
@@ -693,7 +704,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber144">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber156">source</a></span></span>
     </span>
   </h3>
 
@@ -734,7 +745,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber129">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber141">source</a></span></span>
     </span>
   </h3>
 
@@ -775,7 +786,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber243">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber255">source</a></span></span>
     </span>
   </h3>
 
@@ -827,7 +838,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber120">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber132">source</a></span></span>
     </span>
   </h3>
 
@@ -868,7 +879,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber103">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/components/GaugeWidget/Gauge.js.html#lineNumber115">source</a></span></span>
     </span>
   </h3>
 

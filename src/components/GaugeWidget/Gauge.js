@@ -67,7 +67,19 @@ const gaugeStyle = {
     
 };
 /**
- * this is GaugeWidget class.
+ * This is GaugeWidget class.
+ * <p>Setup:-</p>
+ * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.
+ *
+ * <p> Precondition:-</p>
+ * <p>After successful response from REST API, initial requirement is to set values for propTypes. </p>
+ * <p> Prop 1: min, type: number, isRequired</p>
+ * <p> Prop 2: max, type: number, isRequired</p>
+ * <p> Prop 3: rangeData, type: array, isRequired</p>
+ * <p>Integration:-</p>
+ * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
+ * <p>Description:-</p>
+ * The work of Gauge Widget is to show the reading between minimum & maximum values(includes min. & max.). The reading can liewithin any range specified in config.
  */
 export class GaugeWidget extends SICKComponent {
 
