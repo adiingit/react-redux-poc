@@ -45,8 +45,8 @@ const gaugeProps = {
     width: 500,
     radius:250,
     innerRadius:100,
-    startAngle:-90,
-    endAngle:90
+    startAngle:-30,
+    endAngle:70
 };
 
 const needleProps = {

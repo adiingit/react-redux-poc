@@ -24,10 +24,11 @@ export default class Needle extends SICKComponent {
     }
 
     componentDidUpdate(){
+        const startAngleOffset= 90+this.props.startAngle;
         d3.select('g.needle')
                         .transition()
                         .duration(2000)
-                        .attr('transform',`rotate(${(this.props.unitAngleRotation*this.props.value)})`);
+                        .attr('transform',`rotate(${startAngleOffset+(this.props.unitAngleRotation*this.props.value)})`);
         
     }
 
@@ -46,7 +47,7 @@ export default class Needle extends SICKComponent {
     render() {
         return (
             <g className={'needle'}>
-                <path
+                <path shapeRendering={'geometricPrecision'}
                 d={this.path} 
                 fill={this.props.color} 
                 onMouseOver={this.props.mouseover}
