@@ -1,0 +1,308 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 126,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 5,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 0,
+      "end": 78,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 78
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 9,
+          "end": 18,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 9
+            },
+            "end": {
+              "line": 1,
+              "column": 18
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 9,
+            "end": 18,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 18
+              }
+            },
+            "name": "configure"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 9,
+            "end": 18,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 18
+              }
+            },
+            "name": "configure"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "start": 20,
+          "end": 37,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 20
+            },
+            "end": {
+              "line": 1,
+              "column": 37
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 20,
+            "end": 37,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 20
+              },
+              "end": {
+                "line": 1,
+                "column": 37
+              }
+            },
+            "name": "registerTapEvents"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 20,
+            "end": 37,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 20
+              },
+              "end": {
+                "line": 1,
+                "column": 37
+              }
+            },
+            "name": "registerTapEvents"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "start": 39,
+          "end": 44,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 39
+            },
+            "end": {
+              "line": 1,
+              "column": 44
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 39,
+            "end": 44,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 39
+              },
+              "end": {
+                "line": 1,
+                "column": 44
+              }
+            },
+            "name": "store"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 39,
+            "end": 44,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 39
+              },
+              "end": {
+                "line": 1,
+                "column": 44
+              }
+            },
+            "name": "store"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "start": 46,
+          "end": 54,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 46
+            },
+            "end": {
+              "line": 1,
+              "column": 54
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 46,
+            "end": 54,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 46
+              },
+              "end": {
+                "line": 1,
+                "column": 54
+              }
+            },
+            "name": "reducers"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 46,
+            "end": 54,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 46
+              },
+              "end": {
+                "line": 1,
+                "column": 54
+              }
+            },
+            "name": "reducers"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "start": 62,
+        "end": 78,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 62
+          },
+          "end": {
+            "line": 1,
+            "column": 78
+          }
+        },
+        "value": "./SICKPlatform",
+        "rawValue": "./SICKPlatform",
+        "raw": "'./SICKPlatform'"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 82,
+      "end": 122,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 40
+        }
+      },
+      "specifiers": [
+        {
+          "type": "Identifier",
+          "start": 89,
+          "end": 95,
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 13
+            }
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 89,
+            "end": 95,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 13
+              }
+            },
+            "name": "AppBar"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "start": 101,
+        "end": 122,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 19
+          },
+          "end": {
+            "line": 3,
+            "column": 40
+          }
+        },
+        "value": "./components/AppBar",
+        "rawValue": "./components/AppBar",
+        "raw": "'./components/AppBar'"
+      }
+    }
+  ]
+}

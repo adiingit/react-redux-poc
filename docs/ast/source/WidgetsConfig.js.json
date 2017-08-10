@@ -1,0 +1,886 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 612,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 20,
+      "column": 1
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 36,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 36
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 8,
+          "end": 13,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 8
+            },
+            "end": {
+              "line": 1,
+              "column": 13
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 8,
+            "end": 13,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 13
+              }
+            },
+            "name": "store"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 8,
+            "end": 13,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 8
+              },
+              "end": {
+                "line": 1,
+                "column": 13
+              }
+            },
+            "name": "store"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 20,
+        "end": 36,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 20
+          },
+          "end": {
+            "line": 1,
+            "column": 36
+          }
+        },
+        "value": "./SICKPlatform",
+        "rawValue": "./SICKPlatform",
+        "raw": "'./SICKPlatform'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 37,
+      "end": 64,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 27
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 44,
+          "end": 49,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 12
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 44,
+            "end": 49,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 12
+              }
+            },
+            "name": "ducks"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 55,
+        "end": 64,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 18
+          },
+          "end": {
+            "line": 2,
+            "column": 27
+          }
+        },
+        "value": "./ducks",
+        "rawValue": "./ducks",
+        "raw": "'./ducks'",
+        "leadingComments": null,
+        "trailingComments": null
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * This function calls a REST API for GaugeWidget Config.\n * @param {get} url  \"Fetching range for GaugeWidget ${baseUrl}:3000/gauge/ranges\"\n * @return Set of Ranges\n ",
+          "start": 66,
+          "end": 239,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 3
+            }
+          },
+          "range": [
+            66,
+            239
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 240,
+      "end": 342,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "start": 247,
+        "end": 342,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 7
+          },
+          "end": {
+            "line": 11,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 256,
+          "end": 276,
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 16
+            },
+            "end": {
+              "line": 9,
+              "column": 36
+            }
+          },
+          "name": "configureGaugeWidget",
+          "leadingComments": null
+        },
+        "generator": false,
+        "expression": false,
+        "async": false,
+        "params": [
+          {
+            "type": "Identifier",
+            "start": 277,
+            "end": 280,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 37
+              },
+              "end": {
+                "line": 9,
+                "column": 40
+              }
+            },
+            "name": "url"
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "start": 281,
+          "end": 342,
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 41
+            },
+            "end": {
+              "line": 11,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "start": 284,
+              "end": 340,
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 1
+                },
+                "end": {
+                  "line": 10,
+                  "column": 57
+                }
+              },
+              "argument": {
+                "type": "CallExpression",
+                "start": 291,
+                "end": 339,
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 56
+                  }
+                },
+                "callee": {
+                  "type": "MemberExpression",
+                  "start": 291,
+                  "end": 305,
+                  "loc": {
+                    "start": {
+                      "line": 10,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 10,
+                      "column": 22
+                    }
+                  },
+                  "object": {
+                    "type": "Identifier",
+                    "start": 291,
+                    "end": 296,
+                    "loc": {
+                      "start": {
+                        "line": 10,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 13
+                      }
+                    },
+                    "name": "store"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "start": 297,
+                    "end": 305,
+                    "loc": {
+                      "start": {
+                        "line": 10,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 22
+                      }
+                    },
+                    "name": "dispatch"
+                  },
+                  "computed": false
+                },
+                "arguments": [
+                  {
+                    "type": "CallExpression",
+                    "start": 306,
+                    "end": 338,
+                    "loc": {
+                      "start": {
+                        "line": 10,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 55
+                      }
+                    },
+                    "callee": {
+                      "type": "MemberExpression",
+                      "start": 306,
+                      "end": 333,
+                      "loc": {
+                        "start": {
+                          "line": 10,
+                          "column": 23
+                        },
+                        "end": {
+                          "line": 10,
+                          "column": 50
+                        }
+                      },
+                      "object": {
+                        "type": "MemberExpression",
+                        "start": 306,
+                        "end": 318,
+                        "loc": {
+                          "start": {
+                            "line": 10,
+                            "column": 23
+                          },
+                          "end": {
+                            "line": 10,
+                            "column": 35
+                          }
+                        },
+                        "object": {
+                          "type": "Identifier",
+                          "start": 306,
+                          "end": 311,
+                          "loc": {
+                            "start": {
+                              "line": 10,
+                              "column": 23
+                            },
+                            "end": {
+                              "line": 10,
+                              "column": 28
+                            }
+                          },
+                          "name": "ducks"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "start": 312,
+                          "end": 318,
+                          "loc": {
+                            "start": {
+                              "line": 10,
+                              "column": 29
+                            },
+                            "end": {
+                              "line": 10,
+                              "column": 35
+                            }
+                          },
+                          "name": "config"
+                        },
+                        "computed": false
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "start": 319,
+                        "end": 333,
+                        "loc": {
+                          "start": {
+                            "line": 10,
+                            "column": 36
+                          },
+                          "end": {
+                            "line": 10,
+                            "column": 50
+                          }
+                        },
+                        "name": "getGaugeConfig"
+                      },
+                      "computed": false
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "start": 334,
+                        "end": 337,
+                        "loc": {
+                          "start": {
+                            "line": 10,
+                            "column": 51
+                          },
+                          "end": {
+                            "line": 10,
+                            "column": 54
+                          }
+                        },
+                        "name": "url"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * This function calls a REST API for GaugeWidget Config.\n * @param {get} url  \"Fetching range for GaugeWidget ${baseUrl}:3000/gauge/ranges\"\n * @return Set of Ranges\n ",
+            "start": 66,
+            "end": 239,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 3
+              }
+            },
+            "range": [
+              66,
+              239
+            ]
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * This function calls a REST API for MachineWidget Config.\n * @param {get} url  \"Fetching all the machine schematic\"\n * @return Set of Machines\n ",
+            "start": 344,
+            "end": 496,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 0
+              },
+              "end": {
+                "line": 17,
+                "column": 3
+              }
+            },
+            "range": [
+              344,
+              496
+            ]
+          }
+        ]
+      },
+      "specifiers": [],
+      "source": null,
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * This function calls a REST API for GaugeWidget Config.\n * @param {get} url  \"Fetching range for GaugeWidget ${baseUrl}:3000/gauge/ranges\"\n * @return Set of Ranges\n ",
+          "start": 66,
+          "end": 239,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 3
+            }
+          },
+          "range": [
+            66,
+            239
+          ]
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * This function calls a REST API for MachineWidget Config.\n * @param {get} url  \"Fetching all the machine schematic\"\n * @return Set of Machines\n ",
+          "start": 344,
+          "end": 496,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            344,
+            496
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 497,
+      "end": 612,
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 1
+        }
+      },
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "start": 504,
+        "end": 612,
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 7
+          },
+          "end": {
+            "line": 20,
+            "column": 1
+          }
+        },
+        "id": {
+          "type": "Identifier",
+          "start": 513,
+          "end": 535,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 16
+            },
+            "end": {
+              "line": 18,
+              "column": 38
+            }
+          },
+          "name": "configureMachineWidget",
+          "leadingComments": null
+        },
+        "generator": false,
+        "expression": false,
+        "async": false,
+        "params": [
+          {
+            "type": "Identifier",
+            "start": 536,
+            "end": 539,
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 39
+              },
+              "end": {
+                "line": 18,
+                "column": 42
+              }
+            },
+            "name": "url"
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "start": 540,
+          "end": 612,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 43
+            },
+            "end": {
+              "line": 20,
+              "column": 1
+            }
+          },
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "start": 543,
+              "end": 610,
+              "loc": {
+                "start": {
+                  "line": 19,
+                  "column": 1
+                },
+                "end": {
+                  "line": 19,
+                  "column": 68
+                }
+              },
+              "argument": {
+                "type": "CallExpression",
+                "start": 550,
+                "end": 609,
+                "loc": {
+                  "start": {
+                    "line": 19,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 67
+                  }
+                },
+                "callee": {
+                  "type": "MemberExpression",
+                  "start": 550,
+                  "end": 564,
+                  "loc": {
+                    "start": {
+                      "line": 19,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 19,
+                      "column": 22
+                    }
+                  },
+                  "object": {
+                    "type": "Identifier",
+                    "start": 550,
+                    "end": 555,
+                    "loc": {
+                      "start": {
+                        "line": 19,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 13
+                      }
+                    },
+                    "name": "store"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "start": 556,
+                    "end": 564,
+                    "loc": {
+                      "start": {
+                        "line": 19,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 22
+                      }
+                    },
+                    "name": "dispatch"
+                  },
+                  "computed": false
+                },
+                "arguments": [
+                  {
+                    "type": "CallExpression",
+                    "start": 565,
+                    "end": 608,
+                    "loc": {
+                      "start": {
+                        "line": 19,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 66
+                      }
+                    },
+                    "callee": {
+                      "type": "MemberExpression",
+                      "start": 565,
+                      "end": 603,
+                      "loc": {
+                        "start": {
+                          "line": 19,
+                          "column": 23
+                        },
+                        "end": {
+                          "line": 19,
+                          "column": 61
+                        }
+                      },
+                      "object": {
+                        "type": "MemberExpression",
+                        "start": 565,
+                        "end": 577,
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 23
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 35
+                          }
+                        },
+                        "object": {
+                          "type": "Identifier",
+                          "start": 565,
+                          "end": 570,
+                          "loc": {
+                            "start": {
+                              "line": 19,
+                              "column": 23
+                            },
+                            "end": {
+                              "line": 19,
+                              "column": 28
+                            }
+                          },
+                          "name": "ducks"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "start": 571,
+                          "end": 577,
+                          "loc": {
+                            "start": {
+                              "line": 19,
+                              "column": 29
+                            },
+                            "end": {
+                              "line": 19,
+                              "column": 35
+                            }
+                          },
+                          "name": "config"
+                        },
+                        "computed": false
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "start": 578,
+                        "end": 603,
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 36
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 61
+                          }
+                        },
+                        "name": "getMachineSchematicConfig"
+                      },
+                      "computed": false
+                    },
+                    "arguments": [
+                      {
+                        "type": "Identifier",
+                        "start": 604,
+                        "end": 607,
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 62
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 65
+                          }
+                        },
+                        "name": "url"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * This function calls a REST API for MachineWidget Config.\n * @param {get} url  \"Fetching all the machine schematic\"\n * @return Set of Machines\n ",
+            "start": 344,
+            "end": 496,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 0
+              },
+              "end": {
+                "line": 17,
+                "column": 3
+              }
+            },
+            "range": [
+              344,
+              496
+            ]
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * This function calls a REST API for MachineWidget Config.\n * @param {get} url  \"Fetching all the machine schematic\"\n * @return Set of Machines\n ",
+          "start": 344,
+          "end": 496,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 0
+            },
+            "end": {
+              "line": 17,
+              "column": 3
+            }
+          },
+          "range": [
+            344,
+            496
+          ]
+        }
+      ]
+    }
+  ]
+}

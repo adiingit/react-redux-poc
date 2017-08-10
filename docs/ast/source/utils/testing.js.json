@@ -1,0 +1,1041 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 453,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 12,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 47,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 47
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 9,
+          "end": 16,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 9
+            },
+            "end": {
+              "line": 1,
+              "column": 16
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 9,
+            "end": 16,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 16
+              }
+            },
+            "name": "shallow"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 9,
+            "end": 16,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 16
+              }
+            },
+            "name": "shallow"
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "start": 18,
+          "end": 23,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 18
+            },
+            "end": {
+              "line": 1,
+              "column": 23
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 18,
+            "end": 23,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 18
+              },
+              "end": {
+                "line": 1,
+                "column": 23
+              }
+            },
+            "name": "mount"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 18,
+            "end": 23,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 18
+              },
+              "end": {
+                "line": 1,
+                "column": 23
+              }
+            },
+            "name": "mount"
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "start": 25,
+          "end": 31,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 25
+            },
+            "end": {
+              "line": 1,
+              "column": 31
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 25,
+            "end": 31,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 25
+              },
+              "end": {
+                "line": 1,
+                "column": 31
+              }
+            },
+            "name": "render"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 25,
+            "end": 31,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 25
+              },
+              "end": {
+                "line": 1,
+                "column": 31
+              }
+            },
+            "name": "render"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 39,
+        "end": 47,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 39
+          },
+          "end": {
+            "line": 1,
+            "column": 47
+          }
+        },
+        "value": "enzyme",
+        "rawValue": "enzyme",
+        "raw": "'enzyme'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 49,
+      "end": 105,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 56
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 56,
+          "end": 67,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 18
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 56,
+            "end": 67,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 18
+              }
+            },
+            "name": "getMuiTheme"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 73,
+        "end": 105,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 24
+          },
+          "end": {
+            "line": 2,
+            "column": 56
+          }
+        },
+        "value": "material-ui/styles/getMuiTheme",
+        "rawValue": "material-ui/styles/getMuiTheme",
+        "raw": "'material-ui/styles/getMuiTheme'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 107,
+      "end": 149,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 42
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 114,
+          "end": 126,
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 19
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 114,
+            "end": 126,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 19
+              }
+            },
+            "name": "SICKMuiTheme"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 132,
+        "end": 149,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 25
+          },
+          "end": {
+            "line": 3,
+            "column": 42
+          }
+        },
+        "value": "../SICKMuiTheme",
+        "rawValue": "../SICKMuiTheme",
+        "raw": "'../SICKMuiTheme'"
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 153,
+      "end": 217,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 5,
+          "column": 64
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 159,
+          "end": 217,
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 6
+            },
+            "end": {
+              "line": 5,
+              "column": 64
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 159,
+            "end": 166,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 6
+              },
+              "end": {
+                "line": 5,
+                "column": 13
+              }
+            },
+            "name": "options"
+          },
+          "init": {
+            "type": "ObjectExpression",
+            "start": 169,
+            "end": 217,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 16
+              },
+              "end": {
+                "line": 5,
+                "column": 64
+              }
+            },
+            "properties": [
+              {
+                "type": "Property",
+                "start": 170,
+                "end": 216,
+                "loc": {
+                  "start": {
+                    "line": 5,
+                    "column": 17
+                  },
+                  "end": {
+                    "line": 5,
+                    "column": 63
+                  }
+                },
+                "method": false,
+                "shorthand": false,
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 170,
+                  "end": 177,
+                  "loc": {
+                    "start": {
+                      "line": 5,
+                      "column": 17
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 24
+                    }
+                  },
+                  "name": "context"
+                },
+                "value": {
+                  "type": "ObjectExpression",
+                  "start": 179,
+                  "end": 216,
+                  "loc": {
+                    "start": {
+                      "line": 5,
+                      "column": 26
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 63
+                    }
+                  },
+                  "properties": [
+                    {
+                      "type": "Property",
+                      "start": 180,
+                      "end": 215,
+                      "loc": {
+                        "start": {
+                          "line": 5,
+                          "column": 27
+                        },
+                        "end": {
+                          "line": 5,
+                          "column": 62
+                        }
+                      },
+                      "method": false,
+                      "shorthand": false,
+                      "computed": false,
+                      "key": {
+                        "type": "Identifier",
+                        "start": 180,
+                        "end": 188,
+                        "loc": {
+                          "start": {
+                            "line": 5,
+                            "column": 27
+                          },
+                          "end": {
+                            "line": 5,
+                            "column": 35
+                          }
+                        },
+                        "name": "muiTheme"
+                      },
+                      "value": {
+                        "type": "CallExpression",
+                        "start": 190,
+                        "end": 215,
+                        "loc": {
+                          "start": {
+                            "line": 5,
+                            "column": 37
+                          },
+                          "end": {
+                            "line": 5,
+                            "column": 62
+                          }
+                        },
+                        "callee": {
+                          "type": "Identifier",
+                          "start": 190,
+                          "end": 201,
+                          "loc": {
+                            "start": {
+                              "line": 5,
+                              "column": 37
+                            },
+                            "end": {
+                              "line": 5,
+                              "column": 48
+                            }
+                          },
+                          "name": "getMuiTheme"
+                        },
+                        "arguments": [
+                          {
+                            "type": "Identifier",
+                            "start": 202,
+                            "end": 214,
+                            "loc": {
+                              "start": {
+                                "line": 5,
+                                "column": 49
+                              },
+                              "end": {
+                                "line": 5,
+                                "column": 61
+                              }
+                            },
+                            "name": "SICKMuiTheme"
+                          }
+                        ]
+                      },
+                      "kind": "init"
+                    }
+                  ]
+                },
+                "kind": "init"
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 221,
+      "end": 293,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 72
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 228,
+        "end": 293,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 7
+          },
+          "end": {
+            "line": 7,
+            "column": 72
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 234,
+            "end": 293,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 13
+              },
+              "end": {
+                "line": 7,
+                "column": 72
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 234,
+              "end": 250,
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 13
+                },
+                "end": {
+                  "line": 7,
+                  "column": 29
+                }
+              },
+              "name": "mountWithContext"
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "start": 253,
+              "end": 293,
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 32
+                },
+                "end": {
+                  "line": 7,
+                  "column": 72
+                }
+              },
+              "id": null,
+              "generator": false,
+              "expression": true,
+              "async": false,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "start": 254,
+                  "end": 263,
+                  "loc": {
+                    "start": {
+                      "line": 7,
+                      "column": 33
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 42
+                    }
+                  },
+                  "name": "component"
+                }
+              ],
+              "body": {
+                "type": "CallExpression",
+                "start": 268,
+                "end": 293,
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 47
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 72
+                  }
+                },
+                "callee": {
+                  "type": "Identifier",
+                  "start": 268,
+                  "end": 273,
+                  "loc": {
+                    "start": {
+                      "line": 7,
+                      "column": 47
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 52
+                    }
+                  },
+                  "name": "mount"
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "start": 274,
+                    "end": 283,
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 53
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 62
+                      }
+                    },
+                    "name": "component"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 285,
+                    "end": 292,
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 64
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 71
+                      }
+                    },
+                    "name": "options"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 297,
+      "end": 373,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 76
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 304,
+        "end": 373,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 7
+          },
+          "end": {
+            "line": 9,
+            "column": 76
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 310,
+            "end": 373,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 13
+              },
+              "end": {
+                "line": 9,
+                "column": 76
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 310,
+              "end": 328,
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 13
+                },
+                "end": {
+                  "line": 9,
+                  "column": 31
+                }
+              },
+              "name": "shallowWithContext"
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "start": 331,
+              "end": 373,
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 34
+                },
+                "end": {
+                  "line": 9,
+                  "column": 76
+                }
+              },
+              "id": null,
+              "generator": false,
+              "expression": true,
+              "async": false,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "start": 332,
+                  "end": 341,
+                  "loc": {
+                    "start": {
+                      "line": 9,
+                      "column": 35
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 44
+                    }
+                  },
+                  "name": "component"
+                }
+              ],
+              "body": {
+                "type": "CallExpression",
+                "start": 346,
+                "end": 373,
+                "loc": {
+                  "start": {
+                    "line": 9,
+                    "column": 49
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 76
+                  }
+                },
+                "callee": {
+                  "type": "Identifier",
+                  "start": 346,
+                  "end": 353,
+                  "loc": {
+                    "start": {
+                      "line": 9,
+                      "column": 49
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 56
+                    }
+                  },
+                  "name": "shallow"
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "start": 354,
+                    "end": 363,
+                    "loc": {
+                      "start": {
+                        "line": 9,
+                        "column": 57
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 66
+                      }
+                    },
+                    "name": "component"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 365,
+                    "end": 372,
+                    "loc": {
+                      "start": {
+                        "line": 9,
+                        "column": 68
+                      },
+                      "end": {
+                        "line": 9,
+                        "column": 75
+                      }
+                    },
+                    "name": "options"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 377,
+      "end": 451,
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 74
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 384,
+        "end": 451,
+        "loc": {
+          "start": {
+            "line": 11,
+            "column": 7
+          },
+          "end": {
+            "line": 11,
+            "column": 74
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 390,
+            "end": 451,
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 13
+              },
+              "end": {
+                "line": 11,
+                "column": 74
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 390,
+              "end": 407,
+              "loc": {
+                "start": {
+                  "line": 11,
+                  "column": 13
+                },
+                "end": {
+                  "line": 11,
+                  "column": 30
+                }
+              },
+              "name": "renderWithContext"
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "start": 410,
+              "end": 451,
+              "loc": {
+                "start": {
+                  "line": 11,
+                  "column": 33
+                },
+                "end": {
+                  "line": 11,
+                  "column": 74
+                }
+              },
+              "id": null,
+              "generator": false,
+              "expression": true,
+              "async": false,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "start": 411,
+                  "end": 420,
+                  "loc": {
+                    "start": {
+                      "line": 11,
+                      "column": 34
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 43
+                    }
+                  },
+                  "name": "component"
+                }
+              ],
+              "body": {
+                "type": "CallExpression",
+                "start": 425,
+                "end": 451,
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 48
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 74
+                  }
+                },
+                "callee": {
+                  "type": "Identifier",
+                  "start": 425,
+                  "end": 431,
+                  "loc": {
+                    "start": {
+                      "line": 11,
+                      "column": 48
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 54
+                    }
+                  },
+                  "name": "render"
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "start": 432,
+                    "end": 441,
+                    "loc": {
+                      "start": {
+                        "line": 11,
+                        "column": 55
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 64
+                      }
+                    },
+                    "name": "component"
+                  },
+                  {
+                    "type": "Identifier",
+                    "start": 443,
+                    "end": 450,
+                    "loc": {
+                      "start": {
+                        "line": 11,
+                        "column": 66
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 73
+                      }
+                    },
+                    "name": "options"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ]
+}

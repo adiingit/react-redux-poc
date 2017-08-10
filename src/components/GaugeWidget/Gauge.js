@@ -20,14 +20,26 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};
 
+/**
+ * material-ui/styles/colors
+ */
 const palette = theme.palette;
 
+/**
+ * style for #gauge-widget
+ * @type {{textAlign: string, marginTop: number, overflowY: string, height: number}}
+ */
 const divStyle = {
     textAlign: 'center',
     marginTop: 50,
     overflowY:'hidden',
     height:335
 };
+
+/**
+ * style for PaperComponent
+ * @type {{height: number, width: number, textAlign: string, display: string, paddingTop: number, marginTop: number}}
+ */
 const pageStyle = {
     height: 600,
     width: 600,
@@ -36,11 +48,17 @@ const pageStyle = {
     paddingTop : 50,
     marginTop:10
 };
-
+/**
+ * style for svg element
+ * @type {{overflow: string}}
+ */
 const svgStyle = {
     overflow:'visible'
 }
-
+/**
+ * style for svg using d3
+ * @type {{height: number, width: number, radius: number, innerRadius: number}}
+ */
 const gaugeStyle = {
 	height: 250,
     width: 500,
@@ -48,23 +66,40 @@ const gaugeStyle = {
     innerRadius:100
     
 };
-
+/**
+ * this is GaugeWidget class.
+ */
 export class GaugeWidget extends SICKComponent {
 
-	static PropTypes ={
-        min:PropTypes.number.isRequired,
-        max:PropTypes.number.isRequired,
-        rangeData:PropTypes.array.isRequired
+    /** Precondition (Static propTypes)
+     * @returns { propTypes.min minimum value isRequired. ,  propTypes.max maximum value isRequired. , propTypes.rangeData Range of values isRequired.}
+     */
+    static propTypes() {
+        return{
+            min:PropTypes.number.isRequired,
+            max:PropTypes.number.isRequired,
+            rangeData:PropTypes.array.isRequired
+        }
 	}
-
+    /**
+     * creates a instance of GaugeWidget.
+     * @param {object} props
+     * @param {number} currentValue assigning currentValue
+     * @param {function} showValue binding current object with showValue
+     * @param {function} hideValue binding current object with hideValue
+     * @param {function} updateReading binding current object with updateReading
+     */
     constructor(props) {
         super(props);
         const currentValue = this.props.min;
         this.showValue = this.showValue.bind(this);
         this.hideValue = this.hideValue.bind(this);
-        this.updateReading = this.updateReading.bind(this); 
+        this.updateReading = this.updateReading.bind(this);
     }
 
+    /**
+     * loading initial reading for GaugeWidget.
+     */
     updateReading(){
         this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=>{
             
@@ -79,24 +114,40 @@ export class GaugeWidget extends SICKComponent {
         
     }
 
+    /**
+     * showing current reading on mouseover
+     */
     showValue(){
         this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};
         this.props.renderCurrentReading();
     }
 
+
+    /**
+     * hiding reading on mouseout
+     */
     hideValue(){
         this.buttonData = undefined;
         this.props.renderCurrentReading();
     }
 
+    /**
+     * updating buttonData
+     */
     componentDidUpdate(){
         this.buttonData = undefined;
     }
-    
+
+    /**
+     * setting interval and fetching reading for GaugeWidget.
+     */
     componentWillMount(){
         setInterval(this.updateReading,10000);
     }
 
+    /**
+     *loading config information about GaugeWidget.
+     */
     componentDidMount() {
         
         const pi = Math.PI;
@@ -185,7 +236,10 @@ export class GaugeWidget extends SICKComponent {
         .attr("stroke",palette.textColor);
     }
 
-
+    /**
+     * render
+     * @return {ReactElement} svg within PaperComponent to show GaugeWidget.
+     */
     render() {
         return ( 
         	<div id="gauge-widget" style={divStyle}>
