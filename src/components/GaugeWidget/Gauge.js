@@ -76,7 +76,7 @@ export class GaugeWidget extends SICKComponent {
     }
 
     showValue(){
-        this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};
+        this.buttonData={x:0,y:0,label:this.props.currentValue||this.props.min};
         this.props.renderCurrentReading();
     }
 
@@ -90,7 +90,6 @@ export class GaugeWidget extends SICKComponent {
     }
     
     componentWillMount(){
-        
         const data = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
         this.rangeData = data.map((range)=>{
             return {
@@ -105,7 +104,7 @@ export class GaugeWidget extends SICKComponent {
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         setInterval(this.updateReading,10000);
     }
 
@@ -126,6 +125,17 @@ export class GaugeWidget extends SICKComponent {
                     endAngle={gaugeProps.endAngle}
                     rangeData={this.rangeData}
                     labels={this.labelData}
+                    needle={
+                            <Needle 
+                            pivotPoint={needleProps.pivotPoint}
+                            needleLength={needleProps.needleLength}
+                            color={needleProps.color}
+                            value={this.props.currentValue || this.props.min}
+                            startAngle={gaugeProps.startAngle}
+                            unitAngleRotation = {(gaugeProps.endAngle-gaugeProps.startAngle)/(this.props.max-this.props.min)}
+                            mouseover={this.showValue}
+                            mouseout={this.hideValue}/>
+                        }
                     />
 
                     {   

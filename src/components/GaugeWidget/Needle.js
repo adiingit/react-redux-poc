@@ -12,6 +12,7 @@ export default class Needle extends SICKComponent {
         needleLength:PropTypes.number.isRequired,
         color:PropTypes.string.isRequired,
         value:PropTypes.number.isRequired,
+        startAngle:PropTypes.number.isRequired,
         unitAngleRotation:PropTypes.number.isRequired,
         mouseover : PropTypes.func,
         mouseout : PropTypes.func,
@@ -22,23 +23,36 @@ export default class Needle extends SICKComponent {
         super(props);
     }
 
+    componentDidUpdate(){
+        d3.select('g.needle')
+                        .transition()
+                        .duration(2000)
+                        .attr('transform',`rotate(${(this.props.unitAngleRotation*this.props.value)})`);
+        
+    }
+
     componentWillMount() {
-        const start = `${this.props.pivotPoint.x} ${this.props.pivotPoint.y}`;
-        const end = `${this.props.pivotPoint.x} 0`
-        const arc = `C${this.props.needleLength/5},{this.props.needleLength/5} 0 0,0 ${this.props.pivotPoint.x} ${this.props.pivotPoint.y+5}`
-        this.path = this.props.path || `M${this.props.pivotPoint.x} ${this.props.pivotPoint.y-5} A${arc} L${end} z`
-        this.transform = `rotate(${this.props.unitAngleRotation*this.props.value} ${start})`;
+        const start = `${this.props.pivotPoint.x},${this.props.pivotPoint.y}`;
+        const end = `${-1*this.props.needleLength} 0`
+        const arc = `5,5 0 0,0 ${this.props.pivotPoint.x} ${this.props.pivotPoint.y-5}`
+        this.path = this.props.path || `M${this.props.pivotPoint.x} ${this.props.pivotPoint.y+5} A${arc} L${end} z`
+    }
+
+    componentDidMount(){
+        d3.select('g.needle')
+        .attr('transform',`rotate(${90+this.props.startAngle})`);
     }
 
     render() {
         return (
-            <path 
-            d={this.props.path} 
-            fill={this.props.color} 
-            transform={this.transform}
-            mouseover={this.props.mouseover}
-            mouseout={this.props.mouseout}
-            />
+            <g className={'needle'}>
+                <path 
+                d={this.path} 
+                fill={this.props.color} 
+                onMouseOver={this.props.mouseover}
+                onMouseOut={this.props.mouseout}
+                />
+            </g>
         )
     }
 }

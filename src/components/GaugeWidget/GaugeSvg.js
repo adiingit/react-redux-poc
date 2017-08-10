@@ -18,7 +18,7 @@ export default class GaugeSvg extends SICKComponent {
             color:PropTypes.string.isRequired
         })).isRequired,
         labels:PropTypes.arrayOf(PropTypes.string).isRequired,
-        //needle:PropTypes.node.isRequired,
+        needle:PropTypes.node.isRequired,
         style:PropTypes.object
     }
 
@@ -33,19 +33,23 @@ export default class GaugeSvg extends SICKComponent {
         style : {}
     }
 
+    componentWillMount(){
+        this.transform = "translate(" + this.props.radius + "," + this.props.radius + ")";
+    }
+
     componentDidMount() {
         
         const pi = Math.PI;
-        const perUnitAngle = 180/(this.props.max-this.props.min);
+        const perUnitAngle = (this.props.endAngle-this.props.startAngle)/(this.props.max-this.props.min);
         const data = this.props.rangeData;
 
-        const vis=d3.select("#root svg")
-            .data([data])
-            .attr("width", this.props.width)
-            .attr("height", this.props.height)
-            .append('svg:g')
-            .attr("transform", "translate(" + this.props.radius + "," + this.props.radius + ")")
-
+        const svg = d3.select("#gauge-widget svg")
+                    .data([data])    
+                    .attr("width", this.props.width)
+                    .attr("height", this.props.height);
+        
+        const vis=svg.select('#root');
+            
         const arc = d3.arc()
             .outerRadius(this.props.radius)
             .innerRadius(this.props.innerRadius);
@@ -59,17 +63,16 @@ export default class GaugeSvg extends SICKComponent {
         const arcs = vis.selectAll("g.slice")
             .data(pie)
             .enter()
-            .append("svg:g")
+            .insert("svg:g","g.needle")
             .attr("class", "slice");
 
         arcs.append("svg:path")
-            .attr("fill", function(d, i) { console.log(d);return d.data.color; })
+            .attr("fill", function(d, i) {return d.data.color; })
             .attr("d", arc)
             .attr("class", "range");
 
-        const labelsContainer = vis
-        .append("g")
-        .attr("transform", "translate(" + this.props.radius + "," + this.props.radius + ")");
+
+        const labelsContainer = vis.append("g");
 
         labelsContainer.selectAll('text.label')
         .data(this.props.labels)
@@ -81,12 +84,17 @@ export default class GaugeSvg extends SICKComponent {
             return `rotate(${labelAngle}) translate(0,${labelDistance})`;
         }.bind(this))
         .text(function(d) { return d; });
+
     }
 
 
     render() {
         return ( 
-            <svg id="root" style={this.props.style}/>
+            <svg style={this.props.style}>
+                <g id="root" transform={this.transform}>
+                    {this.props.needle}
+                </g>
+            </svg>
         )
     }
 }
