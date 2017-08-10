@@ -5,6 +5,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const config = require('./build/webpack.config.development')
+const colors = require('material-ui/styles/colors')
 
 const app = express()
 const compiler = webpack(config)
@@ -40,24 +41,24 @@ app.get('/gauge/details',(req,res)=>{
 app.get('/gauge/ranges',(req,res)=>{
   res.json([
     {
-      id:1,
       min:0,
-      max:25
+      max:25,
+      color:colors.blueA700
     },
     {
-      id:2,
       min:25,
-      max:50
+      max:50,
+      color:colors.greenA700
     },
     {
-      id:3,
       min:50,
-      max:75
+      max:75,
+      color:colors.yellowA700
     },
     {
-      id:4,
       min:75,
-      max:200
+      max:200,
+      color:colors.redA700
     }
   ]);
 });
