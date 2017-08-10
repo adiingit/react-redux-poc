@@ -46,7 +46,7 @@ export default class Needle extends SICKComponent {
     render() {
         return (
             <g className={'needle'}>
-                <path 
+                <path
                 d={this.path} 
                 fill={this.props.color} 
                 onMouseOver={this.props.mouseover}

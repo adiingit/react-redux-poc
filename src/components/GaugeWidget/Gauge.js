@@ -75,8 +75,8 @@ export class GaugeWidget extends SICKComponent {
         this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`);
     }
 
-    showValue(){
-        this.buttonData={x:0,y:0,label:this.props.currentValue||this.props.min};
+    showValue(e){
+        this.buttonData={x:e.pageX,y:e.pageY,label:this.props.currentValue||this.props.min};
         this.props.renderCurrentReading();
     }
 
