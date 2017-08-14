@@ -67,7 +67,13 @@ const gaugeStyle = {
     
 };
 /**
- * This is GaugeWidget class.
+ * <p>Description:-</p>
+ *<p> The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum  and maximum). The reading can lie within any range specified in configuration.</p>
+ *<p> The structure is in a way to have Template and Widgets working independently. The widget components are cofigurable to fetch properties from REST API and are placed over the Template.
+ * <p>The Gauge Widget is configurable with properties like width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from
+REST API.
+ * One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>
+ * <p>The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API.</p>
  * <p>Setup:-</p>
  * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.
  *
@@ -78,8 +84,6 @@ const gaugeStyle = {
  * <p> Prop 3: rangeData, type: array, isRequired</p>
  * <p>Integration:-</p>
  * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
- * <p>Description:-</p>
- * The work of Gauge Widget is to show the reading between minimum & maximum values(includes min. & max.). The reading can lie within any range specified in config.
  */
 export class GaugeWidget extends SICKComponent {
 

@@ -83,14 +83,16 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/AppBar/appbar.spec.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import {AppBar} from &apos;./AppBar&apos;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;
+import { mount, shallow } from &apos;enzyme&apos;
+import {AppBar} from &apos;./AppBar&apos;
 
 describe(&apos;&lt;AppBar&gt; - Component Test&apos;,()=&gt;{
 	it(&apos;tests if component has a toolbar&apos;,()=&gt;{
 		
-		let appBar = shallow(&lt;AppBar/&gt;);
+		const appBar = shallow(&lt;AppBar/&gt;);
 
-		expect(appBar.find(&apos;Toolbar&apos;)).to.have.length(1);
+		expect(appBar.contains(Toolbar)).to.have.length(1);
 	});
 });</code></pre>
 

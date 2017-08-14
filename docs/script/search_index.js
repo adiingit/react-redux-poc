@@ -732,6 +732,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/components/gaugewidget/gauge.spec.js",
+    "file/src/components/GaugeWidget/Gauge.spec.js.html",
+    "src/components/GaugeWidget/Gauge.spec.js",
+    "file"
+  ],
+  [
     "src/components/sickcomponent.js",
     "file/src/components/SICKComponent.js.html",
     "src/components/SICKComponent.js",

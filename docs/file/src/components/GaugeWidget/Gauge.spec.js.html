@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">src/components/GaugeWidget/Gauge.js | API Document</title>
+  <title data-ice="title">src/components/GaugeWidget/Gauge.spec.js | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -82,282 +82,26 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/components/GaugeWidget/Gauge.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { PropTypes } from &apos;react&apos;
-import * as d3 from &apos;d3&apos;
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/GaugeWidget/Gauge.spec.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;
+import { mount, shallow } from &apos;enzyme&apos;
+import Gauge from &apos;./Gauge&apos;
 import Paper from &apos;material-ui/Paper&apos;
-import RaisedButton from &apos;material-ui/RaisedButton&apos;
-import theme from &apos;../../../tests/theme&apos;
-import { connect } from &apos;../../SICKPlatform&apos;
-import SICKComponent from &apos;../SICKComponent&apos;
-import {renderCurrentReading,fetchCurrentReading} from &apos;../../ducks/gauge&apos;
-import {getPointOnCircle} from &apos;../../utils/shape&apos;
 
-const mapStateToProps = (state) =&gt; {
-    return {
-        max: state.config.gauge?Math.max(...state.config.gauge.get(&apos;range&apos;).map((r)=&gt;r.max)):100,
-        min : state.config.gauge?Math.min(...state.config.gauge.get(&apos;range&apos;).map((r)=&gt;r.min)):0,
-        rangeData : state.config.gauge?state.config.gauge.get(&apos;range&apos;):[],
-        raisedButton : state.gauge.get(&apos;raisedButton&apos;),
-        currentValue : state.gauge.get(&apos;currentValue&apos;)
-    }
-}
-
-const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};
-
-/**
- * material-ui/styles/colors
- */
-const palette = theme.palette;
-
-/**
- * style for #gauge-widget
- * @type {{textAlign: string, marginTop: number, overflowY: string, height: number}}
- */
-const divStyle = {
-    textAlign: &apos;center&apos;,
-    marginTop: 50,
-    overflowY:&apos;hidden&apos;,
-    height:335
-};
-
-/**
- * style for PaperComponent
- * @type {{height: number, width: number, textAlign: string, display: string, paddingTop: number, marginTop: number}}
- */
-const pageStyle = {
-    height: 600,
-    width: 600,
-    textAlign: &apos;center&apos;,
-    display: &apos;inline-block&apos;,
-    paddingTop : 50,
-    marginTop:10
-};
-/**
- * style for svg element
- * @type {{overflow: string}}
- */
-const svgStyle = {
-    overflow:&apos;visible&apos;
-}
-/**
- * style for svg using d3
- * @type {{height: number, width: number, radius: number, innerRadius: number}}
- */
-const gaugeStyle = {
-	height: 250,
-    width: 500,
-    radius:250,
-    innerRadius:100
-    
-};
-/**
- * &lt;p&gt;Description:-&lt;/p&gt;
- *&lt;p&gt; The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum  and maximum). The reading can lie within any range specified in configuration.&lt;/p&gt;
- *&lt;p&gt; The structure is in a way to have Template and Widgets working independently. The widget components are cofigurable to fetch properties from REST API and are placed over the Template.
- * &lt;p&gt;The Gauge Widget is configurable with properties like width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from
-REST API.
- * One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.&lt;/p&gt;
- * &lt;p&gt;The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API.&lt;/p&gt;
- * &lt;p&gt;Setup:-&lt;/p&gt;
- * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.
- *
- * &lt;p&gt; Precondition:-&lt;/p&gt;
- * &lt;p&gt;After successful response from REST API, initial requirement is to set required propTypes. &lt;/p&gt;
- * &lt;p&gt; Prop 1: min, type: number, isRequired&lt;/p&gt;
- * &lt;p&gt; Prop 2: max, type: number, isRequired&lt;/p&gt;
- * &lt;p&gt; Prop 3: rangeData, type: array, isRequired&lt;/p&gt;
- * &lt;p&gt;Integration:-&lt;/p&gt;
- * &lt;p&gt;To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
- */
-export class GaugeWidget extends SICKComponent {
-
-    /** Precondition (Static propTypes)
-     * @returns { propTypes.min minimum value isRequired. ,  propTypes.max maximum value isRequired. , propTypes.rangeData Range of values isRequired.}
-     */
-    static propTypes() {
-        return{
-            min:PropTypes.number.isRequired,
-            max:PropTypes.number.isRequired,
-            rangeData:PropTypes.array.isRequired
-        }
-	}
-    /**
-     * creates a instance of GaugeWidget.
-     * @param {object} props
-     * @param {number} currentValue assigning currentValue
-     * @param {function} showValue binding current object with showValue
-     * @param {function} hideValue binding current object with hideValue
-     * @param {function} updateReading binding current object with updateReading
-     */
-    constructor(props) {
-        super(props);
-        const currentValue = this.props.min;
-        this.showValue = this.showValue.bind(this);
-        this.hideValue = this.hideValue.bind(this);
-        this.updateReading = this.updateReading.bind(this);
-    }
-
-    /**
-     * loading initial reading for GaugeWidget.
-     */
-    updateReading(){
-        this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=&gt;{
-            
-            const perUnitAngle = 180/(this.props.max-this.props.min);
-            const angle = this.props.currentValue * perUnitAngle;
-            const needle=d3.select(&quot;#needle&quot;)
-
-            needle.transition()
-                .duration(2000)
-                .attr(&apos;transform&apos;,`rotate(${angle})`);
-        });
-        
-    }
-
-    /**
-     * showing current reading on mouseover
-     */
-    showValue(){
-        this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};
-        this.props.renderCurrentReading();
-    }
-
-
-    /**
-     * hiding reading on mouseout
-     */
-    hideValue(){
-        this.buttonData = undefined;
-        this.props.renderCurrentReading();
-    }
-
-    /**
-     * updating buttonData
-     */
-    componentDidUpdate(){
-        this.buttonData = undefined;
-    }
-
-    /**
-     * setting interval and fetching reading for GaugeWidget.
-     */
-    componentWillMount(){
-        setInterval(this.updateReading,10000);
-    }
-
-    /**
-     *loading config information about GaugeWidget.
-     */
-    componentDidMount() {
-        
-        const pi = Math.PI;
-        const perUnitAngle = 180/(this.props.max-this.props.min);
-        const colors = [palette.accentBlue,palette.accentGreen,palette.accentYellow,palette.accentRed];
-        const rangeData = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
-        const data = rangeData.map((range,i)=&gt;{
-            return {
-                value : range.max - range.min,
-                color : colors[i]
-            }
-        });
-
-        const svg = d3.select(&quot;#gauge-widget svg&quot;);
-        const vis=svg.data([data])
-            .attr(&quot;width&quot;, gaugeStyle.width)
-            .attr(&quot;height&quot;, gaugeStyle.height)
-            .append(&quot;svg:g&quot;)
-            .attr(&quot;transform&quot;, &quot;translate(&quot; + gaugeStyle.radius + &quot;,&quot; + gaugeStyle.radius + &quot;)&quot;)
-
-        const arc = d3.arc()
-            .outerRadius(gaugeStyle.radius)
-            .innerRadius(gaugeStyle.innerRadius);
-
-        const pie = d3.pie()
-            .value(function(d) { return d.value; })
-            .startAngle(-90 * (pi / 180))
-            .endAngle(90 * (pi / 180))
-            .sort(null);
-
-        const arcs = vis.selectAll(&quot;g.slice&quot;)
-            .data(pie)
-            .enter()
-            .append(&quot;svg:g&quot;)
-            .attr(&quot;class&quot;, &quot;slice&quot;);
-
-        arcs.append(&quot;svg:path&quot;)
-            .attr(&quot;fill&quot;, function(d, i) { return d.data.color; })
-            .attr(&quot;d&quot;, arc)
-            .attr(&quot;class&quot;, &quot;range&quot;)
-            .attr(&quot;id&quot;,function(d,i){return `range-${i}`});
-
-        const needle = vis.append(&apos;g&apos;)
-            .attr(&apos;class&apos;,&apos;pointer&apos;)
-            .append(&quot;path&quot;)
-            .attr(&quot;id&quot;,&quot;needle&quot;)
-            .attr(&quot;d&quot;, &quot;M0 0 L-240 0&quot;)
-            .attr(&quot;stroke-width&quot;,2)
-            .attr(&quot;stroke&quot;,palette.textColor);
-
-        needle.on(&apos;mouseover&apos;,this.showValue);
-        needle.on(&apos;mouseout&apos;,this.hideValue);     
-
-        vis.append(&quot;circle&quot;)
-        	.attr(&apos;cx&apos;,0)
-        	.attr(&apos;cy&apos;,0)   
-        	.attr(&apos;r&apos;,3) 
-        	.attr(&quot;stroke-width&quot;,3)
-            .attr(&quot;stroke&quot;,palette.textColor);
-
-
-        const labelData = [];
-
-        rangeData.forEach((range,i)=&gt;{
-            if(i)
-                labelData.push(range.max);
-            else
-                labelData.push(...[range.min,range.max]);
-                
-        });
-
-        const labelsContainer = d3.select(&quot;#gauge-widget svg&quot;)
-        .append(&quot;g&quot;)
-        .attr(&quot;transform&quot;, &quot;translate(&quot; + gaugeStyle.radius + &quot;,&quot; + gaugeStyle.radius + &quot;)&quot;);
-
-        labelsContainer.selectAll(&apos;text.label&apos;)
-        .data(labelData)
-        .enter()
-        .append(&quot;text&quot;)
-        .attr(&apos;transform&apos;,function(d){
-            const labelAngle = -90+d*perUnitAngle;
-            const labelDistance = -1*(gaugeStyle.radius+10);
-            return `rotate(${labelAngle}) translate(0,${labelDistance})`;
+describe(&apos;components&apos;, () =&gt; {
+    describe(&apos;Gauge&apos;, () =&gt; {
+        it(&apos;should render div&apos;, () =&gt; {
+            expect(mount(&lt;Gauge /&gt;).find(&quot;#gauge-widget&quot;)).length.to.be(1);
         })
-        .text(function(d) { return d; })
-        .attr(&quot;stroke&quot;,palette.textColor);
-    }
 
-    /**
-     * render
-     * @return {ReactElement} svg within PaperComponent to show GaugeWidget.
-     */
-    render() {
-        return ( 
-        	&lt;div id=&quot;gauge-widget&quot; style={divStyle}&gt;
-                &lt;Paper circle={true} style={pageStyle} zDepth={5}&gt;
-            		&lt;svg style={svgStyle}/&gt;
-                    {this.buttonData &amp;&amp; 
-                        &lt;RaisedButton 
-                        primary={true}
-                        style={{position:&apos;absolute&apos;,top:this.buttonData.y,left:this.buttonData.x}}
-                        label={this.buttonData.label}/&gt;}
-                &lt;/Paper&gt;        
-            &lt;/div&gt;
-        )
-    }
-}
+        it(&apos;should render Paper&apos;, () =&gt; {
+            expect(mount(&lt;Gauge /&gt;).find(&quot;Paper&quot;)).length.to.be(1);
+        })
 
-export default connect(mapStateToProps,mapDispatchToProps)(GaugeWidget);
+
+    })
+})
+
 </code></pre>
 
 </div>
