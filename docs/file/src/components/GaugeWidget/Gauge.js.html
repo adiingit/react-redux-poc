@@ -38,7 +38,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-configureMachineWidget">configureMachineWidget</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-reducers">reducers</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/AppBar</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AppBar/AppBar.js~AppBar.html">AppBar</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/GaugeWidget</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/GaugeWidget/Gauge.js~GaugeWidget.html">GaugeWidget</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/GaugeWidget</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/GaugeWidget/Foo.js~FooBar.html">FooBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/GaugeWidget/Gauge.js~GaugeWidget.html">GaugeWidget</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ducks</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-reducer">reducer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-reducer">reducer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSTEM_LIST_RECEIVED">SYSTEM_LIST_RECEIVED</a></span></span></li>
@@ -153,12 +154,11 @@ const gaugeStyle = {
 };
 /**
  * &lt;p&gt;Description:-&lt;/p&gt;
- *&lt;p&gt; The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum  and maximum). The reading can lie within any range specified in configuration.&lt;/p&gt;
- *&lt;p&gt; The structure is in a way to have Template and Widgets working independently. The widget components are cofigurable to fetch properties from REST API and are placed over the Template.
- * &lt;p&gt;The Gauge Widget is configurable with properties like width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from
-REST API.
- * One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.&lt;/p&gt;
- * &lt;p&gt;The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API.&lt;/p&gt;
+ *&lt;p&gt;The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum and maximum). The reading can lie within any range specified in configuration.&lt;/p&gt;
+ *&lt;p&gt;The structure is in a way to have Template and Widgets working independently. The components (needle, paper and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.&lt;/p&gt;
+ * &lt;p&gt;The Gauge Widget is configurable with properties like range colors, width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from REST API.
+ *  One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.&lt;/p&gt;
+ * &lt;p&gt; The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it makes a REST Call to display the exact current value in a tooltip.&lt;/p&gt;
  * &lt;p&gt;Setup:-&lt;/p&gt;
  * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.
  *
@@ -170,7 +170,7 @@ REST API.
  * &lt;p&gt;Integration:-&lt;/p&gt;
  * &lt;p&gt;To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
  */
-export class GaugeWidget extends SICKComponent {
+    export class GaugeWidget extends SICKComponent {
 
     /** Precondition (Static propTypes)
      * @returns { propTypes.min minimum value isRequired. ,  propTypes.max maximum value isRequired. , propTypes.rangeData Range of values isRequired.}

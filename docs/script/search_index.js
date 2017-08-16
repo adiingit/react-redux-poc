@@ -48,6 +48,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "ap-widget-repo/src/components/gaugewidget/foo.js~foobar",
+    "class/src/components/GaugeWidget/Foo.js~FooBar.html",
+    "<span>FooBar</span> <span class=\"search-result-import-path\">ap-widget-repo/src/components/GaugeWidget/Foo.js</span>",
+    "class"
+  ],
+  [
     "ap-widget-repo/src/components/gaugewidget/gauge.js~gaugewidget",
     "class/src/components/GaugeWidget/Gauge.js~GaugeWidget.html",
     "<span>GaugeWidget</span> <span class=\"search-result-import-path\">ap-widget-repo/src/components/GaugeWidget/Gauge.js</span>",
@@ -654,15 +660,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/components/appbar/appbar.spec.js",
-    "file/src/components/AppBar/appbar.spec.js.html",
-    "src/components/AppBar/appbar.spec.js",
-    "file"
-  ],
-  [
     "src/components/appbar/index.js",
     "file/src/components/AppBar/index.js.html",
     "src/components/AppBar/index.js",
+    "file"
+  ],
+  [
+    "src/components/gaugewidget/foo.js",
+    "file/src/components/GaugeWidget/Foo.js.html",
+    "src/components/GaugeWidget/Foo.js",
+    "file"
+  ],
+  [
+    "src/components/gaugewidget/foo.js~foobar#constructor",
+    "class/src/components/GaugeWidget/Foo.js~FooBar.html#instance-constructor-constructor",
+    "src/components/GaugeWidget/Foo.js~FooBar#constructor",
+    "method"
+  ],
+  [
+    "src/components/gaugewidget/foo.js~foobar#render",
+    "class/src/components/GaugeWidget/Foo.js~FooBar.html#instance-method-render",
+    "src/components/GaugeWidget/Foo.js~FooBar#render",
+    "method"
+  ],
+  [
+    "src/components/gaugewidget/foo.spec.js",
+    "file/src/components/GaugeWidget/Foo.spec.js.html",
+    "src/components/GaugeWidget/Foo.spec.js",
     "file"
   ],
   [
@@ -732,9 +756,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/components/gaugewidget/gauge.spec.js",
-    "file/src/components/GaugeWidget/Gauge.spec.js.html",
-    "src/components/GaugeWidget/Gauge.spec.js",
+    "src/components/gaugewidget/needle.spec.js",
+    "file/src/components/GaugeWidget/Needle.spec.js.html",
+    "src/components/GaugeWidget/Needle.spec.js",
     "file"
   ],
   [

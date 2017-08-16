@@ -733,19 +733,6 @@
     "kind": "file",
     "static": true,
     "variation": null,
-    "name": "src/components/AppBar/appbar.spec.js",
-    "memberof": null,
-    "longname": "src/components/AppBar/appbar.spec.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1,
-    "content": "import React from 'react'\nimport { mount, shallow } from 'enzyme'\nimport {AppBar} from './AppBar'\n\ndescribe('<AppBar> - Component Test',()=>{\n\tit('tests if component has a toolbar',()=>{\n\t\t\n\t\tconst appBar = shallow(<AppBar/>);\n\n\t\texpect(appBar.contains(Toolbar)).to.have.length(1);\n\t});\n});"
-  },
-  {
-    "__docId__": 35,
-    "kind": "file",
-    "static": true,
-    "variation": null,
     "name": "src/components/AppBar/index.js",
     "memberof": null,
     "longname": "src/components/AppBar/index.js",
@@ -755,7 +742,95 @@
     "content": "import ConnectedAppBar, {AppBar} from './AppBar'\r\n\r\nexport default ConnectedAppBar\r\nexport { AppBar }\r\n"
   },
   {
+    "__docId__": 35,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/components/GaugeWidget/Foo.js",
+    "memberof": null,
+    "longname": "src/components/GaugeWidget/Foo.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import React from 'react';\n\n\nclass FooBar extends React.Component {\n    constructor(props) {\n        super(props);\n    }\n\n    render() {\n        return (\n            <div className=\"foo\" >\n\n            </div>\n        );\n    }\n}\n\n\n\nexport default FooBar;"
+  },
+  {
     "__docId__": 36,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "FooBar",
+    "memberof": "src/components/GaugeWidget/Foo.js",
+    "longname": "src/components/GaugeWidget/Foo.js~FooBar",
+    "access": null,
+    "export": true,
+    "importPath": "ap-widget-repo/src/components/GaugeWidget/Foo.js",
+    "importStyle": "FooBar",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 37,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/components/GaugeWidget/Foo.js~FooBar",
+    "longname": "src/components/GaugeWidget/Foo.js~FooBar#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 38,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "render",
+    "memberof": "src/components/GaugeWidget/Foo.js~FooBar",
+    "longname": "src/components/GaugeWidget/Foo.js~FooBar#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 39,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/components/GaugeWidget/Foo.spec.js",
+    "memberof": null,
+    "longname": "src/components/GaugeWidget/Foo.spec.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": ""
+  },
+  {
+    "__docId__": 40,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -765,10 +840,10 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "import React, { PropTypes } from 'react'\nimport * as d3 from 'd3'\nimport Paper from 'material-ui/Paper'\nimport RaisedButton from 'material-ui/RaisedButton'\nimport theme from '../../../tests/theme'\nimport { connect } from '../../SICKPlatform'\nimport SICKComponent from '../SICKComponent'\nimport {renderCurrentReading,fetchCurrentReading} from '../../ducks/gauge'\nimport {getPointOnCircle} from '../../utils/shape'\n\nconst mapStateToProps = (state) => {\n    return {\n        max: state.config.gauge?Math.max(...state.config.gauge.get('range').map((r)=>r.max)):100,\n        min : state.config.gauge?Math.min(...state.config.gauge.get('range').map((r)=>r.min)):0,\n        rangeData : state.config.gauge?state.config.gauge.get('range'):[],\n        raisedButton : state.gauge.get('raisedButton'),\n        currentValue : state.gauge.get('currentValue')\n    }\n}\n\nconst mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};\n\n/**\n * material-ui/styles/colors\n */\nconst palette = theme.palette;\n\n/**\n * style for #gauge-widget\n * @type {{textAlign: string, marginTop: number, overflowY: string, height: number}}\n */\nconst divStyle = {\n    textAlign: 'center',\n    marginTop: 50,\n    overflowY:'hidden',\n    height:335\n};\n\n/**\n * style for PaperComponent\n * @type {{height: number, width: number, textAlign: string, display: string, paddingTop: number, marginTop: number}}\n */\nconst pageStyle = {\n    height: 600,\n    width: 600,\n    textAlign: 'center',\n    display: 'inline-block',\n    paddingTop : 50,\n    marginTop:10\n};\n/**\n * style for svg element\n * @type {{overflow: string}}\n */\nconst svgStyle = {\n    overflow:'visible'\n}\n/**\n * style for svg using d3\n * @type {{height: number, width: number, radius: number, innerRadius: number}}\n */\nconst gaugeStyle = {\n\theight: 250,\n    width: 500,\n    radius:250,\n    innerRadius:100\n    \n};\n/**\n * <p>Description:-</p>\n *<p> The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum  and maximum). The reading can lie within any range specified in configuration.</p>\n *<p> The structure is in a way to have Template and Widgets working independently. The widget components are cofigurable to fetch properties from REST API and are placed over the Template.\n * <p>The Gauge Widget is configurable with properties like width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from\nREST API.\n * One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>\n * <p>The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API.</p>\n * <p>Setup:-</p>\n * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.\n *\n * <p> Precondition:-</p>\n * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>\n * <p> Prop 1: min, type: number, isRequired</p>\n * <p> Prop 2: max, type: number, isRequired</p>\n * <p> Prop 3: rangeData, type: array, isRequired</p>\n * <p>Integration:-</p>\n * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.\n */\nexport class GaugeWidget extends SICKComponent {\n\n    /** Precondition (Static propTypes)\n     * @returns { propTypes.min minimum value isRequired. ,  propTypes.max maximum value isRequired. , propTypes.rangeData Range of values isRequired.}\n     */\n    static propTypes() {\n        return{\n            min:PropTypes.number.isRequired,\n            max:PropTypes.number.isRequired,\n            rangeData:PropTypes.array.isRequired\n        }\n\t}\n    /**\n     * creates a instance of GaugeWidget.\n     * @param {object} props\n     * @param {number} currentValue assigning currentValue\n     * @param {function} showValue binding current object with showValue\n     * @param {function} hideValue binding current object with hideValue\n     * @param {function} updateReading binding current object with updateReading\n     */\n    constructor(props) {\n        super(props);\n        const currentValue = this.props.min;\n        this.showValue = this.showValue.bind(this);\n        this.hideValue = this.hideValue.bind(this);\n        this.updateReading = this.updateReading.bind(this);\n    }\n\n    /**\n     * loading initial reading for GaugeWidget.\n     */\n    updateReading(){\n        this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=>{\n            \n            const perUnitAngle = 180/(this.props.max-this.props.min);\n            const angle = this.props.currentValue * perUnitAngle;\n            const needle=d3.select(\"#needle\")\n\n            needle.transition()\n                .duration(2000)\n                .attr('transform',`rotate(${angle})`);\n        });\n        \n    }\n\n    /**\n     * showing current reading on mouseover\n     */\n    showValue(){\n        this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};\n        this.props.renderCurrentReading();\n    }\n\n\n    /**\n     * hiding reading on mouseout\n     */\n    hideValue(){\n        this.buttonData = undefined;\n        this.props.renderCurrentReading();\n    }\n\n    /**\n     * updating buttonData\n     */\n    componentDidUpdate(){\n        this.buttonData = undefined;\n    }\n\n    /**\n     * setting interval and fetching reading for GaugeWidget.\n     */\n    componentWillMount(){\n        setInterval(this.updateReading,10000);\n    }\n\n    /**\n     *loading config information about GaugeWidget.\n     */\n    componentDidMount() {\n        \n        const pi = Math.PI;\n        const perUnitAngle = 180/(this.props.max-this.props.min);\n        const colors = [palette.accentBlue,palette.accentGreen,palette.accentYellow,palette.accentRed];\n        const rangeData = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();\n        const data = rangeData.map((range,i)=>{\n            return {\n                value : range.max - range.min,\n                color : colors[i]\n            }\n        });\n\n        const svg = d3.select(\"#gauge-widget svg\");\n        const vis=svg.data([data])\n            .attr(\"width\", gaugeStyle.width)\n            .attr(\"height\", gaugeStyle.height)\n            .append(\"svg:g\")\n            .attr(\"transform\", \"translate(\" + gaugeStyle.radius + \",\" + gaugeStyle.radius + \")\")\n\n        const arc = d3.arc()\n            .outerRadius(gaugeStyle.radius)\n            .innerRadius(gaugeStyle.innerRadius);\n\n        const pie = d3.pie()\n            .value(function(d) { return d.value; })\n            .startAngle(-90 * (pi / 180))\n            .endAngle(90 * (pi / 180))\n            .sort(null);\n\n        const arcs = vis.selectAll(\"g.slice\")\n            .data(pie)\n            .enter()\n            .append(\"svg:g\")\n            .attr(\"class\", \"slice\");\n\n        arcs.append(\"svg:path\")\n            .attr(\"fill\", function(d, i) { return d.data.color; })\n            .attr(\"d\", arc)\n            .attr(\"class\", \"range\")\n            .attr(\"id\",function(d,i){return `range-${i}`});\n\n        const needle = vis.append('g')\n            .attr('class','pointer')\n            .append(\"path\")\n            .attr(\"id\",\"needle\")\n            .attr(\"d\", \"M0 0 L-240 0\")\n            .attr(\"stroke-width\",2)\n            .attr(\"stroke\",palette.textColor);\n\n        needle.on('mouseover',this.showValue);\n        needle.on('mouseout',this.hideValue);     \n\n        vis.append(\"circle\")\n        \t.attr('cx',0)\n        \t.attr('cy',0)   \n        \t.attr('r',3) \n        \t.attr(\"stroke-width\",3)\n            .attr(\"stroke\",palette.textColor);\n\n\n        const labelData = [];\n\n        rangeData.forEach((range,i)=>{\n            if(i)\n                labelData.push(range.max);\n            else\n                labelData.push(...[range.min,range.max]);\n                \n        });\n\n        const labelsContainer = d3.select(\"#gauge-widget svg\")\n        .append(\"g\")\n        .attr(\"transform\", \"translate(\" + gaugeStyle.radius + \",\" + gaugeStyle.radius + \")\");\n\n        labelsContainer.selectAll('text.label')\n        .data(labelData)\n        .enter()\n        .append(\"text\")\n        .attr('transform',function(d){\n            const labelAngle = -90+d*perUnitAngle;\n            const labelDistance = -1*(gaugeStyle.radius+10);\n            return `rotate(${labelAngle}) translate(0,${labelDistance})`;\n        })\n        .text(function(d) { return d; })\n        .attr(\"stroke\",palette.textColor);\n    }\n\n    /**\n     * render\n     * @return {ReactElement} svg within PaperComponent to show GaugeWidget.\n     */\n    render() {\n        return ( \n        \t<div id=\"gauge-widget\" style={divStyle}>\n                <Paper circle={true} style={pageStyle} zDepth={5}>\n            \t\t<svg style={svgStyle}/>\n                    {this.buttonData && \n                        <RaisedButton \n                        primary={true}\n                        style={{position:'absolute',top:this.buttonData.y,left:this.buttonData.x}}\n                        label={this.buttonData.label}/>}\n                </Paper>        \n            </div>\n        )\n    }\n}\n\nexport default connect(mapStateToProps,mapDispatchToProps)(GaugeWidget);\n"
+    "content": "import React, { PropTypes } from 'react'\nimport * as d3 from 'd3'\nimport Paper from 'material-ui/Paper'\nimport RaisedButton from 'material-ui/RaisedButton'\nimport theme from '../../../tests/theme'\nimport { connect } from '../../SICKPlatform'\nimport SICKComponent from '../SICKComponent'\nimport {renderCurrentReading,fetchCurrentReading} from '../../ducks/gauge'\nimport {getPointOnCircle} from '../../utils/shape'\n\nconst mapStateToProps = (state) => {\n    return {\n        max: state.config.gauge?Math.max(...state.config.gauge.get('range').map((r)=>r.max)):100,\n        min : state.config.gauge?Math.min(...state.config.gauge.get('range').map((r)=>r.min)):0,\n        rangeData : state.config.gauge?state.config.gauge.get('range'):[],\n        raisedButton : state.gauge.get('raisedButton'),\n        currentValue : state.gauge.get('currentValue')\n    }\n}\n\nconst mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};\n\n/**\n * material-ui/styles/colors\n */\nconst palette = theme.palette;\n\n/**\n * style for #gauge-widget\n * @type {{textAlign: string, marginTop: number, overflowY: string, height: number}}\n */\nconst divStyle = {\n    textAlign: 'center',\n    marginTop: 50,\n    overflowY:'hidden',\n    height:335\n};\n\n/**\n * style for PaperComponent\n * @type {{height: number, width: number, textAlign: string, display: string, paddingTop: number, marginTop: number}}\n */\nconst pageStyle = {\n    height: 600,\n    width: 600,\n    textAlign: 'center',\n    display: 'inline-block',\n    paddingTop : 50,\n    marginTop:10\n};\n/**\n * style for svg element\n * @type {{overflow: string}}\n */\nconst svgStyle = {\n    overflow:'visible'\n}\n/**\n * style for svg using d3\n * @type {{height: number, width: number, radius: number, innerRadius: number}}\n */\nconst gaugeStyle = {\n\theight: 250,\n    width: 500,\n    radius:250,\n    innerRadius:100\n    \n};\n/**\n * <p>Description:-</p>\n *<p>The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum and maximum). The reading can lie within any range specified in configuration.</p>\n *<p>The structure is in a way to have Template and Widgets working independently. The components (needle, paper and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.</p>\n * <p>The Gauge Widget is configurable with properties like range colors, width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from REST API.\n *  One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>\n * <p> The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it makes a REST Call to display the exact current value in a tooltip.</p>\n * <p>Setup:-</p>\n * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.\n *\n * <p> Precondition:-</p>\n * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>\n * <p> Prop 1: min, type: number, isRequired</p>\n * <p> Prop 2: max, type: number, isRequired</p>\n * <p> Prop 3: rangeData, type: array, isRequired</p>\n * <p>Integration:-</p>\n * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.\n */\n    export class GaugeWidget extends SICKComponent {\n\n    /** Precondition (Static propTypes)\n     * @returns { propTypes.min minimum value isRequired. ,  propTypes.max maximum value isRequired. , propTypes.rangeData Range of values isRequired.}\n     */\n    static propTypes() {\n        return{\n            min:PropTypes.number.isRequired,\n            max:PropTypes.number.isRequired,\n            rangeData:PropTypes.array.isRequired\n        }\n\t}\n    /**\n     * creates a instance of GaugeWidget.\n     * @param {object} props\n     * @param {number} currentValue assigning currentValue\n     * @param {function} showValue binding current object with showValue\n     * @param {function} hideValue binding current object with hideValue\n     * @param {function} updateReading binding current object with updateReading\n     */\n    constructor(props) {\n        super(props);\n        const currentValue = this.props.min;\n        this.showValue = this.showValue.bind(this);\n        this.hideValue = this.hideValue.bind(this);\n        this.updateReading = this.updateReading.bind(this);\n    }\n\n    /**\n     * loading initial reading for GaugeWidget.\n     */\n    updateReading(){\n        this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`).then(()=>{\n            \n            const perUnitAngle = 180/(this.props.max-this.props.min);\n            const angle = this.props.currentValue * perUnitAngle;\n            const needle=d3.select(\"#needle\")\n\n            needle.transition()\n                .duration(2000)\n                .attr('transform',`rotate(${angle})`);\n        });\n        \n    }\n\n    /**\n     * showing current reading on mouseover\n     */\n    showValue(){\n        this.buttonData={x:d3.event.pageX,y:d3.event.pageY,label:this.props.currentValue||this.props.min};\n        this.props.renderCurrentReading();\n    }\n\n\n    /**\n     * hiding reading on mouseout\n     */\n    hideValue(){\n        this.buttonData = undefined;\n        this.props.renderCurrentReading();\n    }\n\n    /**\n     * updating buttonData\n     */\n    componentDidUpdate(){\n        this.buttonData = undefined;\n    }\n\n    /**\n     * setting interval and fetching reading for GaugeWidget.\n     */\n    componentWillMount(){\n        setInterval(this.updateReading,10000);\n    }\n\n    /**\n     *loading config information about GaugeWidget.\n     */\n    componentDidMount() {\n        \n        const pi = Math.PI;\n        const perUnitAngle = 180/(this.props.max-this.props.min);\n        const colors = [palette.accentBlue,palette.accentGreen,palette.accentYellow,palette.accentRed];\n        const rangeData = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();\n        const data = rangeData.map((range,i)=>{\n            return {\n                value : range.max - range.min,\n                color : colors[i]\n            }\n        });\n\n        const svg = d3.select(\"#gauge-widget svg\");\n        const vis=svg.data([data])\n            .attr(\"width\", gaugeStyle.width)\n            .attr(\"height\", gaugeStyle.height)\n            .append(\"svg:g\")\n            .attr(\"transform\", \"translate(\" + gaugeStyle.radius + \",\" + gaugeStyle.radius + \")\")\n\n        const arc = d3.arc()\n            .outerRadius(gaugeStyle.radius)\n            .innerRadius(gaugeStyle.innerRadius);\n\n        const pie = d3.pie()\n            .value(function(d) { return d.value; })\n            .startAngle(-90 * (pi / 180))\n            .endAngle(90 * (pi / 180))\n            .sort(null);\n\n        const arcs = vis.selectAll(\"g.slice\")\n            .data(pie)\n            .enter()\n            .append(\"svg:g\")\n            .attr(\"class\", \"slice\");\n\n        arcs.append(\"svg:path\")\n            .attr(\"fill\", function(d, i) { return d.data.color; })\n            .attr(\"d\", arc)\n            .attr(\"class\", \"range\")\n            .attr(\"id\",function(d,i){return `range-${i}`});\n\n        const needle = vis.append('g')\n            .attr('class','pointer')\n            .append(\"path\")\n            .attr(\"id\",\"needle\")\n            .attr(\"d\", \"M0 0 L-240 0\")\n            .attr(\"stroke-width\",2)\n            .attr(\"stroke\",palette.textColor);\n\n        needle.on('mouseover',this.showValue);\n        needle.on('mouseout',this.hideValue);     \n\n        vis.append(\"circle\")\n        \t.attr('cx',0)\n        \t.attr('cy',0)   \n        \t.attr('r',3) \n        \t.attr(\"stroke-width\",3)\n            .attr(\"stroke\",palette.textColor);\n\n\n        const labelData = [];\n\n        rangeData.forEach((range,i)=>{\n            if(i)\n                labelData.push(range.max);\n            else\n                labelData.push(...[range.min,range.max]);\n                \n        });\n\n        const labelsContainer = d3.select(\"#gauge-widget svg\")\n        .append(\"g\")\n        .attr(\"transform\", \"translate(\" + gaugeStyle.radius + \",\" + gaugeStyle.radius + \")\");\n\n        labelsContainer.selectAll('text.label')\n        .data(labelData)\n        .enter()\n        .append(\"text\")\n        .attr('transform',function(d){\n            const labelAngle = -90+d*perUnitAngle;\n            const labelDistance = -1*(gaugeStyle.radius+10);\n            return `rotate(${labelAngle}) translate(0,${labelDistance})`;\n        })\n        .text(function(d) { return d; })\n        .attr(\"stroke\",palette.textColor);\n    }\n\n    /**\n     * render\n     * @return {ReactElement} svg within PaperComponent to show GaugeWidget.\n     */\n    render() {\n        return ( \n        \t<div id=\"gauge-widget\" style={divStyle}>\n                <Paper circle={true} style={pageStyle} zDepth={5}>\n            \t\t<svg style={svgStyle}/>\n                    {this.buttonData && \n                        <RaisedButton \n                        primary={true}\n                        style={{position:'absolute',top:this.buttonData.y,left:this.buttonData.x}}\n                        label={this.buttonData.label}/>}\n                </Paper>        \n            </div>\n        )\n    }\n}\n\nexport default connect(mapStateToProps,mapDispatchToProps)(GaugeWidget);\n"
   },
   {
-    "__docId__": 37,
+    "__docId__": 41,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -789,7 +864,7 @@
     }
   },
   {
-    "__docId__": 38,
+    "__docId__": 42,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -810,7 +885,7 @@
     }
   },
   {
-    "__docId__": 39,
+    "__docId__": 43,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -830,7 +905,7 @@
     }
   },
   {
-    "__docId__": 40,
+    "__docId__": 44,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -853,7 +928,7 @@
     }
   },
   {
-    "__docId__": 41,
+    "__docId__": 45,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -876,7 +951,7 @@
     }
   },
   {
-    "__docId__": 42,
+    "__docId__": 46,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -899,7 +974,7 @@
     }
   },
   {
-    "__docId__": 43,
+    "__docId__": 47,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -922,7 +997,7 @@
     }
   },
   {
-    "__docId__": 44,
+    "__docId__": 48,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -933,15 +1008,15 @@
     "export": true,
     "importPath": "ap-widget-repo/src/components/GaugeWidget/Gauge.js",
     "importStyle": "{GaugeWidget}",
-    "description": "<p>Description:-</p>\n<p> The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum  and maximum). The reading can lie within any range specified in configuration.</p>\n<p> The structure is in a way to have Template and Widgets working independently. The widget components are cofigurable to fetch properties from REST API and are placed over the Template.\n<p>The Gauge Widget is configurable with properties like width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from\nREST API.\nOne can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>\n<p>The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API.</p>\n<p>Setup:-</p>\nFetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.\n\n<p> Precondition:-</p>\n<p>After successful response from REST API, initial requirement is to set required propTypes. </p>\n<p> Prop 1: min, type: number, isRequired</p>\n<p> Prop 2: max, type: number, isRequired</p>\n<p> Prop 3: rangeData, type: array, isRequired</p>\n<p>Integration:-</p>\n<p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.",
-    "lineNumber": 88,
+    "description": "<p>Description:-</p>\n<p>The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum and maximum). The reading can lie within any range specified in configuration.</p>\n<p>The structure is in a way to have Template and Widgets working independently. The components (needle, paper and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.</p>\n<p>The Gauge Widget is configurable with properties like range colors, width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from REST API.\n One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>\n<p> The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it makes a REST Call to display the exact current value in a tooltip.</p>\n<p>Setup:-</p>\nFetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.\n\n<p> Precondition:-</p>\n<p>After successful response from REST API, initial requirement is to set required propTypes. </p>\n<p> Prop 1: min, type: number, isRequired</p>\n<p> Prop 2: max, type: number, isRequired</p>\n<p> Prop 3: rangeData, type: array, isRequired</p>\n<p>Integration:-</p>\n<p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.",
+    "lineNumber": 87,
     "interface": false,
     "extends": [
       "src/components/SICKComponent.js~SICKComponent"
     ]
   },
   {
-    "__docId__": 45,
+    "__docId__": 49,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -950,7 +1025,7 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget.propTypes",
     "access": null,
     "description": "Precondition (Static propTypes)",
-    "lineNumber": 93,
+    "lineNumber": 92,
     "unknown": [
       {
         "tagName": "@returns",
@@ -969,7 +1044,7 @@
     "generator": false
   },
   {
-    "__docId__": 46,
+    "__docId__": 50,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -978,7 +1053,7 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#constructor",
     "access": null,
     "description": "creates a instance of GaugeWidget.",
-    "lineNumber": 108,
+    "lineNumber": 107,
     "params": [
       {
         "nullable": null,
@@ -1034,13 +1109,31 @@
     "generator": false
   },
   {
-    "__docId__": 47,
+    "__docId__": 51,
     "kind": "member",
     "static": false,
     "variation": null,
     "name": "showValue",
     "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#showValue",
+    "access": null,
+    "description": null,
+    "lineNumber": 110,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "hideValue",
+    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#hideValue",
     "access": null,
     "description": null,
     "lineNumber": 111,
@@ -1052,13 +1145,13 @@
     }
   },
   {
-    "__docId__": 48,
+    "__docId__": 53,
     "kind": "member",
     "static": false,
     "variation": null,
-    "name": "hideValue",
+    "name": "updateReading",
     "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#hideValue",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#updateReading",
     "access": null,
     "description": null,
     "lineNumber": 112,
@@ -1070,25 +1163,7 @@
     }
   },
   {
-    "__docId__": 49,
-    "kind": "member",
-    "static": false,
-    "variation": null,
-    "name": "updateReading",
-    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#updateReading",
-    "access": null,
-    "description": null,
-    "lineNumber": 113,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 50,
+    "__docId__": 54,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -1097,12 +1172,12 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#updateReading",
     "access": null,
     "description": "loading initial reading for GaugeWidget.",
-    "lineNumber": 119,
+    "lineNumber": 118,
     "params": [],
     "generator": false
   },
   {
-    "__docId__": 51,
+    "__docId__": 55,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -1111,71 +1186,7 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#showValue",
     "access": null,
     "description": "showing current reading on mouseover",
-    "lineNumber": 136,
-    "params": [],
-    "generator": false
-  },
-  {
-    "__docId__": 52,
-    "kind": "member",
-    "static": false,
-    "variation": null,
-    "name": "buttonData",
-    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#buttonData",
-    "access": null,
-    "description": null,
-    "lineNumber": 137,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 53,
-    "kind": "method",
-    "static": false,
-    "variation": null,
-    "name": "hideValue",
-    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#hideValue",
-    "access": null,
-    "description": "hiding reading on mouseout",
-    "lineNumber": 145,
-    "params": [],
-    "generator": false
-  },
-  {
-    "__docId__": 54,
-    "kind": "member",
-    "static": false,
-    "variation": null,
-    "name": "buttonData",
-    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#buttonData",
-    "access": null,
-    "description": null,
-    "lineNumber": 146,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 55,
-    "kind": "method",
-    "static": false,
-    "variation": null,
-    "name": "componentDidUpdate",
-    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#componentDidUpdate",
-    "access": null,
-    "description": "updating buttonData",
-    "lineNumber": 153,
+    "lineNumber": 135,
     "params": [],
     "generator": false
   },
@@ -1189,7 +1200,7 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#buttonData",
     "access": null,
     "description": null,
-    "lineNumber": 154,
+    "lineNumber": 136,
     "undocument": true,
     "type": {
       "types": [
@@ -1202,17 +1213,81 @@
     "kind": "method",
     "static": false,
     "variation": null,
-    "name": "componentWillMount",
+    "name": "hideValue",
     "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
-    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#componentWillMount",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#hideValue",
     "access": null,
-    "description": "setting interval and fetching reading for GaugeWidget.",
-    "lineNumber": 160,
+    "description": "hiding reading on mouseout",
+    "lineNumber": 144,
     "params": [],
     "generator": false
   },
   {
     "__docId__": 58,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "buttonData",
+    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#buttonData",
+    "access": null,
+    "description": null,
+    "lineNumber": 145,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "componentDidUpdate",
+    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#componentDidUpdate",
+    "access": null,
+    "description": "updating buttonData",
+    "lineNumber": 152,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 60,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "buttonData",
+    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#buttonData",
+    "access": null,
+    "description": null,
+    "lineNumber": 153,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "componentWillMount",
+    "memberof": "src/components/GaugeWidget/Gauge.js~GaugeWidget",
+    "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#componentWillMount",
+    "access": null,
+    "description": "setting interval and fetching reading for GaugeWidget.",
+    "lineNumber": 159,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 62,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -1221,12 +1296,12 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#componentDidMount",
     "access": null,
     "description": "loading config information about GaugeWidget.",
-    "lineNumber": 167,
+    "lineNumber": 166,
     "params": [],
     "generator": false
   },
   {
-    "__docId__": 59,
+    "__docId__": 63,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -1235,7 +1310,7 @@
     "longname": "src/components/GaugeWidget/Gauge.js~GaugeWidget#render",
     "access": null,
     "description": "render",
-    "lineNumber": 259,
+    "lineNumber": 258,
     "params": [],
     "return": {
       "nullable": null,
@@ -1248,20 +1323,20 @@
     "generator": false
   },
   {
-    "__docId__": 60,
+    "__docId__": 64,
     "kind": "file",
     "static": true,
     "variation": null,
-    "name": "src/components/GaugeWidget/Gauge.spec.js",
+    "name": "src/components/GaugeWidget/Needle.spec.js",
     "memberof": null,
-    "longname": "src/components/GaugeWidget/Gauge.spec.js",
+    "longname": "src/components/GaugeWidget/Needle.spec.js",
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "import React from 'react'\nimport { mount, shallow } from 'enzyme'\nimport Gauge from './Gauge'\nimport Paper from 'material-ui/Paper'\n\ndescribe('components', () => {\n    describe('Gauge', () => {\n        it('should render div', () => {\n            expect(mount(<Gauge />).find(\"#gauge-widget\")).length.to.be(1);\n        })\n\n        it('should render Paper', () => {\n            expect(mount(<Gauge />).find(\"Paper\")).length.to.be(1);\n        })\n\n\n    })\n})\n\n"
+    "content": ""
   },
   {
-    "__docId__": 61,
+    "__docId__": 65,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -1274,7 +1349,7 @@
     "content": "import { Component, PropTypes } from 'react'\r\nimport uuid from 'node-uuid'\r\nimport SICKComponentWrapper from '../SICKComponentWrapper'\r\nimport getMuiTheme from 'material-ui/styles/getMuiTheme'\r\nimport SICKMuiTheme from '../SICKMuiTheme'\r\n\r\n/**\r\n * A base React component which is shared by all SICK platform React components\r\n * @private\r\n * @abstract\r\n */\r\nexport default class SICKComponent extends Component {\r\n\r\n  static propTypes = {\r\n    config: PropTypes.object,\r\n    group: PropTypes.string\r\n  }\r\n\r\n  static defaultProps = {\r\n    // Default state key will be random. However, for widgets that require user settings to persist,\r\n    // developers will need to specify the group ID for the widget.\r\n    // Without a pre-defined and deterministic group ID, the widget will not know where to get its saved settings.\r\n    group: uuid.v4()\r\n  }\r\n\r\n  /**\r\n   * Initializes a component returning the DOM instance it was rendered into.\r\n   * @protected\r\n   * @param {Element} node The {@link Element} to initialize (render) the component into.\r\n   * @param {Object} properties The properties to be applied to the component.\r\n   * @throws {Error} Throws Error when `init()` is called on the component directly.\r\n   * @return {SICKComponentWrapper} The component wrapper.\r\n   */\r\n  static init (node, properties) {\r\n    if (this.prototype.constructor === SICKComponent) {\r\n      throw new Error('You cannot initialize the base SICK component.')\r\n    }\r\n\r\n    return new SICKComponentWrapper(this.prototype.constructor, node, properties)\r\n  }\r\n\r\n  /** @ignore */\r\n  static childContextTypes = {\r\n    muiTheme: PropTypes.object.isRequired\r\n  }\r\n\r\n  static contextTypes = {\r\n    muiTheme: PropTypes.object\r\n  }\r\n\r\n  /** @private */\r\n  get muiTheme () {\r\n    return this.context.muiTheme || getMuiTheme(this.props.config ? this.props.config.theme : SICKMuiTheme)\r\n  }\r\n\r\n  /** @ignore */\r\n  getChildContext () {\r\n    return {\r\n      muiTheme: this.muiTheme\r\n    }\r\n  }\r\n}\r\n"
   },
   {
-    "__docId__": 62,
+    "__docId__": 66,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -1294,7 +1369,7 @@
     ]
   },
   {
-    "__docId__": 63,
+    "__docId__": 67,
     "kind": "method",
     "static": true,
     "variation": null,
@@ -1345,7 +1420,7 @@
     "generator": false
   },
   {
-    "__docId__": 64,
+    "__docId__": 68,
     "kind": "get",
     "static": false,
     "variation": null,
@@ -1363,7 +1438,7 @@
     "generator": false
   },
   {
-    "__docId__": 65,
+    "__docId__": 69,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -1383,7 +1458,7 @@
     "generator": false
   },
   {
-    "__docId__": 66,
+    "__docId__": 70,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -1396,7 +1471,7 @@
     "content": "import { Map, OrderedMap, Record } from 'immutable'\r\nimport { get } from '../utils/httpRequest'\r\n\r\n// ------------------------------------\r\n// Constants\r\n// ------------------------------------\r\nexport const SYSTEM_LIST_RECEIVED = 'SYSTEM_LIST_RECEIVED'\r\nexport const UPDATE_SYSTEM = 'UPDATE_SYSTEM'\r\n\r\n// ------------------------------------\r\n// Actions\r\n// ------------------------------------\r\nconst systemsReceived = (payload) => ({ type: SYSTEM_LIST_RECEIVED, payload })\r\n\r\nconst updateSystem = (systemName) => ({ type: UPDATE_SYSTEM, systemName})\r\n\r\nexport const getSystems = (url) => {\r\n  return (dispatch) => {\r\n    return get(url)\r\n      .then((payload) => {\r\n        dispatch(systemsReceived(payload))\r\n      })\r\n      .catch(err => {\r\n        console.log(err)\r\n      })\r\n  }\r\n}\r\n\r\nexport const switchSystem = (systemName) => {\r\n  return (dispatch) => {\r\n    dispatch(updateSystem(systemName))\r\n  }\r\n}\r\n// ------------------------------------\r\n// Action Handlers\r\n// ------------------------------------\r\nconst System = Record({\r\n  systemName: '',\r\n  systemLabel: 'Default System',\r\n  disabled: false\r\n})\r\n\r\nconst ACTION_HANDLERS = {\r\n  [SYSTEM_LIST_RECEIVED]: (state, { payload }) => {\r\n    let nextState = state\r\n\r\n    let systemMap = OrderedMap()\r\n\r\n    payload.map((value) => {\r\n      const system = new System(value)\r\n      systemMap = systemMap.set(value.systemName, system)\r\n    })\r\n\r\n    nextState = nextState.setIn(['systems'], systemMap)\r\n\r\n    const selSystem = new System(payload[0])\r\n    nextState = nextState.setIn(['selectedSystem'], selSystem)\r\n\r\n    return nextState\r\n  },\r\n  [UPDATE_SYSTEM]: (state, { systemName}) => {\r\n    let nextState = state\r\n\r\n    const systemLabel = nextState.get('systems').get(systemName)\r\n    ? nextState.get('systems').get(systemName).systemLabel : ''\r\n\r\n    nextState = nextState.setIn(['selectedSystem', 'systemName'], systemName)\r\n    nextState = nextState.setIn(['selectedSystem', 'systemLabel'], systemLabel)\r\n\r\n    return nextState\r\n  }\r\n}\r\n\r\n// ------------------------------------\r\n// Reducer\r\n// ------------------------------------\r\nconst initialState = new Map()\r\n\r\nexport default function reducer (state = initialState, action) {\r\n  const handler = ACTION_HANDLERS[action.type]\r\n\r\n  return handler ? handler(state, action) : state\r\n}\r\n"
   },
   {
-    "__docId__": 67,
+    "__docId__": 71,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1417,7 +1492,7 @@
     }
   },
   {
-    "__docId__": 68,
+    "__docId__": 72,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1438,7 +1513,7 @@
     }
   },
   {
-    "__docId__": 69,
+    "__docId__": 73,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1459,7 +1534,7 @@
     }
   },
   {
-    "__docId__": 70,
+    "__docId__": 74,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1480,7 +1555,7 @@
     }
   },
   {
-    "__docId__": 71,
+    "__docId__": 75,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1501,7 +1576,7 @@
     }
   },
   {
-    "__docId__": 72,
+    "__docId__": 76,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1522,7 +1597,7 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 77,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1543,7 +1618,7 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 78,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1564,7 +1639,7 @@
     }
   },
   {
-    "__docId__": 75,
+    "__docId__": 79,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1585,7 +1660,7 @@
     }
   },
   {
-    "__docId__": 76,
+    "__docId__": 80,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -1624,7 +1699,7 @@
     "generator": false
   },
   {
-    "__docId__": 77,
+    "__docId__": 81,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -1637,7 +1712,7 @@
     "content": "import deepmerge from '../utils/deepmerge'\r\nimport { Map ,List} from 'immutable'\r\nimport { get } from '../utils/httpRequest'\r\nimport SICKMuiTheme from '../SICKMuiTheme'\r\n\r\n// ------------------------------------\r\n// Constants\r\n// ------------------------------------\r\n\r\nconst UPDATE = 'SICKPlatform/config/UPDATE'\r\n/**\r\n * Constant GAUGE_RANGE_CONFIG_RECEIVED\r\n * @type {string}\r\n */\r\nconst GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'\r\n\r\n// ------------------------------------\r\n// Functions: Action creators / Helpers / etc.\r\n// ------------------------------------\r\n/** @private */\r\nexport function updateConfig (config) {\r\n  return {\r\n    type: UPDATE,\r\n    config\r\n  }\r\n}\r\n\r\nconst rangesReceived = (ranges) => ({ type: GAUGE_RANGE_CONFIG_RECEIVED,ranges })\r\n\r\n/**\r\n * This function is used to fetch ranges for GaugeWidget.\r\n */\r\nexport const getGaugeConfig = (url) => {\r\n  return (dispatch) => {\r\n    return get(url)\r\n      .then((ranges) => {\r\n        dispatch(rangesReceived(ranges))\r\n      })\r\n      .catch(err => {\r\n        console.log(err)\r\n      })\r\n  }\r\n}\r\n\r\n// ------------------------------------\r\n// Action Handlers\r\n// ------------------------------------\r\n\r\nconst initialState = {\r\n  theme: SICKMuiTheme,\r\n  webSocket: {\r\n    reconnect: true,\r\n    reconnectInterval: 5,\r\n    maxRetries: 5\r\n  }\r\n}\r\n\r\nconst actionHandlers = {\r\n  [UPDATE]: (state, { config }) => deepmerge(state, config),\r\n  [GAUGE_RANGE_CONFIG_RECEIVED]: (state, { ranges }) => {\r\n    let nextState = state\r\n    if(ranges && ranges.length){\r\n      nextState.gauge = new Map();\r\n      nextState.gauge=nextState.gauge.setIn(['range'], List(ranges));\r\n    }\r\n    return nextState\r\n  }\r\n}\r\n\r\n// ------------------------------------\r\n// Reducer\r\n// ------------------------------------\r\n\r\n/** @private */\r\nexport default function reducer (state = initialState, action) {\r\n  const handler = actionHandlers[action.type]\r\n  return handler ? handler(state, action) : state\r\n}\r\n"
   },
   {
-    "__docId__": 78,
+    "__docId__": 82,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1658,7 +1733,7 @@
     }
   },
   {
-    "__docId__": 79,
+    "__docId__": 83,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1681,7 +1756,7 @@
     }
   },
   {
-    "__docId__": 80,
+    "__docId__": 84,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -1710,7 +1785,7 @@
     "generator": false
   },
   {
-    "__docId__": 81,
+    "__docId__": 85,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1731,7 +1806,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 86,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1751,7 +1826,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 87,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1772,7 +1847,7 @@
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 88,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1793,7 +1868,7 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 89,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -1831,7 +1906,7 @@
     "generator": false
   },
   {
-    "__docId__": 86,
+    "__docId__": 90,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -1844,7 +1919,7 @@
     "content": "import { Map } from 'immutable'\nimport { get } from '../utils/httpRequest'\n\n// ------------------------------------\n// Constants\n// ------------------------------------\n/**\n * Constant ERROR\n * @type {string}\n */\nexport const ERROR = 'ERROR'\n\n/**\n * Constant FETCH_GAUGE_READING\n * @type {string}\n */\nexport const FETCH_GAUGE_READING = 'FETCH_GAUGE_READING'\n/**\n * Constant TOGGLE_GAUGE_READING\n * @type {string}\n */\nexport const TOGGLE_GAUGE_READING = 'TOGGLE_GAUGE_READING'\n// ------------------------------------\n// Actions\n// ------------------------------------\n/**\n * This function is used to fetch gauge current reading from REST API.\n */\nexport const fetchCurrentReading = url => {\n    return dispatch => {\n      return get(url).then(\n        reading=>{dispatch({ type: FETCH_GAUGE_READING, reading })}\n        )\n    }  \n}\n\n/**\n * This function is used to show gauge reading on button.\n */\nexport const renderCurrentReading = () => {\n    return { type: TOGGLE_GAUGE_READING };\n}\n\n// ------------------------------------\n// Action Handlers\n// ------------------------------------\n\nconst ACTION_HANDLERS = {\n  [TOGGLE_GAUGE_READING]: (state, data) => {\n    let nextState = state\n    nextState = nextState.setIn(['raisedButton'], !nextState.get('raisedButton'));\n    return nextState\n  },\n  [FETCH_GAUGE_READING]: (state,data) => {\n    let nextState = state\n    nextState = nextState.setIn(['currentValue'], data.reading);\n    nextState = nextState.setIn(['raisedButton'], undefined);\n    return nextState;\n  }\n}\n\n// ------------------------------------\n// Reducer\n// ------------------------------------\nconst initialState = new Map()\n\nexport default function reducer (state = initialState, action) {\n  const handler = ACTION_HANDLERS[action.type]\n  return handler ? handler(state, action) : state\n}\n"
   },
   {
-    "__docId__": 87,
+    "__docId__": 91,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1867,7 +1942,7 @@
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 92,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1890,7 +1965,7 @@
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 93,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1913,7 +1988,7 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 94,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1933,7 +2008,7 @@
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 95,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1953,7 +2028,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 96,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1974,7 +2049,7 @@
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 97,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -1995,7 +2070,7 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 98,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2034,7 +2109,7 @@
     "generator": false
   },
   {
-    "__docId__": 95,
+    "__docId__": 99,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2047,7 +2122,7 @@
     "content": "import * as config from './config'\r\nimport * as userSettings from './userSettings'\r\nimport * as appbar from './appbar'\r\nimport * as gauge from './gauge'\r\n\r\nexport default {\r\n  config,\r\n  userSettings,\r\n  appbar,\r\n  gauge\r\n}\r\n"
   },
   {
-    "__docId__": 96,
+    "__docId__": 100,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2060,7 +2135,7 @@
     "content": "import deepmerge from '../utils/deepmerge'\r\nimport { store } from '../SICKPlatform'\r\n\r\n// ------------------------------------\r\n// Constants\r\n// ------------------------------------\r\n\r\nconst STORAGE_KEY = 'SICKPlatform/userSettings'\r\nconst UPDATE = 'SICKPlatform/userSettings/UPDATE'\r\n\r\n// ------------------------------------\r\n// Functions: Action creators / Helpers / etc.\r\n// ------------------------------------\r\n\r\nconst update = (settings) => ({ type: UPDATE, settings })\r\n\r\nfunction save (settings) {\r\n  localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))\r\n}\r\n\r\n/** @private */\r\nexport function updateUserSettings (settingsKey, settings) {\r\n  const nextSettings = deepmerge(store.getState().userSettings, {\r\n    [settingsKey]: settings\r\n  })\r\n\r\n  save(nextSettings)\r\n\r\n  return update(nextSettings)\r\n}\r\n\r\n/** @private */\r\nexport function initialUserSettings () {\r\n  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')\r\n}\r\n\r\n// ------------------------------------\r\n// Reducer\r\n// ------------------------------------\r\n\r\nconst initialState = {}\r\n\r\nconst actionHandlers = {\r\n  [UPDATE]: (state, { settings }) => {\r\n    return deepmerge(state, settings)\r\n  }\r\n}\r\n\r\n/** @private */\r\nexport default function reducer (state = initialState, action) {\r\n  const handler = actionHandlers[action.type]\r\n  return handler ? handler(state, action) : state\r\n}\r\n"
   },
   {
-    "__docId__": 97,
+    "__docId__": 101,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2081,7 +2156,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 102,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2102,7 +2177,7 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 103,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2123,7 +2198,7 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 104,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2148,7 +2223,7 @@
     "generator": false
   },
   {
-    "__docId__": 101,
+    "__docId__": 105,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2183,7 +2258,7 @@
     "generator": false
   },
   {
-    "__docId__": 102,
+    "__docId__": 106,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2205,7 +2280,7 @@
     "generator": false
   },
   {
-    "__docId__": 103,
+    "__docId__": 107,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2226,7 +2301,7 @@
     }
   },
   {
-    "__docId__": 104,
+    "__docId__": 108,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2247,7 +2322,7 @@
     }
   },
   {
-    "__docId__": 105,
+    "__docId__": 109,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2285,7 +2360,7 @@
     "generator": false
   },
   {
-    "__docId__": 106,
+    "__docId__": 110,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2298,7 +2373,7 @@
     "content": "export { configure, registerTapEvents, store, reducers } from './SICKPlatform'\r\n\r\nexport AppBar from './components/AppBar'\r\n\r\n"
   },
   {
-    "__docId__": 107,
+    "__docId__": 111,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2311,7 +2386,7 @@
     "content": "import merge from 'lodash.mergewith'\r\n\r\nfunction customizer (destValue, srcValue, key, destParent) {\r\n  if (srcValue === undefined) {\r\n    delete destParent[key]\r\n  } else if (destValue instanceof Array && srcValue instanceof Array) {\r\n    if (destValue.length !== srcValue.length) {\r\n      return srcValue\r\n    }\r\n  }\r\n}\r\n\r\n/** @ignore */\r\nexport default function deepmerge (original, next) {\r\n  return merge({}, original, next, customizer)\r\n}\r\n"
   },
   {
-    "__docId__": 108,
+    "__docId__": 112,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2359,7 +2434,7 @@
     "generator": false
   },
   {
-    "__docId__": 109,
+    "__docId__": 113,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2395,7 +2470,7 @@
     "generator": false
   },
   {
-    "__docId__": 110,
+    "__docId__": 114,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2408,7 +2483,7 @@
     "content": "import deepmerge from './deepmerge'\r\nimport deepFreeze from 'deep-freeze-strict'\r\n\r\n/** @test {(Utility -> Function) deepmerge} */\r\ndescribe('(Utility -> Function) deepmerge', function () {\r\n  it('Should merge correctly when the next object has a different array of items', function () {\r\n    const original = deepFreeze({\r\n      one: {\r\n        array: ['a', 'b', 'c'],\r\n        two: {\r\n          array: ['d', 'e', 'f'],\r\n          three: {\r\n            array: [1, 2, 3]\r\n          }\r\n        }\r\n      }\r\n    })\r\n\r\n    // Test keeping number of items the same but array has different values\r\n    const nextOneArray = ['a', 'e', 'c']\r\n\r\n    // Test removing one item from the array\r\n    const nextTwoArray = ['d', 'f']\r\n\r\n    // Test adding more items to the array\r\n    const nextThreeArray = [1, 2, 3, 4, { foo: 'bar' }, () => {}]\r\n\r\n    const next = deepFreeze({\r\n      one: {\r\n        array: nextOneArray,\r\n        two: {\r\n          array: nextTwoArray,\r\n          three: {\r\n            array: nextThreeArray\r\n          }\r\n        }\r\n      }\r\n    })\r\n\r\n    const newObject = deepmerge(original, next)\r\n\r\n    expect(newObject.one.array).to.deep.equal(nextOneArray)\r\n\r\n    expect(newObject.one.two.array).to.deep.equal(nextTwoArray)\r\n\r\n    expect(newObject.one.two.three.array).to.deep.equal(nextThreeArray)\r\n  })\r\n\r\n  it('Should remove property if the next object set it\\'s value to undefined', function () {\r\n    const original = deepFreeze({\r\n      one: {\r\n        two: {\r\n          three: { foo: 'bar' }\r\n        }\r\n      }\r\n    })\r\n\r\n    const next = deepFreeze({\r\n      one: {\r\n        two: {\r\n          three: undefined\r\n        }\r\n      }\r\n    })\r\n\r\n    const newObject = deepmerge(original, next)\r\n\r\n    expect(newObject.one.two).to.not.have.property('three')\r\n  })\r\n})\r\n"
   },
   {
-    "__docId__": 111,
+    "__docId__": 115,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2421,7 +2496,7 @@
     "content": "export const DEFAULT_EMPTY_OBJECT = {}\r\n\r\nexport const DEFAULT_EMPTY_ARRAY = []\r\n\r\nexport const MINIMUM_TIME_DIFF = 60000 // 1 minute in milliseconds\r\n\r\nexport const DEFAULT_TLG_INTERVAL = 28800000 // 8 hours in milliseconds\r\n\r\nexport const DEFAULT_MEASUREMENT_SYSTEM = 'metric'\r\n\r\n/* eslint-disable */\r\nexport const DEFAULT_EMPTY_IMAGE = '/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD20u+T8zdfU0b3/vN+ZpD1/GkoAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mje/95vzNNooAdvf+835mpI3bb94/nUNSx/d/GgCM9fxpKU9fxpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKlj+7+NRVLH938aAIz1/GkpT1/GkoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqWP7v41FUsf3fxoAjPX8aSlPX8aSgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACpY/u/jUVSx/d/GgCM9fxpKU9fxpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKlj+7+NRVLH938aAIz1/GkpT1/GkoAKKKKACiiigAooooAKKKKACiiigAopks0UC7pZFRc4yxwKh/tGy/5+4f++qALNFVv7Rsv+fuH/vqj+0bL/n7h/wC+hQBZoqKK4hnBMMqSAHB2nOKloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKlj+7+NRVLH938aAIz1/GkpT1/GkoAKKKKACiiigAooooAKKKKACiiigDC8QZM9qpJwQcj8QP61aOg2QJH77g/3/8A61U9dlje6tgrq20ENg5xyOta5v7TJ/0mLqf4qAKn9g2X/Tb/AL7/APrUDQbLP/Lb/v5/9arf260/5+Yv++qPt9pn/j5i/wC+qAMjSUEWr3ESk7FBAycnAPGa3656wnhTWbiR5FVDnDE4B5rZ+3Wn/PzF/wB9UAWKKr/brT/n5i/76o+3Wn/PzF/31QBYoqv9utP+fmL/AL6o+3Wn/PzF/wB9UAWKKr/brT/n5i/76o+3Wn/PzF/31QBYoqv9utP+fmL/AL6qWOVJV3Rurj1U5oAfRRRQAUUUUAFFFFABRRRQAUUUUAFSx/d/Goqlj+7+NAEZ6/jSUp6/jSUAFFFFABRRRQAUUUUAFFFFABWTrl08UUcEZKmXOSOuBgY/M1rVha//AMfNp9D/ADFAEsWgQCMec7mTHO04APpT/wCwLT+9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'\r\n/* eslint-enable */\r\nexport const NOOP = () => {}\r\n"
   },
   {
-    "__docId__": 112,
+    "__docId__": 116,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2442,7 +2517,7 @@
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 117,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2463,7 +2538,7 @@
     }
   },
   {
-    "__docId__": 114,
+    "__docId__": 118,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2484,7 +2559,7 @@
     }
   },
   {
-    "__docId__": 115,
+    "__docId__": 119,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2505,7 +2580,7 @@
     }
   },
   {
-    "__docId__": 116,
+    "__docId__": 120,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2526,7 +2601,7 @@
     }
   },
   {
-    "__docId__": 117,
+    "__docId__": 121,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2547,7 +2622,7 @@
     }
   },
   {
-    "__docId__": 118,
+    "__docId__": 122,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2568,7 +2643,7 @@
     }
   },
   {
-    "__docId__": 119,
+    "__docId__": 123,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2581,7 +2656,7 @@
     "content": "import moment from 'moment'\r\n\r\nlet restBaseURL\r\n\r\nexport const getRestBaseURL = () => {\r\n  return restBaseURL\r\n}\r\n\r\nexport const setRestBaseURL = (baseURL) => {\r\n  restBaseURL = baseURL\r\n}\r\n\r\nfunction serialize (params = {}) {\r\n  const URIencode = (k, v) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`\r\n\r\n  return Object.keys(params).map(\r\n      (k) => {\r\n        let temp = params[k]\r\n        // convert array to array notation.\r\n        if (temp.constructor === Array && temp.length) {\r\n          return encodeURIComponent(k) + '=' + temp.map((i) => encodeURIComponent(i)).join(',') + ''\r\n        } else if (temp.constructor === Date) {\r\n          // convert date to iso format\r\n          temp = moment(temp).format('YYYY-MM-DDTHH:mm:ss.SSS')\r\n        }\r\n\r\n        return URIencode(k, temp)\r\n      }\r\n  ).join('&')\r\n}\r\n\r\nfunction checkResponseStatus (response) {\r\n  let json = response.json()\r\n  if (response.status >= 200 && response.status < 300) {\r\n    return json\r\n  } else {\r\n    console.error(response)\r\n    return json.then(Promise.reject.bind(Promise))\r\n  }\r\n}\r\n\r\nexport function request (method, url, params) {\r\n  const options = {\r\n    method: method,\r\n    headers: {\r\n      'Accept': 'application/json'\r\n    }\r\n  }\r\n\r\n  const paramsRequests = ['delete', 'update', 'post', 'put']\r\n\r\n  if (restBaseURL && url.indexOf('http') === -1) {\r\n    url = restBaseURL + url\r\n  }\r\n\r\n  if (paramsRequests.includes(method.toLowerCase())) {\r\n    options.headers['Content-Type'] = 'application/json'\r\n    options.body = (typeof params === 'object') ? JSON.stringify(params) : params\r\n  } else if (params) {\r\n    url = `${url}?${serialize(params)}`\r\n  }\r\n\r\n  return fetch(url, options)\r\n    .then(checkResponseStatus)\r\n}\r\n\r\nexport const encodeParams = (params) => serialize(params)\r\n\r\nexport const del = (url, params) => request('delete', url, params)\r\n\r\nexport const put = (url, params) => request('put', url, params)\r\n\r\nexport const post = (url, params) => request('post', url, params)\r\n\r\nexport const get = (url, params) => request('get', url, params)\r\n"
   },
   {
-    "__docId__": 120,
+    "__docId__": 124,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2602,7 +2677,7 @@
     }
   },
   {
-    "__docId__": 121,
+    "__docId__": 125,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2623,7 +2698,7 @@
     }
   },
   {
-    "__docId__": 122,
+    "__docId__": 126,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2656,7 +2731,7 @@
     "generator": false
   },
   {
-    "__docId__": 123,
+    "__docId__": 127,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2686,7 +2761,7 @@
     "generator": false
   },
   {
-    "__docId__": 124,
+    "__docId__": 128,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2728,7 +2803,7 @@
     "generator": false
   },
   {
-    "__docId__": 125,
+    "__docId__": 129,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2749,7 +2824,7 @@
     }
   },
   {
-    "__docId__": 126,
+    "__docId__": 130,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2770,7 +2845,7 @@
     }
   },
   {
-    "__docId__": 127,
+    "__docId__": 131,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2791,7 +2866,7 @@
     }
   },
   {
-    "__docId__": 128,
+    "__docId__": 132,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2812,7 +2887,7 @@
     }
   },
   {
-    "__docId__": 129,
+    "__docId__": 133,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -2833,7 +2908,7 @@
     }
   },
   {
-    "__docId__": 130,
+    "__docId__": 134,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2846,7 +2921,7 @@
     "content": "/**\r\n * Get the bounding box of a skewed rectangle using its height and width with the angle of rotation.\r\n * @private\r\n */\r\nexport function getBoundingBoxDimensions (crossAxis, mainAxis, angle) {\r\n  const absSin = Math.abs(Math.sin(angle * Math.PI / 180))\r\n  const absCos = Math.abs(Math.cos(angle * Math.PI / 180))\r\n\r\n  return {\r\n    crossAxis: (absSin * mainAxis) + (absCos * crossAxis),\r\n    mainAxis: (absSin * crossAxis) + (absCos * mainAxis)\r\n  }\r\n}\r\n\r\nexport function getPointOnCircle(radius,centerX,centerY,angle){\r\n\treturn{\r\n\t\tx:centerX + radius * Math.cos(angle * Math.PI / 180),\r\n\t\ty:centerY + radius * Math.sin(angle * Math.PI / 180)\r\n\t}\r\n}\r\n"
   },
   {
-    "__docId__": 131,
+    "__docId__": 135,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2887,7 +2962,7 @@
     "generator": false
   },
   {
-    "__docId__": 132,
+    "__docId__": 136,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2935,7 +3010,7 @@
     "generator": false
   },
   {
-    "__docId__": 133,
+    "__docId__": 137,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2948,7 +3023,7 @@
     "content": "import { getBoundingBoxDimensions } from './shape'\r\n\r\n/** @test {(Utility -> Method) Shape -> getBoundingBoxDimensions} */\r\ndescribe('(Utility -> Method) Shape -> getBoundingBoxDimensions', () => {\r\n  it('Should calculate 45 degrees correctly.', () => {\r\n    const dimensions = getBoundingBoxDimensions(1, 1, 45)\r\n\r\n    // Floating point comparison fails due to varying precision\r\n    expect(Math.ceil(dimensions.crossAxis * 10000000)).to.equal(Math.ceil(Math.SQRT2 * 10000000))\r\n    expect(Math.ceil(dimensions.mainAxis * 10000000)).to.equal(Math.ceil(Math.SQRT2 * 10000000))\r\n  })\r\n\r\n  it('Should calculate -45 degrees correctly.', () => {\r\n    const dimensions = getBoundingBoxDimensions(1, 1, -45)\r\n\r\n    // Floating point comparison fails due to varying precision\r\n    expect(Math.ceil(dimensions.crossAxis * 10000000)).to.equal(Math.ceil(Math.SQRT2 * 10000000))\r\n    expect(Math.ceil(dimensions.mainAxis * 10000000)).to.equal(Math.ceil(Math.SQRT2 * 10000000))\r\n  })\r\n\r\n  it('Should calculate 0 degrees correctly.', () => {\r\n    const dimensions = getBoundingBoxDimensions(1, 1, 0)\r\n\r\n    // Floating point comparison fails due to varying precision\r\n    expect(dimensions.crossAxis).to.equal(1)\r\n    expect(dimensions.mainAxis).to.equal(1)\r\n  })\r\n\r\n  it('Should calculate 0 length correctly.', () => {\r\n    const dimensions = getBoundingBoxDimensions(0, 0, 0)\r\n\r\n    expect(dimensions.crossAxis).to.equal(0)\r\n    expect(dimensions.mainAxis).to.equal(0)\r\n  })\r\n})\r\n"
   },
   {
-    "__docId__": 134,
+    "__docId__": 138,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -2961,7 +3036,7 @@
     "content": "import moment from 'moment'\r\n\r\nfunction serialize (params = {}) {\r\n  const URIencode = (k, v) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`\r\n\r\n  return Object.keys(params).map(\r\n      (k) => {\r\n        let temp = params[k]\r\n        // convert array to array notation.\r\n        if (temp.constructor === Array && temp.length) {\r\n          return encodeURIComponent(k) + '=' + temp.map((i) => encodeURIComponent(i)).join(',') + ''\r\n        } else if (temp.constructor === Date) {\r\n          // convert date to iso format\r\n          temp = moment(temp).format('YYYY-MM-DDTHH:mm:ss.SSS')\r\n        }\r\n\r\n        return URIencode(k, temp)\r\n      }\r\n  ).join('&')\r\n}\r\n\r\nfunction checkResponseStatus (response) {\r\n  if (response.status >= 200 && response.status < 300) {\r\n    return response\r\n  } else {\r\n    console.error(response)\r\n  }\r\n}\r\n\r\nexport function request (method, url, params) {\r\n  const options = {\r\n    method: method,\r\n    headers: {\r\n      'Accept': 'application/json'\r\n    }\r\n  }\r\n\r\n  const paramsRequests = ['delete', 'update', 'post', 'put']\r\n\r\n  if (paramsRequests.includes(method.toLowerCase())) {\r\n    options.headers['Content-Type'] = 'application/json'\r\n    options.body = (typeof params === 'object') ? JSON.stringify(params) : params\r\n  } else if (params) {\r\n    url = `${url}?${serialize(params)}`\r\n  }\r\n\r\n  return fetch(url, options)\r\n    .then(checkResponseStatus)\r\n}\r\n\r\nexport const encodeParams = (params) => serialize(params)\r\n\r\nexport const del = (url, params) => request('delete', url, params)\r\n\r\nexport const put = (url, params) => request('put', url, params)\r\n\r\nexport const post = (url, params) => request('post', url, params)\r\n\r\nexport const get = (url, params) => request('get', url, params)\r\n"
   },
   {
-    "__docId__": 135,
+    "__docId__": 139,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -2994,7 +3069,7 @@
     "generator": false
   },
   {
-    "__docId__": 136,
+    "__docId__": 140,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -3024,7 +3099,7 @@
     "generator": false
   },
   {
-    "__docId__": 137,
+    "__docId__": 141,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -3066,7 +3141,7 @@
     "generator": false
   },
   {
-    "__docId__": 138,
+    "__docId__": 142,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3087,7 +3162,7 @@
     }
   },
   {
-    "__docId__": 139,
+    "__docId__": 143,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3108,7 +3183,7 @@
     }
   },
   {
-    "__docId__": 140,
+    "__docId__": 144,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3129,7 +3204,7 @@
     }
   },
   {
-    "__docId__": 141,
+    "__docId__": 145,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3150,7 +3225,7 @@
     }
   },
   {
-    "__docId__": 142,
+    "__docId__": 146,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3171,7 +3246,7 @@
     }
   },
   {
-    "__docId__": 143,
+    "__docId__": 147,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -3184,7 +3259,7 @@
     "content": "import { shallow, mount, render } from 'enzyme'\r\nimport getMuiTheme from 'material-ui/styles/getMuiTheme'\r\nimport SICKMuiTheme from '../SICKMuiTheme'\r\n\r\nconst options = {context: {muiTheme: getMuiTheme(SICKMuiTheme)}}\r\n\r\nexport const mountWithContext = (component) => mount(component, options)\r\n\r\nexport const shallowWithContext = (component) => shallow(component, options)\r\n\r\nexport const renderWithContext = (component) => render(component, options)\r\n"
   },
   {
-    "__docId__": 144,
+    "__docId__": 148,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3205,7 +3280,7 @@
     }
   },
   {
-    "__docId__": 145,
+    "__docId__": 149,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3226,7 +3301,7 @@
     }
   },
   {
-    "__docId__": 146,
+    "__docId__": 150,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3247,7 +3322,7 @@
     }
   },
   {
-    "__docId__": 147,
+    "__docId__": 151,
     "kind": "variable",
     "static": true,
     "variation": null,
@@ -3268,7 +3343,7 @@
     }
   },
   {
-    "__docId__": 148,
+    "__docId__": 152,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -3281,7 +3356,7 @@
     "content": "/* eslint max-len: [\"error\", 180] */\r\n\r\n/**\r\n * Validates a SICK password\r\n * Length min of 8, 1 uppercase or lowercase char and one number.\r\n */\r\nexport function validatePassword (input = '') {\r\n  var regex = new RegExp(/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)\r\n  return regex.test(input)\r\n}\r\n\r\n/**\r\n * Validates a SICK username.\r\n */\r\nexport function validateUsername (input = '') {\r\n  // Check if validation is against email.\r\n  if (input.indexOf('@') !== -1) {\r\n    var regex = new RegExp(/^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/)\r\n    return regex.test(input)\r\n  }\r\n  // Otherwise just check the input length for username.\r\n  return (input.length >= 3)\r\n}\r\n"
   },
   {
-    "__docId__": 149,
+    "__docId__": 153,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -3313,7 +3388,7 @@
     "generator": false
   },
   {
-    "__docId__": 150,
+    "__docId__": 154,
     "kind": "function",
     "static": true,
     "variation": null,
@@ -3345,7 +3420,7 @@
     "generator": false
   },
   {
-    "__docId__": 152,
+    "__docId__": 156,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3358,7 +3433,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 153,
+    "__docId__": 157,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3371,7 +3446,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 154,
+    "__docId__": 158,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3384,7 +3459,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 155,
+    "__docId__": 159,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3397,7 +3472,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 156,
+    "__docId__": 160,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3410,7 +3485,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 157,
+    "__docId__": 161,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3423,7 +3498,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 158,
+    "__docId__": 162,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3436,7 +3511,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 159,
+    "__docId__": 163,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3449,7 +3524,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 160,
+    "__docId__": 164,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3462,7 +3537,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 161,
+    "__docId__": 165,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3475,7 +3550,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 162,
+    "__docId__": 166,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3488,7 +3563,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 163,
+    "__docId__": 167,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3501,7 +3576,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 164,
+    "__docId__": 168,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3514,7 +3589,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 165,
+    "__docId__": 169,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3527,7 +3602,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 166,
+    "__docId__": 170,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3540,7 +3615,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 167,
+    "__docId__": 171,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3553,7 +3628,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 168,
+    "__docId__": 172,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3566,7 +3641,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 169,
+    "__docId__": 173,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3579,7 +3654,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 170,
+    "__docId__": 174,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3592,7 +3667,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 171,
+    "__docId__": 175,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3605,7 +3680,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 172,
+    "__docId__": 176,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3618,7 +3693,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 173,
+    "__docId__": 177,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3631,7 +3706,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 174,
+    "__docId__": 178,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3644,7 +3719,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 175,
+    "__docId__": 179,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3657,7 +3732,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 176,
+    "__docId__": 180,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3670,7 +3745,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 177,
+    "__docId__": 181,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3683,7 +3758,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 178,
+    "__docId__": 182,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3696,7 +3771,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 179,
+    "__docId__": 183,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3709,7 +3784,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 180,
+    "__docId__": 184,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3722,7 +3797,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 181,
+    "__docId__": 185,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3735,7 +3810,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 182,
+    "__docId__": 186,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3748,7 +3823,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 183,
+    "__docId__": 187,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3761,7 +3836,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 184,
+    "__docId__": 188,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3774,7 +3849,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 185,
+    "__docId__": 189,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3787,7 +3862,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 186,
+    "__docId__": 190,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3800,7 +3875,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 187,
+    "__docId__": 191,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3813,7 +3888,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 188,
+    "__docId__": 192,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3826,7 +3901,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 189,
+    "__docId__": 193,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3839,7 +3914,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 190,
+    "__docId__": 194,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3852,7 +3927,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 191,
+    "__docId__": 195,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3865,7 +3940,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 192,
+    "__docId__": 196,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3878,7 +3953,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 193,
+    "__docId__": 197,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3891,7 +3966,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 194,
+    "__docId__": 198,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3904,7 +3979,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 195,
+    "__docId__": 199,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3917,7 +3992,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 196,
+    "__docId__": 200,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3930,7 +4005,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 197,
+    "__docId__": 201,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3943,7 +4018,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 198,
+    "__docId__": 202,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3956,7 +4031,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 200,
+    "__docId__": 204,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3969,7 +4044,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 201,
+    "__docId__": 205,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3982,7 +4057,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 202,
+    "__docId__": 206,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -3995,7 +4070,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 203,
+    "__docId__": 207,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -4008,7 +4083,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 204,
+    "__docId__": 208,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -4021,7 +4096,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 205,
+    "__docId__": 209,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -4034,7 +4109,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 206,
+    "__docId__": 210,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -4047,7 +4122,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 207,
+    "__docId__": 211,
     "kind": "external",
     "static": true,
     "variation": null,
