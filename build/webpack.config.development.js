@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/dist'
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.css', '.png', '.PNG']
+    extensions: ['', '.js', '.json', '.css']
   },
   module: {
     loaders: [
@@ -31,10 +31,7 @@ module.exports = {
       {
         test: /\.(scss|css)$/,
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap')
-      }, {
-            test: /\.(png|jpg|PNG)$/,
-            loader: 'url?limit=25000'
-        }
+      }
     ]
   },
   plugins: [

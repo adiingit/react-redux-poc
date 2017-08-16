@@ -6,8 +6,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { white, lightBlack, darkBlack } from 'material-ui/styles/colors'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
-import { getSystems, switchSystem } from '../../ducks/appbar'
-import RectangularPaper from '../MachineWidget/RectangularPaper'
+import { getSystems, switchSystem ,updateSensorCount} from '../../ducks/appbar'
+
+import MachineWidget from '../Machine/Widget'
 
 const mapStateToProps = (state) => ({
   appbar: state.appbar
@@ -86,38 +87,16 @@ export class AppBar extends SICKComponent {
   constructor (props, context) {
     super(props, context)
     this.handleChange = this.handleChange.bind(this)
-    this.state = {currentCount: 5}
+    //this.state = {currentCount: 5}
   }
 
   componentWillMount () {
     this.props.url && this.props.getSystems(this.props.url)
-    clearInterval(this.intervalId)
+    //clearInterval(this.intervalId)
   }
 
   handleChange = ( event, index, value) => {
     this.props.switchSystem(value)
-    clearInterval(this.intervalId);
-    this.setState({
-      currentCount: 5
-    })
-    this.intervalId = setInterval(this.timer.bind(this), 500)
-  }
-
-  timer () {
-
-    this.setState({
-      currentCount: this.state.currentCount - 1
-    })
-    if(this.state.currentCount < 1) {
-      clearInterval(this.intervalId)
-      this.setState({
-        currentCount: 10
-      })
-      this.intervalId = setInterval(this.timer.bind(this), 500)
-    }
-  }
-  componentDidMount() {
-    this.intervalId = setInterval(this.timer.bind(this), 500)
   }
 
   render () {
@@ -126,25 +105,18 @@ export class AppBar extends SICKComponent {
     const fullSystemDetails = appbar.get('systems')
     let selSystemName = ''
     let selSystemLabel = 'Default System'
-    let selSystemImage = ''
-    let selSystemSensorLocation = []
     let selSystemSensorCount = 0
-    let color = (this.state.currentCount === 0 ? '#9e9e9e' : (this.state.currentCount > 5 && this.state.currentCount < 10 ? '#d50000' : '#00c853'))
 
     if (appbar.get('selectedSystem')) {
       selSystemName = appbar.get('selectedSystem').get('systemName')
       selSystemLabel = appbar.get('selectedSystem').get('systemLabel')
-      selSystemImage = appbar.get('selectedSystem').get('systemImage')
-      selSystemSensorLocation = appbar.get('selectedSystem').get('systemSensorLocation')
-      selSystemSensorCount = appbar.get('selectedSystem').get('systemSensorCount')
+      selSystemSensorCount = appbar.get('sensorCount')
     } else if (systems.length > 0) {
       selSystemName = systems[0]
       selSystemLabel = fullSystemDetails.get(selSystemName)
-      selSystemImage = fullSystemDetails.get(selSystemImage)
-      selSystemSensorLocation = fullSystemDetails.get(selSystemSensorLocation)
-      selSystemSensorCount = fullSystemDetails.get(selSystemSensorCount)
     }
 
+    //const sensorCount = selSystemSensorCount ? `Number of <strong>Sensors -  ${selSystemSensorCount}</strong>`:'' 
     return (
       <div>
         <Toolbar style={styles.appbar}>
@@ -157,7 +129,7 @@ export class AppBar extends SICKComponent {
             </DropDownMenu>
             <span id='il-appbar-system-label' style={styles.systemLabel}>Sensors to be located in <strong>{selSystemName}</strong></span>
             <span id='il-appbar-sensor-count' style={styles.shiftLabel}>
-              Number of <strong>Sensors -  {selSystemSensorCount}</strong>
+             Number of <strong>Sensors - {selSystemSensorCount}</strong>
             </span>
           </ToolbarGroup>
           <ToolbarGroup lastChild>
@@ -167,16 +139,14 @@ export class AppBar extends SICKComponent {
               buttonStyle={styles.button} />
           </ToolbarGroup>
         </Toolbar>
-        <
-          RectangularPaper color={color} image={selSystemImage} locationArray={selSystemSensorLocation}
-        />
+        {Boolean(selSystemName)&&<MachineWidget onMachineChange={this.props.updateSensorCount} url = {`http://localhost:3000/machine/${selSystemName}`} />}
       </div>
     )
   }
 }
 
 
-export default connect(mapStateToProps, { getSystems, switchSystem })(AppBar)
+export default connect(mapStateToProps, { getSystems, switchSystem ,updateSensorCount})(AppBar)
 
 
 

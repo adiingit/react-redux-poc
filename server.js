@@ -5,6 +5,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const config = require('./build/webpack.config.development')
+const theme = require('material-ui/styles')
 
 const app = express()
 const compiler = webpack(config)
@@ -23,7 +24,9 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler))
 
-app.get('*', function (req, res) {
+app.use(express.static(__dirname + config.output.publicPath));
+
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './tests/index.html'))
 })
 
@@ -56,155 +59,34 @@ app.get('/gauge/ranges',(req,res)=>{
   ]);
 });
 
-app.get('/sensor/status',(req,res)=>{
-  const health=Math.round(Math.random()),status=[0,1,-1];
+app.get('/sensor/:sensor/status',(req,res)=>{
+  const health=Boolean(Math.round(Math.random())),status=Boolean(Math.round(Math.random()));
   res.json({
-    reading:{
-      health:health,
-      status:health?status[Math.round(2*Math.random())]:undefined
-    }
+      id:req.params.sensor,
+      idle:!health,
+      status:health?status:undefined,
+      color: health?(status?theme.colors.greenA700:theme.colors.redA700):undefined
   });
 });
 
-app.get('/machine/config',(req,res)=>{
-  res.json([
-    {
-      id:1,
-      name: 'Machine Schematic - 01',
-      backgoundMap:'https://encrypted-tbn0.gstatic.com/images?' +
-      'q=tbn:ANd9GcTQehDUC9hh3QRSmuMdZuTpi7Q3s0TPNsXCKK7tJwSUiAKhNBI54A'
-    },
-    {
-      id:2,
-      name: 'Machine Schematic - 01',
-      backgoundMap:'https://encrypted-tbn0.gstatic.com/images?' +
-      'q=tbn:ANd9GcTQehDUC9hh3QRSmuMdZuTpi7Q3s0TPNsXCKK7tJwSUiAKhNBI54A'
-    },
-    {
-      id:3,
-      name: 'Machine Schematic - 01',
-      backgoundMap:'https://encrypted-tbn0.gstatic.com/images?' +
-      'q=tbn:ANd9GcTQehDUC9hh3QRSmuMdZuTpi7Q3s0TPNsXCKK7tJwSUiAKhNBI54A'
-    }
-  ]);
-});
 
-app.get('/sensor/:machine_id/location',(req,res)=>{
-  res.json([
-    {
-      machine_id: 1,
-      sensorDetails: [
-        {
-          id: 1,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 2,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 3,
-          x: 85,
-          y: 91,
-          state: 0
-        }
-      ]
-    },
-    {
-      machine_id: 2,
-      sensorDetails: [
-        {
-          id: 1,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 2,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 3,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 4,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 5,
-          x: 85,
-          y: 91,
-          state: 0
-        }
-      ]
-    },
-    {
-      machine_id: 3,
-      sensorDetails: [
-        {
-          id: 1,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 2,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 3,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 4,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 5,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 6,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 7,
-          x: 85,
-          y: 91,
-          state: 0
-        },
-        {
-          id: 8,
-          x: 85,
-          y: 91,
-          state: 0
-        }
-      ]
-    }
-  ]);
+app.get('/machine/:machine',(req,res)=>{
+  console.log(req.params.machine);
+  const locations= [
+  {name: 'Machine Schematic-01',image:'images/Auto_pallet1.png',"sensors":[{'x': 190, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
+  {name: 'Machine Schematic-02',image:'images/Auto_pallet2.PNG',"sensors":[{'x': 305, 'y': 103},{'x': 125, 'y': 182}, {'x': 380, 'y': 150}, {'x': 200, 'y': 195}]},
+  {name: 'Machine Schematic-03',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 214, 'y': 305},{"x":85,"y":91,},{"x":180,"y":41}]}];
+  const currentMachineConfig = locations.filter(location=>location.name===req.params.machine)[0];
+  currentMachineConfig.sensors = currentMachineConfig.sensors.map((sensor,i)=>{
+    return Object.assign({},sensor,{
+      id:i+1,
+      label:i+1,
+      url:`sensor/${i+1}/status`,
+      updateFreq : Math.round(Math.random()*10)
+    });
+  });
+  res.json(currentMachineConfig);
 });
-
 
 app.listen(port, '0.0.0.0', function (err) {
   if (err) {

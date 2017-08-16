@@ -25,10 +25,7 @@ module.exports = {
           plugins: ['transform-runtime'],
           presets: ['es2015', 'react', 'stage-0', 'react-optimize']
         }
-      },
-
-      { test: /\.(png|jpg|PNG)$/, loader: 'url-loader?limit=8192' }
-
+      }
     ]
   },
   resolve: {
