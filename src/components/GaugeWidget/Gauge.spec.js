@@ -9,45 +9,166 @@ import Needle from './Needle'
 
 
 describe("Gauge Component", function() {
-    it("contains a div element with id #gauge-widget", function() {
+    it("contains div element with id #gauge-widget", function () {
         expect(mount(<Gauge />).find('#gauge-widget').length).to.equal(1);
     });
 
-    it("contains a Paper Component", function() {
+    it("contains Paper Component", function () {
         expect(mount(<Gauge />).find(Paper).length).to.equal(1);
     });
 
-    it("contains a GaugeSvg Component", function() {
+    it("contains GaugeSvg Component", function () {
         expect(mount(<Gauge />).find(GaugeSvg).length).to.equal(1);
     });
 
-    it("contains a Needle Component", function() {
+    it("contains Needle Component", function () {
         expect(mount(<Gauge />).find(Needle).length).to.equal(1);
     });
 
+    describe("contains GaugeSvg Component", function() {
+        describe("with default props value", function () {
+            const wrapper = mount(<Gauge />).find(GaugeSvg).at(0).props()
+            it('radius', function () {
+                expect(wrapper.radius).to.equal(250);
+            });
 
-    it('allows us to set props for GaugeSvg Component', () => {
-        const gaugeProps = {
-            height: 250,
-            width: 500,
-            radius:250,
-            innerRadius:100,
-            startAngle:-30,
-            endAngle:70
-        };
+            it('height', function () {
+                expect(wrapper.height).to.equal(250);
+            });
 
-        const wrapper = shallow(<GaugeSvg
-            width={gaugeProps.width}
-            height={gaugeProps.height}
-            radius={gaugeProps.radius}
-            innerRadius={gaugeProps.innerRadius}
-            startAngle={gaugeProps.startAngle}
-            endAngle={gaugeProps.endAngle}
-        />);
+            it('width', function () {
+                expect(wrapper.width).to.equal(500);
+            });
 
-        expect(wrapper.props().radius).to.equal('250');
+            it('innerRadius', function () {
+                expect(wrapper.innerRadius).to.equal(100);
+            });
+
+            it('startAngle', function () {
+                expect(wrapper.startAngle).to.equal(-30);
+            });
+
+            it('endAngle', function () {
+                expect(wrapper.endAngle).to.equal(70);
+            });
+
+            it('minimum value', function () {
+                expect(wrapper.min).to.equal(0);
+            });
+
+
+            it('maximum value', function () {
+                expect(wrapper.max).to.equal(100);
+            });
+
+            it('rangeData', function () {
+                expect(wrapper.rangeData).to.deep.equal([]);
+            });
+        });
+
+        describe("without default props value", function () {
+            const wrapper = mount(<Gauge />).find(GaugeSvg).at(0).props()
+            it('radius', function () {
+                expect(wrapper.radius).not.to.equal(260);
+            });
+
+            it('height', function () {
+                expect(wrapper.height).not.to.equal(230);
+            });
+
+            it('width', function () {
+                expect(wrapper.width).not.to.equal(520);
+            });
+
+            it('innerRadius', function () {
+                expect(wrapper.innerRadius).not.to.equal(400);
+            });
+
+            it('startAngle', function () {
+                expect(wrapper.startAngle).not.to.equal(60);
+            });
+
+            it('endAngle', function () {
+                expect(wrapper.endAngle).not.to.equal(90);
+            });
+
+            it('minimum value', function () {
+                expect(wrapper.min).not.to.equal(10);
+            });
+
+            it('maximum value', function () {
+                expect(wrapper.max).not.to.equal(90);
+            });
+
+            it('rangeData', function () {
+                expect(wrapper.rangeData).not.to.equal('');
+            });
+
+        });
+
+
+        describe("contains Needle Component", function () {
+            describe("with default props value", function () {
+                const wrapper = mount(<Gauge />).find(Needle).at(0).props()
+                it('pivotPoint', function () {
+                    expect(wrapper.pivotPoint).to.deep.equal({x: 0, y: 0});
+                });
+
+                it('needleLength', function () {
+                    expect(wrapper.needleLength).to.equal(240);
+                });
+
+                it('color', function () {
+                    expect(wrapper.color).to.equal('#000');
+                });
+
+                it('value', function () {
+                    expect(wrapper.value).to.equal(0);
+                });
+
+                it('startAngle', function () {
+                    expect(wrapper.startAngle).to.equal(-30);
+                });
+
+                it('unitAngleRotation', function () {
+                    expect(wrapper.unitAngleRotation).to.equal(1);
+                });
+
+            });
+
+            describe("without default props value", function () {
+                const wrapper = mount(<Gauge />).find(GaugeSvg).at(0).props()
+                it('pivotPoint', function () {
+                    expect(wrapper.pivotPoint).not.to.deep.equal({x: 10, y: 0});
+                });
+
+                it('needleLength', function () {
+                    expect(wrapper.needleLength).not.to.equal(250);
+                });
+
+                it('color', function () {
+                    expect(wrapper.color).not.to.equal('#fff');
+                });
+
+                it('value', function () {
+                    expect(wrapper.value).not.to.equal(100);
+                });
+
+                it('startAngle', function () {
+                    expect(wrapper.startAngle).not.to.equal(60);
+                });
+
+                it('unitAngleRotation', function () {
+                    expect(wrapper.unitAngleRotation).not.to.equal(2);
+                });
+
+            });
+
+
+        });
+
+
     });
-
 
 });
 
