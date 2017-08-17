@@ -4,13 +4,27 @@ import { get } from '../utils/httpRequest'
 // ------------------------------------
 // Constants
 // ------------------------------------
+/**
+ * Constant ERROR
+ * @type {string}
+ */
 export const ERROR = 'ERROR'
+/**
+ * Constant FETCH_GAUGE_READING
+ * @type {string}
+ */
 export const FETCH_GAUGE_READING = 'FETCH_GAUGE_READING'
+/**
+ * Constant TOGGLE_GAUGE_READING
+ * @type {string}
+ */
 export const TOGGLE_GAUGE_READING = 'TOGGLE_GAUGE_READING'
 // ------------------------------------
 // Actions
 // ------------------------------------
-
+/**
+ * This function is used to fetch gauge current reading from REST API.
+ */
 export const fetchCurrentReading = url => {
     return dispatch => {
       return get(url).then(
@@ -19,6 +33,9 @@ export const fetchCurrentReading = url => {
     }  
 }
 
+/**
+ * This function is used to show gauge reading on button.
+ */
 export const renderCurrentReading = () => {
     return { type: TOGGLE_GAUGE_READING };
 }

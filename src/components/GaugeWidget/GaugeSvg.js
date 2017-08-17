@@ -2,30 +2,45 @@ import React, { PropTypes } from 'react'
 import * as d3 from 'd3'
 import SICKComponent from '../SICKComponent'
 
+/**
+ * <p>Description:-</p>
+ * GaugeSvg Component is used to draw arc/circle and include other properties(i.e. width, height, min, max, radius, startAngle, endAngle etc. ) which are retrieved from REST API.
+ */
 export default class GaugeSvg extends SICKComponent {
 
-    static PropTypes ={
-        width:PropTypes.number.isRequired,
-        height:PropTypes.number.isRequired,
-        min:PropTypes.number.isRequired,
-        max:PropTypes.number.isRequired,
-        raduis:PropTypes.number.isRequired,
-        innerRadius:PropTypes.number,
-        startAngle:PropTypes.number,
-        endAngle:PropTypes.number,
-        rangeData:PropTypes.arrayOf(PropTypes.shape({
-            value:PropTypes.number.isRequired,
-            color:PropTypes.string.isRequired
-        })).isRequired,
-        labels:PropTypes.arrayOf(PropTypes.string).isRequired,
-        needle:PropTypes.node.isRequired,
-        style:PropTypes.object
+    /** Precondition (Static propTypes)
+     * @returns { propTypes.width width value isRequired ,  propTypes.height height value isRequired , propTypes.min min value isRequired, propTypes.max max isRequired, propTypes.raduis raduis value isRequired, propTypes.innerRadius innerRadius value isOptional, propTypes.startAngle startAngle value isOptional, propTypes.endAngle endAngle value isOptional, propTypes.labels labels array isRequired, propTypes.style style object isOptional}
+     */
+    static PropTypes() {
+        return{
+            width:PropTypes.number.isRequired,
+            height:PropTypes.number.isRequired,
+            min:PropTypes.number.isRequired,
+            max:PropTypes.number.isRequired,
+            raduis:PropTypes.number.isRequired,
+            innerRadius:PropTypes.number,
+            startAngle:PropTypes.number,
+            endAngle:PropTypes.number,
+            rangeData:PropTypes.arrayOf(PropTypes.shape({
+                value:PropTypes.number.isRequired,
+                color:PropTypes.string.isRequired
+            })).isRequired,
+            labels:PropTypes.arrayOf(PropTypes.string).isRequired,
+            needle:PropTypes.node.isRequired,
+            style:PropTypes.object
+        }
     }
 
+    /**
+     * creates a instance of GaugeSvg.
+     */
     constructor(props) {
         super(props);
     }
 
+    /**
+     * default prop values.
+     */
     static defaultProps ={
         innerRadius : 0,
         startAngle : -90,
@@ -33,10 +48,16 @@ export default class GaugeSvg extends SICKComponent {
         style : {}
     }
 
+    /**
+     * setting initial values
+     */
     componentWillMount(){
         this.transform = "translate(" + this.props.radius + "," + this.props.radius + ")";
     }
 
+    /**
+     *loading config information.
+     */
     componentDidMount() {
         
         const pi = Math.PI;
@@ -87,7 +108,10 @@ export default class GaugeSvg extends SICKComponent {
 
     }
 
-
+    /**
+     * Renders the component.
+     * @return {ReactElement} - HTML for svg tag.
+     */
     render() {
         return ( 
             <svg style={this.props.style}>

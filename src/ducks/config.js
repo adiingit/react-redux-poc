@@ -8,6 +8,10 @@ import SICKMuiTheme from '../SICKMuiTheme'
 // ------------------------------------
 
 const UPDATE = 'SICKPlatform/config/UPDATE'
+/**
+ * Constant GAUGE_RANGE_CONFIG_RECEIVED
+ * @type {string}
+ */
 const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
 
 // ------------------------------------
@@ -23,6 +27,9 @@ export function updateConfig (config) {
 
 const rangesReceived = (ranges) => ({ type: GAUGE_RANGE_CONFIG_RECEIVED,ranges })
 
+/**
+ * This function is used to fetch ranges for GaugeWidget.
+ */
 export const getGaugeConfig = (url) => {
   return (dispatch) => {
     return get(url)
