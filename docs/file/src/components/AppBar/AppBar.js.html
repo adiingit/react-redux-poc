@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/components/AppBar/AppBar.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-configure">configure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-registerTapEvents">registerTapEvents</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-configureGaugeWidget">configureGaugeWidget</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-configureMachineWidget">configureMachineWidget</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-reducers">reducers</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/AppBar</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AppBar/AppBar.js~AppBar.html">AppBar</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">components/Machine</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Machine/Machine.js~Machine.html">Machine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Machine/Sensor.js~Sensor.html">Sensor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Machine/Widget.js~MachineWidget.html">MachineWidget</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">ducks</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-reducer">reducer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-reducer">reducer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SENSOR_COUNT_UPDATED">SENSOR_COUNT_UPDATED</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSTEM_LIST_RECEIVED">SYSTEM_LIST_RECEIVED</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-UPDATE_SYSTEM">UPDATE_SYSTEM</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-getSystems">getSystems</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-switchSystem">switchSystem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-updateSensorCount">updateSensorCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-getGaugeConfig">getGaugeConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-getMachineSchematicConfig">getMachineSchematicConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CURRENT_SYSTEM_LOADED">CURRENT_SYSTEM_LOADED</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MACHINE_LOADED">MACHINE_LOADED</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SENSOR_STATUS_RECEIVED">SENSOR_STATUS_RECEIVED</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fetchCurrentSystem">fetchCurrentSystem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fetchMachineConfig">fetchMachineConfig</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fetchSensorStatus">fetchSensorStatus</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-request">request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-request">request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validatePassword">validatePassword</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-validateUsername">validateUsername</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFAULT_EMPTY_ARRAY">DEFAULT_EMPTY_ARRAY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFAULT_EMPTY_IMAGE">DEFAULT_EMPTY_IMAGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFAULT_EMPTY_OBJECT">DEFAULT_EMPTY_OBJECT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFAULT_MEASUREMENT_SYSTEM">DEFAULT_MEASUREMENT_SYSTEM</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFAULT_TLG_INTERVAL">DEFAULT_TLG_INTERVAL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MINIMUM_TIME_DIFF">MINIMUM_TIME_DIFF</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOOP">NOOP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-del">del</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-encodeParams">encodeParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-getRestBaseURL">getRestBaseURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-post">post</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-put">put</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-setRestBaseURL">setRestBaseURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-del">del</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-encodeParams">encodeParams</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-post">post</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-put">put</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mountWithContext">mountWithContext</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-renderWithContext">renderWithContext</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shallowWithContext">shallowWithContext</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/AppBar/AppBar.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { PropTypes } from &apos;react&apos;
+import { Toolbar, ToolbarGroup } from &apos;material-ui/Toolbar&apos;
+import DropDownMenu from &apos;material-ui/DropDownMenu&apos;
+import MenuItem from &apos;material-ui/MenuItem&apos;
+import RaisedButton from &apos;material-ui/RaisedButton&apos;
+import { white, lightBlack, darkBlack } from &apos;material-ui/styles/colors&apos;
+import { connect } from &apos;../../SICKPlatform&apos;
+import SICKComponent from &apos;../SICKComponent&apos;
+import { getSystems, switchSystem ,updateSensorCount} from &apos;../../ducks/appbar&apos;
+
+import MachineWidget from &apos;../Machine/Widget&apos;
+
+const mapStateToProps = (state) =&gt; ({
+  appbar: state.appbar
+})
+
+const styles = {
+  appbar: {
+    backgroundColor: white,
+    height: 45,
+    fontSize: 12,
+    color: lightBlack
+  },
+  dropdown: {
+    fontSize: 16,
+    fontWeight: 600,
+    marginLeft: 180,
+    color: darkBlack
+  },
+  systemLabel: {
+    marginLeft: -20,
+    marginTop: 5
+  },
+  shiftLabel: {
+    marginLeft: 30,
+    marginTop: 5
+  },
+  button: {
+    height: 32
+  },
+  ledbox: {
+    height: &apos;30px&apos;,
+    width: &apos;25%&apos;,
+    margin: &apos;10px 0&apos;,
+    float: &apos;left&apos;
+  },
+  ledred: {
+    margin: &apos;0 auto&apos;,
+    width: &apos;15px&apos;,
+    height: &apos;15px&apos;,
+    backgroundColor: &apos;#F00&apos;,
+    borderRadius: &apos;50%&apos;
+  },
+  ledgreen: {
+    margin: &apos;0 auto&apos;,
+    width: &apos;15px&apos;,
+    height: &apos;15px&apos;,
+    backgroundColor: &apos;#ABFF00&apos;,
+    borderRadius: &apos;50%&apos;
+  },
+  ledblue: {
+    margin: &apos;0 auto&apos;,
+    width: &apos;15px&apos;,
+    height: &apos;15px&apos;,
+    backgroundColor: &apos;#24E0FF&apos;,
+    borderRadius: &apos;50%&apos;
+  }
+}
+
+/**
+ * Component for rendering secondary header in the template
+ */
+export class AppBar extends SICKComponent {
+
+  /** @ignore */
+  static propTypes = {
+    appbar: PropTypes.object.isRequired,
+    url: PropTypes.string
+  }
+
+  /** @ignore */
+  static defaultProps = {
+    appbar: {}
+  }
+
+  /** @ignore */
+  constructor (props, context) {
+    super(props, context)
+    this.handleChange = this.handleChange.bind(this)
+    //this.state = {currentCount: 5}
+  }
+
+  componentWillMount () {
+    this.props.url &amp;&amp; this.props.getSystems(this.props.url)
+    //clearInterval(this.intervalId)
+  }
+
+  handleChange = ( event, index, value) =&gt; {
+    this.props.switchSystem(value)
+  }
+
+  render () {
+    const appbar = this.props.appbar
+    const systems = appbar.get(&apos;systems&apos;) ? appbar.get(&apos;systems&apos;).keySeq().toArray() : []
+    const fullSystemDetails = appbar.get(&apos;systems&apos;)
+    let selSystemName = &apos;&apos;
+    let selSystemLabel = &apos;Default System&apos;
+    let selSystemSensorCount = 0
+
+    if (appbar.get(&apos;selectedSystem&apos;)) {
+      selSystemName = appbar.get(&apos;selectedSystem&apos;).get(&apos;systemName&apos;)
+      selSystemLabel = appbar.get(&apos;selectedSystem&apos;).get(&apos;systemLabel&apos;)
+      selSystemSensorCount = appbar.get(&apos;sensorCount&apos;)
+    } else if (systems.length &gt; 0) {
+      selSystemName = systems[0]
+      selSystemLabel = fullSystemDetails.get(selSystemName)
+    }
+
+    //const sensorCount = selSystemSensorCount ? `Number of &lt;strong&gt;Sensors -  ${selSystemSensorCount}&lt;/strong&gt;`:&apos;&apos; 
+    return (
+      &lt;div&gt;
+        &lt;Toolbar style={styles.appbar}&gt;
+          &lt;ToolbarGroup&gt;
+            &lt;DropDownMenu id=&apos;il-appbar-system-selection&apos; value={selSystemName} maxHeight={4500}
+              onChange={this.handleChange} style={styles.dropdown}&gt;
+              {systems.map((name) =&gt;
+                &lt;MenuItem key={name} value={name} primaryText={name} disabled={fullSystemDetails.get(name).disabled} /&gt;
+              )}
+            &lt;/DropDownMenu&gt;
+            &lt;span id=&apos;il-appbar-system-label&apos; style={styles.systemLabel}&gt;Sensors to be located in &lt;strong&gt;{selSystemName}&lt;/strong&gt;&lt;/span&gt;
+            &lt;span id=&apos;il-appbar-sensor-count&apos; style={styles.shiftLabel}&gt;
+             Number of &lt;strong&gt;Sensors - {selSystemSensorCount}&lt;/strong&gt;
+            &lt;/span&gt;
+          &lt;/ToolbarGroup&gt;
+          &lt;ToolbarGroup lastChild&gt;
+            &lt;RaisedButton id=&apos;il-appbar-reset-button&apos;
+              label=&apos;Reset&apos;
+              primary
+              buttonStyle={styles.button} /&gt;
+          &lt;/ToolbarGroup&gt;
+        &lt;/Toolbar&gt;
+        {Boolean(selSystemName)&amp;&amp;&lt;MachineWidget onMachineChange={this.props.updateSensorCount} url = {`http://localhost:3000/machine/${selSystemName}`} /&gt;}
+      &lt;/div&gt;
+    )
+  }
+}
+
+
+export default connect(mapStateToProps, { getSystems, switchSystem ,updateSensorCount})(AppBar)
+
+
+
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

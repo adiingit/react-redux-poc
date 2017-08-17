@@ -32,6 +32,15 @@ const machineStyle = {
   position:'absolute'
 }
 
+/**
+*Description:-
+*Machine Schematic is a presentation of sensors placed on a machine. 
+*Each sensor has their own position over a blueprint (image) of machine.
+*Machine Schematic widget is integrated with a Template and retrieves configuration of machines from a REST API.After mounting the Machine Schematic configurations, the sensors are loaded from a REST API with information about each sensor (i.e their location coordinates and initial state)  and placed over the machine.
+*The functionality of sensor is to change their state (color: gray, red, green) over a period of time through polling depending on the information fetched from REST API for each of the sensor independently.
+*The information about machines, sensor location and their state is configurable and retrieved from REST API.
+*/
+
 export class MachineWidget extends SICKComponent {
 
   static propTypes = {
