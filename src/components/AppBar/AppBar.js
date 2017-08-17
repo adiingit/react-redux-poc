@@ -9,6 +9,8 @@ import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
 import { getSystems, switchSystem } from '../../ducks/appbar'
 
+import GaugeWidget from '../GaugeWidget/Gauge'
+
 const mapStateToProps = (state) => ({
   appbar: state.appbar
 })
@@ -86,6 +88,7 @@ export class AppBar extends SICKComponent {
     }
 
     return (
+      <div>
       <Toolbar style={styles.appbar}>
         <ToolbarGroup>
           <DropDownMenu id='il-appbar-system-selection' value={selSystemName} maxHeight={4500}
@@ -104,6 +107,8 @@ export class AppBar extends SICKComponent {
             buttonStyle={styles.button} />
         </ToolbarGroup>
       </Toolbar>
+      <GaugeWidget configUrl={`${baseUrl}:3000/gauge/ranges`} readingUrl={`${baseUrl}:3000/gauge/reading`} polling={true} value={Number(selSystemName)}/>
+      </div>
     )
   }
 }

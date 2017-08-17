@@ -4,22 +4,22 @@ import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
-import {renderCurrentReading,fetchCurrentReading} from '../../ducks/gauge'
+import {renderCurrentReading,fetchCurrentReading,getGaugeConfig} from '../../ducks/gauge'
 import {getPointOnCircle} from '../../utils/shape'
 import GaugeSvg from './GaugeSvg'
 import Needle from './Needle'
 
 const mapStateToProps = (state) => {
     return {
-        max: state.config.gauge?Math.max(...state.config.gauge.get('range').map((r)=>r.max)):100,
-        min : state.config.gauge?Math.min(...state.config.gauge.get('range').map((r)=>r.min)):0,
-        rangeData : state.config.gauge?state.config.gauge.get('range'):[],
+        max: state.gauge.size?Math.max(...state.gauge.get('range').map((r)=>r.max)):100,
+        min : state.gauge.size?Math.min(...state.gauge.get('range').map((r)=>r.min)):0,
+        rangeData : state.gauge.size?state.gauge.get('range'):[],
         raisedButton : state.gauge.get('raisedButton'),
         currentValue : state.gauge.get('currentValue')
     }
 }
 
-const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading};
+const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading,getGaugeConfig};
 
 const divStyle = {
     textAlign: 'center',
@@ -55,28 +55,58 @@ const needleProps = {
     color:'#000'
 }
 
+const validator = (...types) => (...args) => {
+  const errors = types.map((type) => type(...args)).filter(Boolean);
+  if (errors.length === 0) return;
+  const message = errors.map((e) => e.message).join('\n');
+  return new Error(message);
+};
+
 export class GaugeWidget extends SICKComponent {
 
-	static PropTypes = {
-        min:PropTypes.number.isRequired,
-        max:PropTypes.number.isRequired,
-        rangeData:PropTypes.array.isRequired
+	static propTypes = {
+        value : validator(PropTypes.number.isRequired,function(props, propName, componentName){
+            if (!props.hasOwnProperty(propName) && !props.hasOwnProperty('readingUrl')){
+                if(!props.polling){
+                    return new Error(`set prop ${propName}`);
+                }else{
+                    return new Error(`set prop readingUrl`);
+                }
+            }
+
+            if(props.hasOwnProperty(propName) && props.polling){
+                return new Error(`${propName} is not an online feature,set Prop polling false`);
+            }
+        }),
+        polling : PropTypes.bool.isRequired,
+        readingUrl : validator(PropTypes.string.isRequired,function(props, propName, componentName){
+            if (!props.hasOwnProperty(propName) && !props.hasOwnProperty('value')){
+                if(props.polling){
+                    return new Error(`set prop ${propName}`);
+                }else{
+                    return new Error(`set prop value`);
+                }
+            }
+            if(props.hasOwnProperty(propName) && !props.polling){
+                return new Error(`${propName} is an online feature,set Prop polling true`);
+            }
+        }),
+        configUrl : PropTypes.string.isRequired
 	}
 
     constructor(props) {
         super(props);
-        const currentValue = this.props.min;
         this.showValue = this.showValue.bind(this);
         this.hideValue = this.hideValue.bind(this);
         this.updateReading = this.updateReading.bind(this); 
     }
 
     updateReading(){
-        this.props.fetchCurrentReading(`${baseUrl}:3000/gauge/reading`);
+        this.props.fetchCurrentReading(this.props.readingUrl);
     }
 
     showValue(e){
-        this.buttonData={x:e.pageX,y:e.pageY,label:this.props.currentValue||this.props.min};
+        this.buttonData={x:e.pageX,y:e.pageY,label:(this.props.currentValue||(!this.props.polling && this.props.value)||this.props.min)};
         this.props.renderCurrentReading();
     }
 
@@ -90,53 +120,62 @@ export class GaugeWidget extends SICKComponent {
     }
     
     componentWillMount(){
-        const data = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
-        this.rangeData = data.map((range)=>{
-            return {
-                value : range.max - range.min,
-                color : range.color
-            }
-        });
-
-        this.labelData = [this.props.min];
-        this.rangeData.forEach(range=>{            
-                this.labelData.push(this.labelData[this.labelData.length-1]+range.value);
-        });
+        this.props.getGaugeConfig(this.props.configUrl);
     }
 
     componentDidMount() {
-        setInterval(this.updateReading,10000);
+        if(this.props.polling)
+            setInterval(this.updateReading,10000);
     }
 
 
     render() {
+        let rangeData=undefined,labelData=undefined;
+        if(this.props.rangeData.size){
+            const data = Array.isArray(this.props.rangeData)?this.props.rangeData:this.props.rangeData.toArray();
+            rangeData = data.map((range)=>{
+                return {
+                    value : range.max - range.min,
+                    color : range.color
+                }
+            });
+
+            labelData = [this.props.min];
+            rangeData.forEach(range=>{            
+                    labelData.push(labelData[labelData.length-1]+range.value);
+            });
+        }
+        const currentValue = this.props.currentValue || (!this.props.polling && this.props.value);
+
         return ( 
         	<div id="gauge-widget" style={divStyle}>
                 <Paper circle={true} style={pageStyle} zDepth={5}>
-            		<GaugeSvg 
-                    style={svgStyle} 
-                    width={gaugeProps.width}
-                    height={gaugeProps.height}
-                    min={this.props.min}
-                    max={this.props.max}
-                    radius={gaugeProps.radius}
-                    innerRadius={gaugeProps.innerRadius}
-                    startAngle={gaugeProps.startAngle}
-                    endAngle={gaugeProps.endAngle}
-                    rangeData={this.rangeData}
-                    labels={this.labelData}
-                    needle={
-                            <Needle 
-                            pivotPoint={needleProps.pivotPoint}
-                            needleLength={needleProps.needleLength}
-                            color={needleProps.color}
-                            value={this.props.currentValue || this.props.min}
-                            startAngle={gaugeProps.startAngle}
-                            unitAngleRotation = {(gaugeProps.endAngle-gaugeProps.startAngle)/(this.props.max-this.props.min)}
-                            mouseover={this.showValue}
-                            mouseout={this.hideValue}/>
-                        }
-                    />
+            		{
+                        rangeData && <GaugeSvg 
+                        style={svgStyle} 
+                        width={gaugeProps.width}
+                        height={gaugeProps.height}
+                        min={this.props.min}
+                        max={this.props.max}
+                        radius={gaugeProps.radius}
+                        innerRadius={gaugeProps.innerRadius}
+                        startAngle={gaugeProps.startAngle}
+                        endAngle={gaugeProps.endAngle}
+                        rangeData={rangeData}
+                        labels={labelData}
+                        needle={
+                                <Needle 
+                                pivotPoint={needleProps.pivotPoint}
+                                needleLength={needleProps.needleLength}
+                                color={needleProps.color}
+                                value={currentValue || this.props.min}
+                                startAngle={gaugeProps.startAngle}
+                                unitAngleRotation = {(gaugeProps.endAngle-gaugeProps.startAngle)/(this.props.max-this.props.min)}
+                                mouseover={this.showValue}
+                                mouseout={this.hideValue}/>
+                            }
+                        />
+                    }
 
                     {   
                         this.buttonData && 

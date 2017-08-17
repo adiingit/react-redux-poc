@@ -8,7 +8,7 @@ import SICKMuiTheme from '../SICKMuiTheme'
 // ------------------------------------
 
 const UPDATE = 'SICKPlatform/config/UPDATE'
-const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
+
 
 // ------------------------------------
 // Functions: Action creators / Helpers / etc.
@@ -18,20 +18,6 @@ export function updateConfig (config) {
   return {
     type: UPDATE,
     config
-  }
-}
-
-const rangesReceived = (ranges) => ({ type: GAUGE_RANGE_CONFIG_RECEIVED,ranges })
-
-export const getGaugeConfig = (url) => {
-  return (dispatch) => {
-    return get(url)
-      .then((ranges) => {
-        dispatch(rangesReceived(ranges))
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 }
 
@@ -49,15 +35,7 @@ const initialState = {
 }
 
 const actionHandlers = {
-  [UPDATE]: (state, { config }) => deepmerge(state, config),
-  [GAUGE_RANGE_CONFIG_RECEIVED]: (state, { ranges }) => {
-    let nextState = state
-    if(ranges && ranges.length){
-      nextState.gauge = new Map();
-      nextState.gauge=nextState.gauge.setIn(['range'], List(ranges));
-    }
-    return nextState
-  }
+  [UPDATE]: (state, { config }) => deepmerge(state, config)
 }
 
 // ------------------------------------

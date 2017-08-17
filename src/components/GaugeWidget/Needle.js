@@ -40,8 +40,9 @@ export default class Needle extends SICKComponent {
     }
 
     componentDidMount(){
+        const angle=90+this.props.startAngle+(this.props.unitAngleRotation*this.props.value)
         d3.select('g.needle')
-        .attr('transform',`rotate(${90+this.props.startAngle})`);
+        .attr('transform',`rotate(${angle})`);
     }
 
     render() {

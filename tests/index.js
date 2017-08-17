@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import * as SICKPlatform from '../src'
-import * as WidgetConfig from '../src/WidgetsConfig'
 import AppBar from '../src/components/AppBar'
-import GaugeWidget from '../src/components/GaugeWidget/Gauge'
 import theme from './theme'
 import SICKIntlProvider from './components/Localization'
 
@@ -37,16 +35,14 @@ SICKPlatform.configure({
 const App = () => (
     <div>
     <AppBar url = { `${baseUrl}:3000/system/systemList` } />
-    <GaugeWidget/>
+    
     </div>
 )
 
-WidgetConfig.configureGaugeWidget(`${baseUrl}:3000/gauge/ranges`).then(function(s){
-  ReactDOM.render(
-    <App />,
-    document.getElementById('container')
+ReactDOM.render(
+  <App />,
+  document.getElementById('container')
 )  
-})
 
 
 
