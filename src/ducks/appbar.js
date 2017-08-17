@@ -17,6 +17,7 @@ const updateSystem = (systemName) => ({ type: UPDATE_SYSTEM, systemName })
 
 const senserCount = (count) => ({type:SENSOR_COUNT_UPDATED,count})
 
+
 export const getSystems = (url) => {
   return (dispatch) => {
     return get(url)
@@ -68,7 +69,8 @@ const ACTION_HANDLERS = {
 
     return nextState;
   },
-  [UPDATE_SYSTEM]: (state, { systemName }) => {
+
+  [UPDATE_SYSTEM]: (state, { systemName}) => {
     let nextState = state
 
     const systemLabel = nextState.get('systems').get(systemName)
@@ -80,8 +82,6 @@ const ACTION_HANDLERS = {
   },
   [SENSOR_COUNT_UPDATED] : (state,data) => {
     let nextState = state;
-    /*nextState = nextState.setIn(['selectedSystem', 'systemName'], '')
-    nextState = nextState.setIn(['selectedSystem', 'systemLabel'], '')*/
     nextState = nextState.setIn(['sensorCount'], data.count)
     return nextState;
   }

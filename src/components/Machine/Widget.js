@@ -28,7 +28,8 @@ const machineStyle = {
   width : '50%',
   height : '50%',
   left:'25%',
-  marginTop:30,
+  marginTop:50,
+  marginBottom:50,
   position:'absolute'
 }
 

@@ -2,12 +2,14 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import * as SICKPlatform from '../src'
 import AppBar from '../src/components/AppBar'
-
 import theme from './theme'
 import SICKIntlProvider from './components/Localization'
 
 
 import mockData from './mock/mockFetch'
+
+
+window.baseUrl = 'http://localhost';
 
 SICKPlatform.registerTapEvents()
 
@@ -30,14 +32,10 @@ SICKPlatform.configure({
 
 // React method to create AppBar component
 const App = () => (
-  <div>
-    <AppBar url = { 'http://localhost:3000/system/systemList' }>
-      
-    </AppBar>
-    
-  </div>
+    <div>
+    <AppBar url = { `${baseUrl}:3000/system/systemList` } />
+    </div>
 )
-
 
 ReactDOM.render(
   <App />,

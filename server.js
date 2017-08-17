@@ -28,7 +28,13 @@ app.use(express.static(__dirname + config.output.publicPath));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, './tests/index.html'))
-})
+});
+
+app.get('/gauge/reading',(req,res)=>{
+  const negative = Math.random()*0;
+  const positive = Math.random()*200;
+  res.json(Math.ceil(negative+positive));
+});
 
 app.get('/gauge/details',(req,res)=>{
   res.json({title:'Gauge Widget',description:'Meter Gauge'});
@@ -37,24 +43,24 @@ app.get('/gauge/details',(req,res)=>{
 app.get('/gauge/ranges',(req,res)=>{
   res.json([
     {
-      id:1,
       min:0,
-      max:25
+      max:25,
+      color:theme.colors.blueA700
     },
     {
-      id:2,
       min:25,
-      max:50
+      max:50,
+      color:theme.colors.greenA700
     },
     {
-      id:3,
       min:50,
-      max:75
+      max:75,
+      color:theme.colors.yellowA700
     },
     {
-      id:4,
       min:75,
-      max:100
+      max:200,
+      color:theme.colors.redA700
     }
   ]);
 });
@@ -73,9 +79,9 @@ app.get('/sensor/:sensor/status',(req,res)=>{
 app.get('/machine/:machine',(req,res)=>{
   console.log(req.params.machine);
   const locations= [
-  {name: 'Machine Schematic-01',image:'images/Auto_pallet1.png',"sensors":[{'x': 190, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
-  {name: 'Machine Schematic-02',image:'images/Auto_pallet2.PNG',"sensors":[{'x': 305, 'y': 103},{'x': 125, 'y': 182}, {'x': 380, 'y': 150}, {'x': 200, 'y': 195}]},
-  {name: 'Machine Schematic-03',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 214, 'y': 305},{"x":85,"y":91,},{"x":180,"y":41}]}];
+  {name: '01',image:'images/Auto_pallet1.png',"sensors":[{'x': 190, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
+  {name: '84',image:'images/Auto_pallet2.PNG',"sensors":[{'x': 305, 'y': 103},{'x': 125, 'y': 182}, {'x': 380, 'y': 150}, {'x': 200, 'y': 195}]},
+  {name: '185',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 214, 'y': 305},{"x":85,"y":91,},{"x":180,"y":41}]}];
   const currentMachineConfig = locations.filter(location=>location.name===req.params.machine)[0];
   currentMachineConfig.sensors = currentMachineConfig.sensors.map((sensor,i)=>{
     return Object.assign({},sensor,{
@@ -93,6 +99,7 @@ app.listen(port, '0.0.0.0', function (err) {
     console.log(err)
     return
   }
-
+  
   console.log('Listening at http://0.0.0.0:' + port)
 })
+

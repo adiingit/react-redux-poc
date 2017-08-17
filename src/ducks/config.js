@@ -7,6 +7,12 @@ import SICKMuiTheme from '../SICKMuiTheme'
 
 const UPDATE = 'SICKPlatform/config/UPDATE'
 
+/**
+ * Constant GAUGE_RANGE_CONFIG_RECEIVED
+ * @type {string}
+ */
+const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
+
 // ------------------------------------
 // Functions: Action creators / Helpers / etc.
 // ------------------------------------
@@ -23,33 +29,7 @@ export function updateConfig (config) {
 
 // ------------------------------------
 // Reducer
-export const getGaugeConfig = (url) => {
-  return (dispatch) => {
-    return get(url)
-      .then((ranges) => {
-        dispatch(rangesReceived(ranges))
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-}
-
-
-export const getMachineSchematicConfig= (url) => {
-  return (dispatch) => {
-    return get(url)
-      .then((ranges) => {
-        dispatch(rangesReceived(ranges))
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-}
 // ------------------------------------
-
-
 
 const initialState = {
   theme: SICKMuiTheme,

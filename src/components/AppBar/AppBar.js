@@ -10,6 +10,8 @@ import { getSystems, switchSystem ,updateSensorCount} from '../../ducks/appbar'
 
 import MachineWidget from '../Machine/Widget'
 
+import GaugeWidget from '../GaugeWidget/Gauge'
+
 const mapStateToProps = (state) => ({
   appbar: state.appbar
 })
@@ -87,12 +89,10 @@ export class AppBar extends SICKComponent {
   constructor (props, context) {
     super(props, context)
     this.handleChange = this.handleChange.bind(this)
-    //this.state = {currentCount: 5}
   }
 
   componentWillMount () {
     this.props.url && this.props.getSystems(this.props.url)
-    //clearInterval(this.intervalId)
   }
 
   handleChange = ( event, index, value) => {
@@ -116,7 +116,6 @@ export class AppBar extends SICKComponent {
       selSystemLabel = fullSystemDetails.get(selSystemName)
     }
 
-    //const sensorCount = selSystemSensorCount ? `Number of <strong>Sensors -  ${selSystemSensorCount}</strong>`:'' 
     return (
       <div>
         <Toolbar style={styles.appbar}>
@@ -139,7 +138,8 @@ export class AppBar extends SICKComponent {
               buttonStyle={styles.button} />
           </ToolbarGroup>
         </Toolbar>
-        {Boolean(selSystemName)&&<MachineWidget onMachineChange={this.props.updateSensorCount} url = {`http://localhost:3000/machine/${selSystemName}`} />}
+        <GaugeWidget configUrl={`${baseUrl}:3000/gauge/ranges`} readingUrl={`${baseUrl}:3000/gauge/reading`} polling={false} value={Number(selSystemName)}/>
+        {Boolean(selSystemName)&&<MachineWidget onMachineChange={this.props.updateSensorCount} url = {`${baseUrl}:3000/machine/${selSystemName}`} />}
       </div>
     )
   }

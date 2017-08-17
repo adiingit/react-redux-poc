@@ -21,7 +21,7 @@ export default class Machine extends SICKComponent {
       backgroundSize : 'contain'
     },this.props.style); 
     return (
-      <Paper style={paperStyle} >
+      <Paper style={paperStyle} zDepth={5} >
         {this.props.sensors}
       </Paper>
     )
