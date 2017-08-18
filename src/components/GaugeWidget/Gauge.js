@@ -76,23 +76,24 @@ const needleProps = {
  * <p>The Gauge Widget is configurable with properties like range colors, width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from REST API.
  *  One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>
  * <p> The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it makes a REST Call to display the exact current value in a tooltip.</p>
- * <p>The Gauge Widget is decoupled from AppBar Widget and retrieves values from REST API call through polling. However, one can couple it with AppBar Widget and listen to the dropdown selected value on change.</p>
+ * <p>The Gauge Widget is decoupled from AppBar Widget and retrieves values from REST API call through polling(set polling props to true). However, one can couple it(by setting polling props to false) with AppBar Widget and listen to the dropdown selected value on change.</p>
  *
  * <p>Setup:-</p>
- * Fetch basic configuration viz. minimum values, maximum values and rangeData(includes ranges with property like colors) from REST API for GaugeWidget.
+ * Fetch basic configuration viz. value, polling, readingUrl, configUrl from REST API for GaugeWidget.
  *
  * <p> Precondition:-</p>
  * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>
- * <p> Prop 1: min, type: number, isRequired</p>
- * <p> Prop 2: max, type: number, isRequired</p>
- * <p> Prop 3: rangeData, type: array, isRequired</p>
+ * <p> Prop 1: value, type: number, isRequired</p>
+ * <p> Prop 2: polling, type: boolean, isRequired</p>
+ * <p> Prop 3: readingUrl, type: string, isRequired</p>
+ * <p> Prop 4: configUrl, type: string, isRequired</p>
  * <p>Integration:-</p>
  * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
  */
 export class GaugeWidget extends SICKComponent {
 
     /** Precondition (Static propTypes)
-     * @returns { propTypes.value minimum value isRequired ,  propTypes.polling maximum value isRequired , propTypes.readingUrl Range of values isRequired}
+     * @returns { propTypes.value value isRequired ,  propTypes.polling polling isRequired , propTypes.readingUrl readingUrl isRequired, propTypes.configUrl configUrl isRequired}
      */
 	static propTypes = {
         value : PropTypes.number.isRequired,
@@ -104,9 +105,6 @@ export class GaugeWidget extends SICKComponent {
     /**
      * creates a instance of GaugeWidget.
      * @param {object} props
-     * @param {number} currentValue assigning currentValue
-     * @param {function} showValue binding current object with showValue
-     * @param {function} hideValue binding current object with hideValue
      * @param {function} updateReading binding current object with updateReading
      */
     constructor(props) {
@@ -122,7 +120,7 @@ export class GaugeWidget extends SICKComponent {
     }
 
     /**
-     * setting color, value and other configurations.
+     * setting color, value, polling and other configurations.
      */
     componentWillMount(){
         this.props.getGaugeConfig(this.props.configUrl);
@@ -142,13 +140,13 @@ export class GaugeWidget extends SICKComponent {
      */
 
     /**
-     * Renders the component.
+     * Renders the components.
      *
      * Paper from 'material-ui/Paper'
      * GaugeSvg from './GaugeSvg'
      * RaisedButton from 'material-ui/RaisedButton'
      * Needle from './Needle'
-     * @return {string} - HTML markup for the component
+     * @return {string} - HTML markup for the components
      */
     render() {
         let max,min,rangeData,labelData;

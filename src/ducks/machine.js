@@ -4,14 +4,29 @@ import { get } from '../utils/httpRequest'
 // ------------------------------------
 // Constants
 // ------------------------------------
+/**
+ * Constant SENSOR_STATUS_RECEIVED
+ * @type {string}
+ */
 export const SENSOR_STATUS_RECEIVED = 'SENSOR_STATUS_RECEIVED'
+/**
+ * Constant CURRENT_SYSTEM_LOADED
+ * @type {string}
+ */
 export const CURRENT_SYSTEM_LOADED = 'CURRENT_SYSTEM_LOADED'
+/**
+ * Constant MACHINE_LOADED
+ * @type {string}
+ */
 export const MACHINE_LOADED = 'MACHINE_LOADED'
 // ------------------------------------
 // Actions
 // ------------------------------------
 const fetchSensor = (sensorStatus) => ({ type: SENSOR_STATUS_RECEIVED,sensorStatus })
 
+/**
+ * This function is used to fetch sensor status from REST API.
+ */
 export const fetchSensorStatus = (url) => {
   return (dispatch) => {
     return get(url)
@@ -32,6 +47,9 @@ export const fetchCurrentSystem = () => {
 
 const fetchMachine = (machine) => ({ type: MACHINE_LOADED,machine })
 
+/**
+ * This function is used to fetch machine configurations.
+ */
 export const fetchMachineConfig = (url) => {
   return (dispatch) => {
     return get(url)

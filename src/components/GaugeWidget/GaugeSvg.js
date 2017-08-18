@@ -9,7 +9,7 @@ import SICKComponent from '../SICKComponent'
 export default class GaugeSvg extends SICKComponent {
 
     /** Precondition (Static propTypes)
-     * @returns { propTypes.width width value isRequired ,  propTypes.height height value isRequired , propTypes.min min value isRequired, propTypes.max max isRequired, propTypes.raduis raduis value isRequired, propTypes.innerRadius innerRadius value isOptional, propTypes.startAngle startAngle value isOptional, propTypes.endAngle endAngle value isOptional, propTypes.labels labels array isRequired, propTypes.style style object isOptional}
+     * @returns { propTypes.width width isRequired ,  propTypes.height height isRequired , propTypes.min min isRequired, propTypes.max isRequired, propTypes.raduis raduis isRequired, propTypes.innerRadius innerRadius, propTypes.startAngle startAngle, propTypes.endAngle endAngle, propTypes.labels labels isRequired, propTypes.style style}
      */
     static PropTypes() {
         return{

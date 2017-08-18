@@ -5,8 +5,15 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 var interval;
 
+/**
+ * <p>Description:-</p>
+ * Sensor Component is used to place each sensor independently on MachineSchematic.
+ */
 export default class Sensor extends SICKComponent {
 
+  /** Precondition (Static propTypes)
+   * @returns { propTypes.color color,  propTypes.location location object with value of x and y isRequired, propTypes.width width isRequired, propTypes.height height isRequired, propTypes.onTouch onTouch, propTypes.update update isRequired, propTypes.updateFreq updateFreq isRequired, propTypes.updateUrl updateUrl isRequired, propTypes.label label isRequired, propTypes.idle idle isRequired, propTypes.status status, propTypes.style style}
+   */
   static propTypes = {
     color : PropTypes.string,
     location : PropTypes.shape({
@@ -25,28 +32,50 @@ export default class Sensor extends SICKComponent {
     style : PropTypes.object
   }
 
+  /**
+   * Default Props
+   * @returns {{idle: boolean, onTouch: Sensor.defaultProps.onTouch}}
+   */
   static defaultProps = {
     idle : true,
     onTouch : function(){}
   }
 
+  /**
+   * creates an instance of Sensor.
+   * @param {object} props
+   * @param {function} updateSensor binding current object with updateSensor
+   */
   constructor(props){
     super(props);
     this.updateSensor = this.updateSensor.bind(this);
   }
 
+  /**
+   * updating sensor Url.
+   */
   updateSensor(){
     this.props.update(this.props.updateUrl);
   }
 
+  /**
+   * setting frequency
+   */
   componentDidMount () {
     interval=setInterval(this.updateSensor,this.props.updateFreq*1000);
   }
 
+  /**
+   * clear setInterval
+   */
   componentWillUnmount(){
     clearInterval(interval);
   }
 
+  /**
+   * Renders the component.
+   * import RaisedButton from 'material-ui/RaisedButton'
+   */
   render () {
     const buttonStyle = Object.assign({
       width:this.props.width,
