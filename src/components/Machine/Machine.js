@@ -11,16 +11,20 @@ export default class Machine extends SICKComponent {
   /** Precondition (Static propTypes)
    * @returns { propTypes.image image string isOptional ,  propTypes.sensors sensors array isRequired}
    */
-  static propTypes = {
-    image : PropTypes.string,
-    sensors : PropTypes.arrayOf(PropTypes.node).isRequired
+  static propTypes () {
+    return{
+        image : PropTypes.string,
+        sensors : PropTypes.arrayOf(PropTypes.node).isRequired
+    }
   };
 
   /** Default Props
    * @returns { array of sensors}
    */
-  static defaultProps ={
-    sensors : []
+  static defaultProps(){
+    return{
+      sensors : []
+    }
   }
 
   /**

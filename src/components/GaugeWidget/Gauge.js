@@ -95,11 +95,13 @@ export class GaugeWidget extends SICKComponent {
     /** Precondition (Static propTypes)
      * @returns { propTypes.value value isRequired ,  propTypes.polling polling isRequired , propTypes.readingUrl readingUrl isRequired, propTypes.configUrl configUrl isRequired}
      */
-	static propTypes = {
-        value : PropTypes.number.isRequired,
-        polling : PropTypes.bool.isRequired,
-        readingUrl : PropTypes.string.isRequired,
-        configUrl : PropTypes.string.isRequired
+	static propTypes () {
+	    return{
+            value : PropTypes.number.isRequired,
+            polling : PropTypes.bool.isRequired,
+            readingUrl : PropTypes.string.isRequired,
+            configUrl : PropTypes.string.isRequired
+        }
 	}
 
     /**

@@ -61,9 +61,11 @@ export class MachineWidget extends SICKComponent {
   /** Precondition (Static propTypes)
    * @returns { propTypes.url url isRequired ,  propTypes.onMachineChange onMachineChange}
    */
-  static propTypes = {
-    url : PropTypes.string.isRequired,
-    onMachineChange : PropTypes.func
+  static propTypes() {
+    return{
+      url : PropTypes.string.isRequired,
+      onMachineChange : PropTypes.func
+    }
   }
 
   /**
