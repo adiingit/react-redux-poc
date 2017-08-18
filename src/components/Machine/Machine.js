@@ -3,13 +3,13 @@ import Paper from 'material-ui/Paper'
 import SICKComponent from '../SICKComponent'
 
 /**
-* <p>Description:-</p>
-* To draw a machine schematic on Paper Component with information of image, name, location of sensors that are fetched from Rest API.
+* <h3>Description:-</h3>
+* This is a presentational component that represents Machine Schematic with sensors deployed on it.
 */
 export default class Machine extends SICKComponent {
 
   /** Precondition (Static propTypes)
-   * @returns { propTypes.image image string isOptional ,  propTypes.sensors sensors array isRequired}
+   * @returns { propTypes.image string isOptional ,  propTypes.sensors array isRequired}
    */
   static propTypes () {
     return{
@@ -19,7 +19,7 @@ export default class Machine extends SICKComponent {
   };
 
   /** Default Props
-   * @returns { array of sensors}
+   * @static {array} - sensors
    */
   static defaultProps(){
     return{
@@ -28,6 +28,7 @@ export default class Machine extends SICKComponent {
   }
 
   /**
+   * React lifecycle method :
    * Renders the component.
    * Paper from 'material-ui/Paper'
    */

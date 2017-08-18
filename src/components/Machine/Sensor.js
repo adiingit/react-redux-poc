@@ -7,15 +7,29 @@ import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 var interval;
 
 /**
- * <p>Description:-</p>
- * Sensor Component is used to place each sensor independently on MachineSchematic.
+ * <h3>Description:-</h3>
+ * <p>Sensor Component is a presentational component that denotes a configurable sensor that gets its status using REST API calls.</p>
+ * <p>Displays current status when the sensor is clicked </p>
  */
 
 
 export default class Sensor extends SICKComponent {
 
   /** Precondition (Static propTypes)
-   * @returns { propTypes.color color,  propTypes.location location object with value of x and y isRequired, propTypes.width width isRequired, propTypes.height height isRequired, propTypes.onTouch onTouch, propTypes.update update isRequired, propTypes.updateFreq updateFreq isRequired, propTypes.updateUrl updateUrl isRequired, propTypes.label label isRequired, propTypes.idle idle isRequired, propTypes.status status, propTypes.style style}
+   * @static
+   * @returns {object} validators
+        { propTypes color string,  
+          propTypes location object{x,y} isRequired, 
+          propTypes width number isRequired, 
+          propTypes height number isRequired, 
+          propTypes onTouch function, 
+          propTypes update function isRequired, 
+          propTypes updateFreq number isRequired, 
+          propTypes updateUrl string isRequired, 
+          propTypes label string isRequired, 
+          propTypes idle boolean isRequired, 
+          propTypes status boolean, 
+          propTypes style object}
   */
   static propTypes() {
     return {
@@ -42,7 +56,7 @@ export default class Sensor extends SICKComponent {
 
   /**
    * Default Props
-   * @returns {{idle: boolean, onTouch: Sensor.defaultProps.onTouch}}
+   * @returns {object} - props
    */
   static defaultProps() {
     return{
@@ -54,8 +68,8 @@ export default class Sensor extends SICKComponent {
 
   /**
    * creates an instance of Sensor.
+   * @constructor
    * @param {object} props
-   * @param {function} updateSensor binding current object with updateSensor
    */
   constructor(props){
     super(props);
@@ -71,33 +85,42 @@ export default class Sensor extends SICKComponent {
     this.props.update(this.props.updateUrl);
   }
 
+  /**
+   * mouseover handler
+   */
   mouseover(e){
     e.preventDefault();
     this.props.onTouchStart(this.props.id);
   }
 
+  /**
+   * mouseout handler
+   */
   mouseout(){
     this.props.onTouchEnd(this.props.id);
   }
 
   /**
-   * setting frequency
-   */
+   * React lifecycle method :
+   * setting frequency to update sensor
+  */
   componentDidMount () {
     interval=setInterval(this.updateSensor,this.props.updateFreq*1000);
   }
 
   /**
+   * React lifecycle method :
    * clear setInterval
-   */
+  */
   componentWillUnmount(){
     clearInterval(interval);
   }
 
   /**
+   * React lifecycle method :
    * Renders the component.
-   * import RaisedButton from 'material-ui/RaisedButton'
-   */
+   * @returns {ReactElement}
+  */
   render () {
     const style = Object.assign({width:this.props.width,height:this.props.height},this.props.style)
     const raisedButtonStyle = Object.assign({minWidth:0},style);

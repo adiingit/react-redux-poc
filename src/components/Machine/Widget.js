@@ -28,8 +28,7 @@ const dispatchToProps = {
 }
 
 /**
-*@const
-*@type {object}
+*@const {object}
 */
 const sensorStyle = {
   width : 50,
@@ -38,8 +37,7 @@ const sensorStyle = {
 };
 
 /**
-*@const
-*@type {object}
+*@const {object}
 */
 const machineStyle = {
   width : 600,
@@ -49,29 +47,33 @@ const machineStyle = {
 
 /**
   *@class
-  *Description:-
+  *<h3>Description:-</h3>
   *<p>Machine Schematic is a presentation of sensors placed on a machine. </p>
   *<p>Each sensor has their own position over a blueprint (image) of machine.</p>
-  *<p>Machine Schematic widget is integrated with a Template and retrieves configuration of machines from a REST API.After mounting the Machine Schematic configurations, the sensors are loaded from a REST API with information about each sensor (i.e their location coordinates and initial state)  and placed over the machine.</p>
+  *<p>Machine Schematic widget is integrated with a Template and retrieves configuration of machines from a REST API.After mounting the Machine Schematic configurations,
+  * the sensors are loaded from a REST API with information about each sensor (i.e their location coordinates and initial state)  and placed over the machine.</p>
   *<p>The functionality of sensor is to change their state (color: gray, red, green) over a period of time through polling depending on the information fetched from REST API for each of the sensor independently.</p>
   *<p>The information about machines, sensor location and their state is configurable and retrieved from REST API.</p>
   *
-  * <p>Setup:-</p>
+  * <h3>Setup:-</h3>
   * Fetch basic configuration for numbers of MachineSchematic, information about each schematics and their sensors loaction from REST API for MachineWidget.
   *
-  * <p> Precondition:-</p>
+  * <h3> Precondition:-</h3>
   * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>
   * <p> Prop 1: url, type: string, isRequired</p>
   * <p> Prop 2: onMachineChange, type: function</p>
-  * <p>Integration:-</p>
-  * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
+  *
+  * <h3>Integration:-</h3>
+  * <p> This is a container component that composes 2 presentational components (Machine and Sensor).</p>
+  * <p> To use the presentational component (Machine) either use Widget(container component) with required props and stateMappings(stateToProps and DispatchToProps) 
+  * or create your own container component that fills all the props for Machine</p>
 */
 
 export class MachineWidget extends SICKComponent {
 
   /** Precondition (Static propTypes)
-   * @returns { propTypes.url url isRequired ,  propTypes.onMachineChange onMachineChange}
-   */
+  * @returns { propTypes url string isRequired ,  propTypes function onMachineChange}
+  */
   static propTypes() {
     return{
       url : PropTypes.string.isRequired,
@@ -80,8 +82,8 @@ export class MachineWidget extends SICKComponent {
   }
 
   /**
-   * * creates an instance of MachineWidget.
-   * @param {function} createSensor binding current object with createSensor
+   * creates an instance of MachineWidget.
+   * @param {object} props 
    */
   constructor(props){
     super(props);
@@ -90,7 +92,7 @@ export class MachineWidget extends SICKComponent {
 
   /**
    * configuration of sensor.
-   * @param sensor
+   * @param {object} sensor
    */
   createSensor(sensor){
     const sensorData = this.props.machineConfig.get('sensorData');
@@ -116,6 +118,7 @@ export class MachineWidget extends SICKComponent {
   }
 
   /*
+   * React lifecycle method :
    *  getting and setting machine configurations
    */
   componentDidUpdate(){
@@ -127,6 +130,7 @@ export class MachineWidget extends SICKComponent {
   }
 
   /**
+   * React lifecycle method :
    * setting initial values
    */
   componentWillMount(){
@@ -134,17 +138,19 @@ export class MachineWidget extends SICKComponent {
   }
 
   /**
-   *props value
-   */
+   *React lifecycle method :
+   * check if update should be done.
+  */
   componentWillReceiveProps(nextProps){
     this.machineUpdate=(this.props.url!==nextProps.url);
     this.sensorUpdate = !this.props.machineConfig || (this.props.machineConfig.get('sensors').length !== nextProps.machineConfig.get('sensors').length)
   }
 
   /**
+   *React lifecycle method :
    *Renders the component.
    *Machine from './Machine'
-   */
+  */
   render () {
     
     return (
@@ -157,6 +163,9 @@ export class MachineWidget extends SICKComponent {
   }
 }
 
+/**
+* @export - container component (MachineWidget)
+*/
 export default connect(mapStateToProps,dispatchToProps)(MachineWidget);
 
 

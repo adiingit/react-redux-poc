@@ -6,17 +6,17 @@ import { get } from '../utils/httpRequest'
 // ------------------------------------
 /**
  * Constant SENSOR_STATUS_RECEIVED
- * @type {string}
+ * @const {string}
  */
 export const SENSOR_STATUS_RECEIVED = 'SENSOR_STATUS_RECEIVED'
 /**
  * Constant CURRENT_SYSTEM_LOADED
- * @type {string}
+ * @const {string}
  */
 export const CURRENT_SYSTEM_LOADED = 'CURRENT_SYSTEM_LOADED'
 /**
  * Constant MACHINE_LOADED
- * @type {string}
+ * @const {string}
  */
 export const MACHINE_LOADED = 'MACHINE_LOADED'
 export const DISPLAY_SENSOR_VALUE = 'DISPLAY_SENSOR_VALUE'
@@ -27,7 +27,9 @@ export const DISPLAY_SENSOR_VALUE = 'DISPLAY_SENSOR_VALUE'
 const fetchSensor = (sensorStatus) => ({ type: SENSOR_STATUS_RECEIVED,sensorStatus })
 
 /**
- * This function is used to fetch sensor status from REST API.
+ * @func
+ * @param {string} url
+ * This function is used to fetch sensor status.
  */
 export const fetchSensorStatus = (url) => {
   return (dispatch) => {
@@ -41,6 +43,11 @@ export const fetchSensorStatus = (url) => {
   }
 }
 
+/**
+ * @func
+ * @param {string} url
+ * This function is used to fetch current loaded machine.
+ */
 export const fetchCurrentSystem = () => {
   return (dispatch) => {
     dispatch({ type: CURRENT_SYSTEM_LOADED })
@@ -50,6 +57,8 @@ export const fetchCurrentSystem = () => {
 const fetchMachine = (machine) => ({ type: MACHINE_LOADED,machine })
 
 /**
+ * @func
+ * @param {string} url
  * This function is used to fetch machine configurations.
  */
 export const fetchMachineConfig = (url) => {
@@ -64,6 +73,11 @@ export const fetchMachineConfig = (url) => {
   }
 }
 
+/**
+ * @func
+ * @param {string} id
+ * This function is used to display current sensor value.
+ */
 export const displaySensorValue = (id) => {
   return (dispatch) => {
     dispatch({ type: DISPLAY_SENSOR_VALUE,id })

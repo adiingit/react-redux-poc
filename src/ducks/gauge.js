@@ -20,10 +20,14 @@ export const FETCH_GAUGE_READING = 'FETCH_GAUGE_READING'
  */
 export const TOGGLE_GAUGE_READING = 'TOGGLE_GAUGE_READING'
 const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
+
 // ------------------------------------
 // Actions
 // ------------------------------------
+
 /**
+ * @func
+ * @param {string} url
  * This function is used to fetch gauge current reading from REST API.
  */
 export const fetchCurrentReading = url => {
@@ -35,6 +39,8 @@ export const fetchCurrentReading = url => {
 }
 
 /**
+ * @func
+ * @param {number} value
  * This function is used to show gauge reading on button.
  */
 export const renderReading = (value) => {
@@ -43,6 +49,11 @@ export const renderReading = (value) => {
 
 const rangesReceived = (ranges) => ({ type: GAUGE_RANGE_CONFIG_RECEIVED,ranges })
 
+/**
+ * @func
+ * @param {string} url
+ * This function is used to fetch gauge config.
+ */
 export const getGaugeConfig = (url) => {
   return (dispatch) => {
     return get(url)
