@@ -9,7 +9,7 @@ import SICKComponent from '../SICKComponent'
 export default class Needle extends SICKComponent {
 
     /** Precondition (Static propTypes)
-     * @returns { propTypes.pivotPoint object pivotPoint with x and y value isRequired ,  propTypes.needleLength needleLength value isRequired , propTypes.color  color value isRequired, propTypes.value value isRequired, propTypes.startAngle startAngle value isRequired, propTypes.unitAngleRotation unitAngleRotation value isRequired, propTypes.mouseover mouseover function isOptional, , propTypes.mouseout mouseout function isOptional, , propTypes.path path string isOptional}
+     * @returns { propTypes.pivotPoint object pivotPoint with x and y isRequired ,  propTypes.needleLength needleLength isRequired , propTypes.color  color isRequired, propTypes.value isRequired, propTypes.startAngle startAngle isRequired, propTypes.unitAngleRotation unitAngleRotation isRequired, propTypes.mouseover mouseover, propTypes.mouseout mouseout, propTypes.path path }
      */
 	static PropTypes () {
 	    return{

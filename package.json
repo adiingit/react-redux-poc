@@ -9,7 +9,7 @@
     "bundle": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress",
     "bundle:dev": "cross-env NODE_ENV=development webpack --config ./build/webpack.config.development.js --progress",
     "clean": "rimraf ./dist",
-    "docs": "rimraf ./docs && esdoc -c .esdocrc",
+    "docs": "rimraf ./docs && esdoc -c .esdoc.json",
     "lint": "eslint ./ --ext .js",
     "lint:fix": "npm run lint -- --fix",
     "prebuild": "npm run clean && npm run lint",

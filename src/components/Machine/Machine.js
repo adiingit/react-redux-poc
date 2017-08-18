@@ -2,17 +2,35 @@ import React,{PropTypes} from 'react'
 import Paper from 'material-ui/Paper'
 import SICKComponent from '../SICKComponent'
 
+/**
+* <p>Description:-</p>
+* To draw a machine schematic on Paper Component with information of image, name, location of sensors that are fetched from Rest API.
+*/
 export default class Machine extends SICKComponent {
 
-  static propTypes = {
-    image : PropTypes.string,
-    sensors : PropTypes.arrayOf(PropTypes.node).isRequired
+  /** Precondition (Static propTypes)
+   * @returns { propTypes.image image string isOptional ,  propTypes.sensors sensors array isRequired}
+   */
+  static propTypes () {
+    return{
+        image : PropTypes.string,
+        sensors : PropTypes.arrayOf(PropTypes.node).isRequired
+    }
   };
 
-  static defaultProps ={
-    sensors : []
+  /** Default Props
+   * @returns { array of sensors}
+   */
+  static defaultProps(){
+    return{
+      sensors : []
+    }
   }
 
+  /**
+   * Renders the component.
+   * Paper from 'material-ui/Paper'
+   */
   render () {
     const paperStyle = Object.assign({},{
       backgroundImage:`url(${this.props.image})`,

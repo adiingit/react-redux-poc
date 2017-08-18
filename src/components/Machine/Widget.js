@@ -19,6 +19,10 @@ const dispatchToProps = {
     displaySensorValue
 }
 
+/**
+ *
+ * @type {{width: number, height: number, borderRadius: string}}
+ */
 const sensorStyle = {
   width : 50,
   height : 50,
@@ -32,26 +36,49 @@ const machineStyle = {
 }
 
 /**
-*Description:-
-*Machine Schematic is a presentation of sensors placed on a machine. 
-*Each sensor has their own position over a blueprint (image) of machine.
-*Machine Schematic widget is integrated with a Template and retrieves configuration of machines from a REST API.After mounting the Machine Schematic configurations, the sensors are loaded from a REST API with information about each sensor (i.e their location coordinates and initial state)  and placed over the machine.
-*The functionality of sensor is to change their state (color: gray, red, green) over a period of time through polling depending on the information fetched from REST API for each of the sensor independently.
-*The information about machines, sensor location and their state is configurable and retrieved from REST API.
-*/
+  *Description:-
+  *<p>Machine Schematic is a presentation of sensors placed on a machine. </p>
+  *<p>Each sensor has their own position over a blueprint (image) of machine.</p>
+  *<p>Machine Schematic widget is integrated with a Template and retrieves configuration of machines from a REST API.After mounting the Machine Schematic configurations, the sensors are loaded from a REST API with information about each sensor (i.e their location coordinates and initial state)  and placed over the machine.</p>
+  *<p>The functionality of sensor is to change their state (color: gray, red, green) over a period of time through polling depending on the information fetched from REST API for each of the sensor independently.</p>
+  *<p>The information about machines, sensor location and their state is configurable and retrieved from REST API.</p>
+  *
+  * <p>Setup:-</p>
+  * Fetch basic configuration for numbers of MachineSchematic, information about each schematics and their sensors loaction from REST API for MachineWidget.
+  *
+  * <p> Precondition:-</p>
+  * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>
+  * <p> Prop 1: url, type: string, isRequired</p>
+  * <p> Prop 2: onMachineChange, type: function</p>
+  * <p>Integration:-</p>
+  * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
+  */
 
 export class MachineWidget extends SICKComponent {
 
-  static propTypes = {
-    url : PropTypes.string.isRequired,
-    onMachineChange : PropTypes.func
+  /** Precondition (Static propTypes)
+   * @returns { propTypes.url url isRequired ,  propTypes.onMachineChange onMachineChange}
+   */
+  static propTypes() {
+    return{
+      url : PropTypes.string.isRequired,
+      onMachineChange : PropTypes.func
+    }
   }
 
+  /**
+   * * creates an instance of MachineWidget.
+   * @param {function} createSensor binding current object with createSensor
+   */
   constructor(props){
     super(props);
     this.createSensor = this.createSensor.bind(this);
   }
 
+  /**
+   * configuration of sensor.
+   * @param sensor
+   */
   createSensor(sensor){
     const sensorData = this.props.machineConfig.get('sensorData');
     const sensorDisplayData = this.props.machineConfig.get('sensorDisplay');
@@ -75,7 +102,9 @@ export class MachineWidget extends SICKComponent {
           );
   }
 
-
+  /*
+   *  getting and setting machine configurations
+   */
   componentDidUpdate(){
     if(this.sensorUpdate)
       this.props.onMachineChange(this.props.machineConfig.get('sensors').length);
@@ -84,15 +113,25 @@ export class MachineWidget extends SICKComponent {
     }
   }
 
+  /**
+   * setting initial values
+   */
   componentWillMount(){
     this.props.fetchMachineConfig(this.props.url);
   }
 
+  /**
+   *props value
+   */
   componentWillReceiveProps(nextProps){
     this.machineUpdate=(this.props.url!==nextProps.url);
     this.sensorUpdate = !this.props.machineConfig || (this.props.machineConfig.get('sensors').length !== nextProps.machineConfig.get('sensors').length)
   }
 
+  /**
+   *Renders the component.
+   *Machine from './Machine'
+   */
   render () {
     
     return (
