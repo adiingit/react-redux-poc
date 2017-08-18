@@ -37,8 +37,8 @@ export const fetchCurrentReading = url => {
 /**
  * This function is used to show gauge reading on button.
  */
-export const renderCurrentReading = () => {
-    return { type: TOGGLE_GAUGE_READING };
+export const renderReading = (value) => {
+    return { type: TOGGLE_GAUGE_READING,value };
 }
 
 const rangesReceived = (ranges) => ({ type: GAUGE_RANGE_CONFIG_RECEIVED,ranges })
@@ -69,7 +69,7 @@ const ACTION_HANDLERS = {
   },
   [TOGGLE_GAUGE_READING]: (state, data) => {
     let nextState = state
-    nextState = nextState.setIn(['raisedButton'], !nextState.get('raisedButton'));
+    nextState = nextState.setIn(['buttonData'], data.value);
     return nextState
   },
   [FETCH_GAUGE_READING]: (state,data) => {

@@ -34,13 +34,21 @@ export default class Needle extends SICKComponent {
     constructor(props) {
         super(props);
         this.mouseHover = this.mouseHover.bind(this);
+        this.mouseOut = this.mouseOut.bind(this);
     }
 
     /**
     * mouse hover handler
     */
     mouseHover(event,target){
-        this.props.mouseover(event,target,this.props.value);
+        this.props.mouseover({x:event.pageX,y:event.pageY,label:this.props.value});
+    }
+
+    /**
+    * mouse hover handler
+    */
+    mouseOut(event,target){
+        this.props.mouseout();
     }
 
     /**
@@ -85,7 +93,7 @@ export default class Needle extends SICKComponent {
                 d={this.path} 
                 fill={this.props.color} 
                 onMouseOver={this.mouseHover}
-                onMouseOut={this.props.mouseout}
+                onMouseOut={this.mouseOut}
                 />
             </g>
         )

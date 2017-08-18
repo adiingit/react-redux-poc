@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from '../../SICKPlatform'
 import SICKComponent from '../SICKComponent'
-import {renderCurrentReading,fetchCurrentReading,getGaugeConfig} from '../../ducks/gauge'
+import {renderReading,fetchCurrentReading,getGaugeConfig} from '../../ducks/gauge'
 import {getPointOnCircle} from '../../utils/shape'
 import GaugeSvg from './GaugeSvg'
 import Needle from './Needle'
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = {renderCurrentReading,fetchCurrentReading,getGaugeConfig};
+const mapDispatchToProps = {renderReading,fetchCurrentReading,getGaugeConfig};
 
 /**
  * style for div#gauge-widget
@@ -68,12 +68,6 @@ const needleProps = {
     color:'#000'
 }
 
-const validator = (...types) => (...args) => {
-  const errors = types.map((type) => type(...args)).filter(Boolean);
-  if (errors.length === 0) return;
-  const message = errors.map((e) => e.message).join('\n');
-  return new Error(message);
-};
 
 /**
  * <p>Description:-</p>
@@ -101,32 +95,9 @@ export class GaugeWidget extends SICKComponent {
      * @returns { propTypes.value minimum value isRequired ,  propTypes.polling maximum value isRequired , propTypes.readingUrl Range of values isRequired}
      */
 	static propTypes = {
-        value : validator(PropTypes.number.isRequired,function(props, propName, componentName){
-            if (!props.hasOwnProperty(propName) && !props.hasOwnProperty('readingUrl')){
-                if(!props.polling){
-                    return new Error(`set prop ${propName}`);
-                }else{
-                    return new Error(`set prop readingUrl`);
-                }
-            }
-
-            if(props.hasOwnProperty(propName) && props.polling){
-                return new Error(`${propName} is not an online feature,set Prop polling false`);
-            }
-        }),
+        value : PropTypes.number.isRequired,
         polling : PropTypes.bool.isRequired,
-        readingUrl : validator(PropTypes.string.isRequired,function(props, propName, componentName){
-            if (!props.hasOwnProperty(propName) && !props.hasOwnProperty('value')){
-                if(props.polling){
-                    return new Error(`set prop ${propName}`);
-                }else{
-                    return new Error(`set prop value`);
-                }
-            }
-            if(props.hasOwnProperty(propName) && !props.polling){
-                return new Error(`${propName} is an online feature,set Prop polling true`);
-            }
-        }),
+        readingUrl : PropTypes.string.isRequired,
         configUrl : PropTypes.string.isRequired
 	}
 
@@ -140,8 +111,6 @@ export class GaugeWidget extends SICKComponent {
      */
     constructor(props) {
         super(props);
-        this.showValue = this.showValue.bind(this);
-        this.hideValue = this.hideValue.bind(this);
         this.updateReading = this.updateReading.bind(this); 
     }
 
@@ -150,29 +119,6 @@ export class GaugeWidget extends SICKComponent {
      */
     updateReading(){
         this.props.fetchCurrentReading(this.props.readingUrl);
-    }
-
-    /**
-     * showing current reading on mouseover
-     */
-    showValue(e,target,value){
-        this.buttonData={x:e.pageX,y:e.pageY,label:value};
-        this.props.renderCurrentReading();
-    }
-
-    /**
-     * hiding reading on mouseout
-     */
-    hideValue(){
-        this.buttonData = undefined;
-        this.props.renderCurrentReading();
-    }
-
-    /**
-     * updating buttonData
-     */
-    componentDidUpdate(){
-        this.buttonData = undefined;
     }
 
     /**
@@ -205,13 +151,11 @@ export class GaugeWidget extends SICKComponent {
      * @return {string} - HTML markup for the component
      */
     render() {
-        let max,min,rangeData,raisedButton,currentValue,labelData;
-        if (this.props.gauge.size) {
+        let max,min,rangeData,labelData;
+        if (this.props.gauge.get('range')) {
             max = Math.max(...this.props.gauge.get('range').map((r) => r.max))
             min = Math.min(...this.props.gauge.get('range').map((r) => r.min))
             rangeData = this.props.gauge.get('range')
-            raisedButton = this.props.gauge.get('raisedButton')
-            currentValue = this.props.gauge.get('currentValue') || (!this.props.polling && this.props.value) || min;
             const data = Array.isArray(rangeData) ? rangeData : rangeData.toArray();
             rangeData = data.map((range) => {
                 return {
@@ -225,12 +169,14 @@ export class GaugeWidget extends SICKComponent {
                 labelData.push(labelData[labelData.length - 1] + range.value);
             });
         }
+        const currentValue = this.props.gauge.get('currentValue') || (!this.props.polling && this.props.value) || min;
+        const buttonData = this.props.gauge.get('buttonData')
         
         return ( 
         	<div id="gauge-widget" style={divStyle}>
                 <Paper circle={true} style={pageStyle} zDepth={5}>
             		{
-                        this.props.gauge.size && <GaugeSvg 
+                        rangeData && <GaugeSvg 
                         style={svgStyle} 
                         width={gaugeProps.width}
                         height={gaugeProps.height}
@@ -250,18 +196,18 @@ export class GaugeWidget extends SICKComponent {
                                 value={currentValue}
                                 startAngle={gaugeProps.startAngle}
                                 unitAngleRotation = {(gaugeProps.endAngle-gaugeProps.startAngle)/(max-min)}
-                                mouseover={this.showValue}
-                                mouseout={this.hideValue}/>
+                                mouseover={this.props.renderReading}
+                                mouseout={this.props.renderReading}/>
                             }
                         />
                     }
 
                     {   
-                        this.buttonData && 
+                        buttonData && 
                         <RaisedButton 
                         primary={true}
-                        style={{position:'absolute',top:this.buttonData.y,left:this.buttonData.x}}
-                        label={String(this.buttonData.label)}/>
+                        style={{position:'absolute',top:buttonData.y,left:buttonData.x}}
+                        label={String(buttonData.label)}/>
                     }
 
                 </Paper>        
