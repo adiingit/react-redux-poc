@@ -71,15 +71,14 @@ app.get('/sensor/:sensor/status',(req,res)=>{
       id:req.params.sensor,
       idle:!health,
       status:health?status:undefined,
-      color: health?(status?theme.colors.greenA700:theme.colors.redA700):undefined
+      color: health?(status?theme.colors.greenA700:theme.colors.redA700):theme.colors.blueGrey50
   });
 });
 
 
 app.get('/machine/:machine',(req,res)=>{
-  console.log(req.params.machine);
   const locations= [
-  {name: '01',image:'images/Auto_pallet1.png',"sensors":[{'x': 190, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
+  {name: '01',image:'images/Auto_pallet1.png',"sensors":[{'x': 200, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
   {name: '84',image:'images/Auto_pallet2.PNG',"sensors":[{'x': 305, 'y': 103},{'x': 125, 'y': 182}, {'x': 380, 'y': 150}, {'x': 200, 'y': 195}]},
   {name: '185',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 214, 'y': 305},{"x":85,"y":91,},{"x":180,"y":41}]}];
   const currentMachineConfig = locations.filter(location=>location.name===req.params.machine)[0];

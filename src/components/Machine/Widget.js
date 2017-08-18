@@ -4,7 +4,7 @@ import Sensor from './Sensor'
 import Machine from './Machine'
 import SICKComponent from '../SICKComponent'
 import { connect } from '../../SICKPlatform'
-import {fetchCurrentSystem,fetchMachineConfig,fetchSensorStatus} from '../../ducks/machine'
+import {fetchCurrentSystem,fetchMachineConfig,fetchSensorStatus,displaySensorValue} from '../../ducks/machine'
 
 const mapStateToProps = (state)=>{
   return {
@@ -15,7 +15,8 @@ const mapStateToProps = (state)=>{
 const dispatchToProps = {
     fetchCurrentSystem,
     fetchMachineConfig,
-    fetchSensorStatus
+    fetchSensorStatus,
+    displaySensorValue
 }
 
 const sensorStyle = {
@@ -25,12 +26,9 @@ const sensorStyle = {
 };
 
 const machineStyle = {
-  width : '50%',
-  height : '50%',
-  left:'25%',
-  marginTop:50,
-  marginBottom:50,
-  position:'absolute'
+  width : 600,
+  height : 400,
+  margin :'50 auto'
 }
 
 /**
@@ -56,16 +54,21 @@ export class MachineWidget extends SICKComponent {
 
   createSensor(sensor){
     const sensorData = this.props.machineConfig.get('sensorData');
+    const sensorDisplayData = this.props.machineConfig.get('sensorDisplay');
     return (this.props.machineConfig? (<Sensor 
               key={sensor.id}
+              id={String(sensor.id)}
+              width={sensorStyle.width}
+              height={sensorStyle.height}
               updateUrl={sensor.url}
               color={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].color):''} 
               location={{x:sensor.x,y:sensor.y}}
-              width={sensorStyle.width}
-              height={sensorStyle.height}
               label={sensor.label}
               update={this.props.fetchSensorStatus}
               updateFreq={sensor.updateFreq} 
+              onTouchStart={this.props.displaySensorValue}
+              onTouchEnd={this.props.displaySensorValue}
+              sensorDisplay={sensorDisplayData && sensorDisplayData[sensor.id]}
               idle={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].idle):true} 
               status={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].status):false} 
               style={{borderRadius:sensorStyle.borderRadius}}/>):null

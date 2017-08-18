@@ -7,6 +7,7 @@ import { get } from '../utils/httpRequest'
 export const SENSOR_STATUS_RECEIVED = 'SENSOR_STATUS_RECEIVED'
 export const CURRENT_SYSTEM_LOADED = 'CURRENT_SYSTEM_LOADED'
 export const MACHINE_LOADED = 'MACHINE_LOADED'
+export const DISPLAY_SENSOR_VALUE = 'DISPLAY_SENSOR_VALUE'
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -43,12 +44,17 @@ export const fetchMachineConfig = (url) => {
       })
   }
 }
+
+export const displaySensorValue = (id) => {
+  return (dispatch) => {
+    dispatch({ type: DISPLAY_SENSOR_VALUE,id })
+  }
+}
+
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-/*const range = Record({
- "id":0,"min": 0 ,"max":0
- })*/
 
 const ACTION_HANDLERS = {
   [CURRENT_SYSTEM_LOADED]: (state,system) => {
@@ -70,6 +76,12 @@ const ACTION_HANDLERS = {
     if(data && data.sensorStatus){
         nextState = nextState.setIn(['sensorData'],{[data.sensorStatus.id]:data.sensorStatus});
     }
+    return nextState
+  },
+  [DISPLAY_SENSOR_VALUE]:(state,data) => {
+    let nextState = state
+    const visible = !(nextState.get('sensorDisplay') && nextState.get('sensorDisplay')[data.id]);
+    nextState = nextState.setIn(['sensorDisplay'],{[data.id]:visible});
     return nextState
   }
 }
