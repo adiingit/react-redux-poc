@@ -4,7 +4,7 @@ import SICKComponent from '../SICKComponent'
 
 /**
 * <p>Description:-</p>
-* To draw a machine schematic with image, name, sensors location retrieves from Rest API.
+* To draw a machine schematic on Paper Component with information of image, name, location of sensors that are fetched from Rest API.
 */
 export default class Machine extends SICKComponent {
 
