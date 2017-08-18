@@ -46,7 +46,6 @@ const machineStyle = {
 }
 
 /**
-  *@class
   *<h3>Description:-</h3>
   *<p>Machine Schematic is a presentation of sensors placed on a machine. </p>
   *<p>Each sensor has their own position over a blueprint (image) of machine.</p>

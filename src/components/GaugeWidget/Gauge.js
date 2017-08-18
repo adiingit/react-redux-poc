@@ -78,7 +78,6 @@ const needleProps = {
 
 
 /**
- *@class
  * <h3>Description:-</h3>
  *<p>The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum and maximum). The reading can lie within any range specified in configuration.</p>
  *<p>The structure is in a way to have Widgets working independently. The components (needle and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.</p>
