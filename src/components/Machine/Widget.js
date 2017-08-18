@@ -6,12 +6,20 @@ import SICKComponent from '../SICKComponent'
 import { connect } from '../../SICKPlatform'
 import {fetchCurrentSystem,fetchMachineConfig,fetchSensorStatus,displaySensorValue} from '../../ducks/machine'
 
+/**
+* @func Mapping component state to props of presentaional components 
+* @param {Object} state
+* @returns {Object} containing props
+*/
 const mapStateToProps = (state)=>{
   return {
     machineConfig : state.machine.size?state.machine:null
   }
 }
 
+/**
+* @const {object} - redux actionCreators
+*/
 const dispatchToProps = {
     fetchCurrentSystem,
     fetchMachineConfig,
@@ -20,15 +28,19 @@ const dispatchToProps = {
 }
 
 /**
- *
- * @type {{width: number, height: number, borderRadius: string}}
- */
+*@const
+*@type {object}
+*/
 const sensorStyle = {
   width : 50,
   height : 50,
   borderRadius : '50%'
 };
 
+/**
+*@const
+*@type {object}
+*/
 const machineStyle = {
   width : 600,
   height : 400,
@@ -36,6 +48,7 @@ const machineStyle = {
 }
 
 /**
+  *@class
   *Description:-
   *<p>Machine Schematic is a presentation of sensors placed on a machine. </p>
   *<p>Each sensor has their own position over a blueprint (image) of machine.</p>
@@ -52,7 +65,7 @@ const machineStyle = {
   * <p> Prop 2: onMachineChange, type: function</p>
   * <p>Integration:-</p>
   * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
-  */
+*/
 
 export class MachineWidget extends SICKComponent {
 

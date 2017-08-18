@@ -88,12 +88,15 @@ const ACTION_HANDLERS = {
       nextState = nextState.setIn(['image'],data.machine.image);
       nextState = nextState.setIn(['sensors'],data.machine.sensors)
     }
+    nextState = nextState.setIn(['sensorData'],null);
     return nextState;
   },
   [SENSOR_STATUS_RECEIVED]: (state, data) => {
     let nextState = state
+
     if(data && data.sensorStatus){
-        nextState = nextState.setIn(['sensorData'],{[data.sensorStatus.id]:data.sensorStatus});
+      const nextData=Object.assign({},nextState.get('sensorData'),{[data.sensorStatus.id]:data.sensorStatus})
+      nextState = nextState.setIn(['sensorData'],nextData);
     }
     return nextState
   },

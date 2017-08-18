@@ -80,7 +80,7 @@ app.get('/machine/:machine',(req,res)=>{
   const locations= [
   {name: '01',image:'images/Auto_pallet1.png',"sensors":[{'x': 200, 'y': 100},{'x': 335, 'y': 42}, {'x': 150, 'y': 190}]},
   {name: '84',image:'images/Auto_pallet2.PNG',"sensors":[{'x': 305, 'y': 103},{'x': 125, 'y': 182}, {'x': 380, 'y': 150}, {'x': 200, 'y': 195}]},
-  {name: '185',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 214, 'y': 305},{"x":85,"y":91,},{"x":180,"y":41}]}];
+  {name: '185',image:'images/Auto_pallet1.png',"sensors":[{'x': 300, 'y': 90}, {'x': 250, 'y': 245 },{'x': 394, 'y': 155},{'x':85,'y':91},{'x':180,'y':141}]}];
   const currentMachineConfig = locations.filter(location=>location.name===req.params.machine)[0];
   currentMachineConfig.sensors = currentMachineConfig.sensors.map((sensor,i)=>{
     return Object.assign({},sensor,{

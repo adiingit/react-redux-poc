@@ -3,15 +3,28 @@ import * as d3 from 'd3'
 import SICKComponent from '../SICKComponent'
 
 /**
- * <p>Description:-</p>
- * GaugeSvg Component is used to draw arc/circle and include other properties(i.e. width, height, min, max, radius, startAngle, endAngle etc. ) which are retrieved from REST API.
+ * <h3>Description:-</h3>
+ * <p>GaugeSvg Component is a presentational component.</p>
+ * <p>Renders an configurable arc shaped gauge that can act as a general purpose measuring gauge.</p>
  */
 export default class GaugeSvg extends SICKComponent {
 
-    /** Precondition (Static propTypes)
-     * @returns { propTypes.width width isRequired ,  propTypes.height height isRequired , propTypes.min min isRequired, propTypes.max isRequired, propTypes.raduis raduis isRequired, propTypes.innerRadius innerRadius, propTypes.startAngle startAngle, propTypes.endAngle endAngle, propTypes.labels labels isRequired, propTypes.style style}
-     */
-    static PropTypes() {
+    /** 
+    *Precondition (Static propTypes)
+    * @returns {Object} validations
+            { PropTypes width number isRequired ,
+              PropTypes height number isRequired ,
+              PropTypes min number isRequired,
+              PropTypes max number isRequired, 
+              PropTypes raduis number isRequired, 
+              PropTypes innerRadius number, 
+              PropTypes startAngle number, 
+              PropTypes endAngle number, 
+              PropTypes rangeData object{value:number,color:string}
+              PropTypes labels array[String] isRequired, 
+              PropTypes style object}
+    */
+    static propTypes() {
         return{
             width:PropTypes.number.isRequired,
             height:PropTypes.number.isRequired,
@@ -33,6 +46,7 @@ export default class GaugeSvg extends SICKComponent {
 
     /**
      * creates a instance of GaugeSvg.
+     * @param {object} props
      */
     constructor(props) {
         super(props);
@@ -49,15 +63,17 @@ export default class GaugeSvg extends SICKComponent {
     }
 
     /**
-     * setting initial values
-     */
+    * React lifecycle method :
+    * setting initial position
+    */
     componentWillMount(){
         this.transform = "translate(" + this.props.radius + "," + this.props.radius + ")";
     }
 
     /**
-     *loading config information.
-     */
+    * React lifecycle method :
+    * Drawing gauge arc with labels as per the props.
+    */
     componentDidMount() {
         
         const pi = Math.PI;
@@ -109,9 +125,10 @@ export default class GaugeSvg extends SICKComponent {
     }
 
     /**
-     * Renders the component.
-     * @return {ReactElement} - HTML for svg tag.
-     */
+    * React lifecycle method :
+    * Renders the component.
+    * @return {ReactElement} svg Element.
+    */
     render() {
         return ( 
             <svg style={this.props.style}>

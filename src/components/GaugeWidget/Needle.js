@@ -3,15 +3,29 @@ import * as d3 from 'd3'
 import SICKComponent from '../SICKComponent'
 
 /**
-* <p>Description:-</p>
- * Use to draw a NeedleComponent whoose properties(i.e. needleLength, color, path etc. ) are configurable from REST API.
- */
+* <h3>Description:-</h3>
+* Needle is a presentational component.
+* Needle Component renders a svg element that represents a rotatable marker/pointer on a circular scale.
+*/
 export default class Needle extends SICKComponent {
 
-    /** Precondition (Static propTypes)
-     * @returns { propTypes.pivotPoint object pivotPoint with x and y isRequired ,  propTypes.needleLength needleLength isRequired , propTypes.color  color isRequired, propTypes.value isRequired, propTypes.startAngle startAngle isRequired, propTypes.unitAngleRotation unitAngleRotation isRequired, propTypes.mouseover mouseover, propTypes.mouseout mouseout, propTypes.path path }
-     */
-	static PropTypes () {
+    /** 
+    *Precondition (propTypes)
+    *@static
+    *@returns {object} validations
+        { 
+            propTypes pivotPoint object{x:number,y:number} isRequired ,  
+            propTypes needleLength number isRequired , 
+            propTypes color string isRequired, 
+            propTypes value number isRequired, 
+            propTypes startAngle number isRequired, 
+            propTypes unitAngleRotation number isRequired, 
+            propTypes mouseover function mouseover, 
+            propTypes mouseout function mouseout, 
+            propTypes path path 
+        }
+    */
+	static propTypes () {
 	    return{
             pivotPoint : PropTypes.objectOf(PropTypes.shape({
                 x:PropTypes.number.isRequired,
@@ -29,8 +43,9 @@ export default class Needle extends SICKComponent {
 	}
 
     /**
-     * creates a instance of Needle.
-     */
+    * creates a instance of Needle.
+    * @param {object} props
+    */
     constructor(props) {
         super(props);
         this.mouseHover = this.mouseHover.bind(this);
@@ -45,27 +60,28 @@ export default class Needle extends SICKComponent {
     }
 
     /**
-    * mouse hover handler
+    * mouse out handler
     */
     mouseOut(event,target){
         this.props.mouseout();
     }
 
     /**
-     * updating angle rotation
-     */
+    * React lifecycle method :
+    * updating angle rotation
+    */
     componentDidUpdate(){
         const startAngleOffset= 90+this.props.startAngle;
         d3.select('g.needle')
                         .transition()
                         .duration(2000)
                         .attr('transform',`rotate(${startAngleOffset+(this.props.unitAngleRotation*this.props.value)})`);
-        
     }
 
     /**
-     * setting initial values for Needle i.e. start, end, arc, path
-     */
+    * React lifecycle method :   
+    * setting initial values for Needle i.e. start, end, arc, path
+    */
     componentWillMount() {
         const start = `${this.props.pivotPoint.x},${this.props.pivotPoint.y}`;
         const end = `${-1*this.props.needleLength} 0`
@@ -74,8 +90,9 @@ export default class Needle extends SICKComponent {
     }
 
     /**
-     * setting angle rotation
-     */
+    * React lifecycle method : 
+    * initial angle rotation
+    */
     componentDidMount(){
         const angle=90+this.props.startAngle+(this.props.unitAngleRotation*this.props.value)
         d3.select('g.needle')
@@ -83,8 +100,9 @@ export default class Needle extends SICKComponent {
     }
 
     /**
+    * React lifecycle method :
     * Renders the component.
-    * @return {ReactElement} - HTML for g tag.
+    * @returns {ReactElement} - svg Element.
     */
     render() {
         return (

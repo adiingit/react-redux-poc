@@ -9,16 +9,24 @@ import {getPointOnCircle} from '../../utils/shape'
 import GaugeSvg from './GaugeSvg'
 import Needle from './Needle'
 
+/*
+* @Function Mapping component state to props of presentaional components 
+* @param {Object} state
+* @returns {Object} containing props
+*/
 const mapStateToProps = (state) => {
     return {
         gauge : state.gauge
     }
 }
 
+/*
+* @Object redux actionCreators for GaugeWidget 
+*/
 const mapDispatchToProps = {renderReading,fetchCurrentReading,getGaugeConfig};
 
 /**
- * style for div#gauge-widget
+ * style for container div#gauge-widget
  */
 const divStyle = {
     textAlign: 'center',
@@ -48,7 +56,7 @@ const svgStyle = {
 }
 
 /**
- * default prop values for GaugeSvg Component
+ * input for prop values of GaugeSvg Component
  */
 const gaugeProps = {
 	height: 250,
@@ -60,7 +68,7 @@ const gaugeProps = {
 };
 
 /**
- * default prop values for Needle Component
+ * input for prop values of Needle Component
  */
 const needleProps = {
     pivotPoint:{x:0,y:0},
@@ -70,33 +78,47 @@ const needleProps = {
 
 
 /**
- * <p>Description:-</p>
+ *@exports
+ *@class 
+ * <h3>Description:-</h3>
  *<p>The work of Gauge Widget is to show the reading between minimum and maximum values (including minimum and maximum). The reading can lie within any range specified in configuration.</p>
- *<p>The structure is in a way to have Template and Widgets working independently. The components (needle, paper and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.</p>
+ *<p>The structure is in a way to have Widgets working independently. The components (needle and Gauge SVG) are configurable to fetch properties from REST API and are placed over the Template.</p>
  * <p>The Gauge Widget is configurable with properties like range colors, width, height, minValue, maxValue, radius, innerRadius, startAngle, endAngle, rangeData etc. retrieved from REST API.
  *  One can have Paper, Card or any Material UI widget and draw a Gauge Widget over a Template as all the properties are configurable.</p>
- * <p> The NeedleComponent placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it makes a REST Call to display the exact current value in a tooltip.</p>
- * <p>The Gauge Widget is decoupled from AppBar Widget and retrieves values from REST API call through polling(set polling props to true). However, one can couple it(by setting polling props to false) with AppBar Widget and listen to the dropdown selected value on change.</p>
+ * <p> The Needle Component placed over GaugeWidget Component is also configurable and fetch properties like pivotPoint, needleLength, color, value, startAngle, unitAngleRotation etc. from REST API. On Mouseover, it displays the exact current value in a tooltip.</p>
+ * <p>The Gauge Widget has an online and offline feature controlled by a prop 'polling'.</p>
+ * <p>If polling is set true , the widget retrieves current value from REST API call , setting polling to false will fetch current gauge value from AppBar Widget(or any input).</p>
  *
- * <p>Setup:-</p>
- * Fetch basic configuration viz. value, polling, readingUrl, configUrl from REST API for GaugeWidget.
+ * <h3>Setup:-</h3>
+ * Fetch basic configuration viz. configUrl from REST API for GaugeWidget.
+ * Add required props , value , readingUrl and polling.   
  *
- * <p> Precondition:-</p>
- * <p>After successful response from REST API, initial requirement is to set required propTypes. </p>
+ * <h3> Precondition:-</h3>
  * <p> Prop 1: value, type: number, isRequired</p>
  * <p> Prop 2: polling, type: boolean, isRequired</p>
  * <p> Prop 3: readingUrl, type: string, isRequired</p>
  * <p> Prop 4: configUrl, type: string, isRequired</p>
- * <p>Integration:-</p>
- * <p>To integrate the widget one need to get widget config from REST API and set required propTypes. Post that one is ready to use the widget.
+ *
+ * <h3>Integration:-</h3>
+ * <p> This is a container component that composes 2 presentational components (GaugeSvg and Needle).</p>
+ * <p> To use the presentational component (GaugeSvg) either use GaugeWidget(container component) with required props and stateMappings(stateToProps and DispatchToProps) 
+ * or create your own container component that fills all the props for GaugeSvg</p>
  */
 export class GaugeWidget extends SICKComponent {
 
-    /** Precondition (Static propTypes)
-     * @returns { propTypes.value value isRequired ,  propTypes.polling polling isRequired , propTypes.readingUrl readingUrl isRequired, propTypes.configUrl configUrl isRequired}
-     */
+    /** 
+    *Validation for props (Static propTypes)
+    * @static
+    * @returns {object} validators
+            {
+                PropTypes value number isRequired ,
+                PropTypes polling boolean isRequired ,
+                PropTypes readingUrl string isRequired,
+                PropTypes configUrl string isRequired
+            }
+    */
 	static propTypes () {
-	    return{
+        return{
             value : PropTypes.number.isRequired,
             polling : PropTypes.bool.isRequired,
             readingUrl : PropTypes.string.isRequired,
@@ -105,31 +127,32 @@ export class GaugeWidget extends SICKComponent {
 	}
 
     /**
-     * creates a instance of GaugeWidget.
-     * @param {object} props
-     * @param {function} updateReading binding current object with updateReading
-     */
+    * creates a instance of GaugeWidget.
+    * @param {Object} props
+    */
     constructor(props) {
         super(props);
         this.updateReading = this.updateReading.bind(this); 
     }
 
     /**
-     * loading reading from REST API call.
+     * reading current value for Gauge from REST API call.
      */
     updateReading(){
         this.props.fetchCurrentReading(this.props.readingUrl);
     }
 
     /**
-     * setting color, value, polling and other configurations.
-     */
+    * React lifecycle method :
+    * setting color, value, polling and other configurations.
+    */
     componentWillMount(){
         this.props.getGaugeConfig(this.props.configUrl);
     }
 
     /**
-    * setting interval and fetching reading for GaugeWidget.
+    * React lifecycle method :
+    * setting interval and fetching reading for GaugeWidget if polling feature is enabled.
     */
     componentDidMount() {
         if(this.props.polling)
@@ -137,19 +160,10 @@ export class GaugeWidget extends SICKComponent {
     }
 
     /**
-     * render
-     * @return {ReactElement} svg within PaperComponent to show GaugeWidget.
-     */
-
-    /**
-     * Renders the components.
-     *
-     * Paper from 'material-ui/Paper'
-     * GaugeSvg from './GaugeSvg'
-     * RaisedButton from 'material-ui/RaisedButton'
-     * Needle from './Needle'
-     * @return {string} - HTML markup for the components
-     */
+    * React lifecycle method :
+    * Renders this component
+    * @returns {ReactElement} - wrapped in material UI Paper Component
+    */
     render() {
         let max,min,rangeData,labelData;
         if (this.props.gauge.get('range')) {
