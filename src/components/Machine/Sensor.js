@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react'
 import SICKComponent from '../SICKComponent'
 import RaisedButton from 'material-ui/RaisedButton'
-import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Popover from 'material-ui/Popover';
 
 
 var interval;
@@ -129,7 +129,7 @@ export default class Sensor extends SICKComponent {
       position : 'relative',
       left : this.props.location.x - (this.props.width/2),
       top : this.props.location.y - (this.props.height/2)
-    },this.props.style);
+    },style);
 
     return (
       <div style={sensorStyle}>
@@ -149,8 +149,18 @@ export default class Sensor extends SICKComponent {
             onRequestClose = {this.mouseout}
         >
           <article style={{margin:10}}>
-            <div>Sensor {this.props.label}</div>
-            <div>Status:{this.props.idle?'idle':(this.props.status?'Ok':'Error')}</div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Sensor</td>
+                  <td>{this.props.label}</td>
+                </tr>
+                <tr>
+                  <td>Status:</td>
+                  <td>{this.props.idle?'idle':(this.props.status?'Ok':'Error')}</td>
+                </tr>
+              </tbody>  
+            </table>
           </article>  
         </Popover>
       </div>

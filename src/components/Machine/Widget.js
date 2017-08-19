@@ -33,7 +33,9 @@ const dispatchToProps = {
 const sensorStyle = {
   width : 50,
   height : 50,
-  borderRadius : '50%'
+  borderRadius : '50%',
+  margin:'none',
+  transition:'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
 };
 
 /**
@@ -112,7 +114,7 @@ export class MachineWidget extends SICKComponent {
               sensorDisplay={sensorDisplayData && sensorDisplayData[sensor.id]}
               idle={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].idle):true} 
               status={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].status):false} 
-              style={{borderRadius:sensorStyle.borderRadius}}/>):null
+              style={sensorStyle}/>):null
           );
   }
 
