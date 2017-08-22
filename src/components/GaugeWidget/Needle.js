@@ -25,12 +25,11 @@ export default class Needle extends SICKComponent {
             propTypes path path 
         }
     */
-	static propTypes () {
-	    return{
-            pivotPoint : PropTypes.objectOf(PropTypes.shape({
+	static propTypes = {
+            pivotPoint : PropTypes.shape({
                 x:PropTypes.number.isRequired,
                 y:PropTypes.number.isRequired
-            })).isRequired,
+            }).isRequired,
             needleLength:PropTypes.number.isRequired,
             color:PropTypes.string.isRequired,
             value:PropTypes.number.isRequired,
@@ -39,7 +38,6 @@ export default class Needle extends SICKComponent {
             mouseover : PropTypes.func,
             mouseout : PropTypes.func,
             path : PropTypes.string
-        }
 	}
 
     /**

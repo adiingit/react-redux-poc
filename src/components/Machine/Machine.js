@@ -9,23 +9,12 @@ import SICKComponent from '../SICKComponent'
 export default class Machine extends SICKComponent {
 
   /** Precondition (Static propTypes)
-   * @returns { propTypes.image string isOptional ,  propTypes.sensors array isRequired}
+   * @static @type { propTypes.image string isRequired ,  propTypes.sensors array isRequired}
    */
-  static propTypes () {
-    return{
-        image : PropTypes.string,
+  static propTypes = {
+        image : PropTypes.string.isRequired,
         sensors : PropTypes.arrayOf(PropTypes.node).isRequired
-    }
   };
-
-  /** Default Props
-   * @static {array} - sensors
-   */
-  static defaultProps(){
-    return{
-      sensors : []
-    }
-  }
 
   /**
    * React lifecycle method :

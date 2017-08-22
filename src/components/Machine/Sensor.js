@@ -17,7 +17,7 @@ export default class Sensor extends SICKComponent {
 
   /** Precondition (Static propTypes)
    * @static
-   * @returns {object} validators
+   * @type {object} validators
         { propTypes color string,  
           propTypes location object{x,y} isRequired, 
           propTypes width number isRequired, 
@@ -27,12 +27,11 @@ export default class Sensor extends SICKComponent {
           propTypes updateFreq number isRequired, 
           propTypes updateUrl string isRequired, 
           propTypes label string isRequired, 
-          propTypes idle boolean isRequired, 
+          propTypes idle boolean, 
           propTypes status boolean, 
           propTypes style object}
   */
-  static propTypes() {
-    return {
+  static propTypes = {
       id:PropTypes.string.isRequired,
       color : PropTypes.string,
       location : PropTypes.shape({
@@ -48,22 +47,22 @@ export default class Sensor extends SICKComponent {
       updateFreq : PropTypes.number.isRequired,
       updateUrl : PropTypes.string.isRequired,
       label : PropTypes.number.isRequired,
-      idle : PropTypes.bool.isRequired,
+      idle : PropTypes.bool,
       status : PropTypes.bool,
       style : PropTypes.object
-   }
   };
 
   /**
    * Default Props
-   * @returns {object} - props
+   * @static @type {object} - props
    */
-  static defaultProps() {
-    return{
+  static defaultProps = {
       idle : true,
+      status : false,
+      color: '#fff',
       onTouchStart : function(){},
+      onTouchEnd : function(){},
       sensorDisplay : false
-    }
   }
 
   /**

@@ -11,12 +11,12 @@ export default class GaugeSvg extends SICKComponent {
 
     /** 
     *Precondition (Static propTypes)
-    * @returns {Object} validations
+    *@static @type {Object} validations
             { PropTypes width number isRequired ,
               PropTypes height number isRequired ,
               PropTypes min number isRequired,
               PropTypes max number isRequired, 
-              PropTypes raduis number isRequired, 
+              PropTypes radius number isRequired, 
               PropTypes innerRadius number, 
               PropTypes startAngle number, 
               PropTypes endAngle number, 
@@ -24,13 +24,12 @@ export default class GaugeSvg extends SICKComponent {
               PropTypes labels array[String] isRequired, 
               PropTypes style object}
     */
-    static propTypes() {
-        return{
+    static propTypes = {
             width:PropTypes.number.isRequired,
             height:PropTypes.number.isRequired,
             min:PropTypes.number.isRequired,
             max:PropTypes.number.isRequired,
-            raduis:PropTypes.number.isRequired,
+            radius:PropTypes.number.isRequired,
             innerRadius:PropTypes.number,
             startAngle:PropTypes.number,
             endAngle:PropTypes.number,
@@ -41,7 +40,6 @@ export default class GaugeSvg extends SICKComponent {
             labels:PropTypes.arrayOf(PropTypes.string).isRequired,
             needle:PropTypes.node.isRequired,
             style:PropTypes.object
-        }
     }
 
     /**
@@ -55,7 +53,7 @@ export default class GaugeSvg extends SICKComponent {
     /**
      * default prop values.
      */
-    static defaultProps ={
+    static defaultProps = {
         innerRadius : 0,
         startAngle : -90,
         endAngle : 90,

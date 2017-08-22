@@ -107,7 +107,7 @@ export class GaugeWidget extends SICKComponent {
     /** 
     *Validation for props (Static propTypes)
     * @static
-    * @returns {object} validators
+    * @type {object} validators
             {
                 PropTypes value number isRequired ,
                 PropTypes polling boolean isRequired ,
@@ -115,13 +115,11 @@ export class GaugeWidget extends SICKComponent {
                 PropTypes configUrl string isRequired
             }
     */
-	static propTypes () {
-        return{
+	static propTypes = {
             value : PropTypes.number.isRequired,
             polling : PropTypes.bool.isRequired,
             readingUrl : PropTypes.string.isRequired,
             configUrl : PropTypes.string.isRequired
-        }
 	}
 
     /**
@@ -176,9 +174,9 @@ export class GaugeWidget extends SICKComponent {
                 }
             });
 
-            labelData = [min];
+            labelData = [String(min)];
             rangeData.forEach(range => {
-                labelData.push(labelData[labelData.length - 1] + range.value);
+                labelData.push(String(labelData[labelData.length - 1] + range.value));
             });
         }
         const currentValue = this.props.gauge.get('currentValue') || (!this.props.polling && this.props.value) || min;

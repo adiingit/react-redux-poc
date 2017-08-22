@@ -73,13 +73,11 @@ const machineStyle = {
 export class MachineWidget extends SICKComponent {
 
   /** Precondition (Static propTypes)
-  * @returns { propTypes url string isRequired ,  propTypes function onMachineChange}
+  * @static @type { propTypes url string isRequired ,  propTypes function onMachineChange}
   */
-  static propTypes() {
-    return{
+  static propTypes = {
       url : PropTypes.string.isRequired,
       onMachineChange : PropTypes.func
-    }
   }
 
   /**
@@ -112,7 +110,7 @@ export class MachineWidget extends SICKComponent {
               onTouchStart={this.props.displaySensorValue}
               onTouchEnd={this.props.displaySensorValue}
               sensorDisplay={sensorDisplayData && sensorDisplayData[sensor.id]}
-              idle={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].idle):true} 
+              idle={sensorData?(sensorData[sensor.id]?(sensorData[sensor.id].idle):true):true} 
               status={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].status):false} 
               style={sensorStyle}/>):null
           );
