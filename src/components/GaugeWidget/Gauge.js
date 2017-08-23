@@ -174,10 +174,11 @@ export class GaugeWidget extends SICKComponent {
                 }
             });
 
-            labelData = [String(min)];
+            labelData = [min];
             rangeData.forEach(range => {
-                labelData.push(String(labelData[labelData.length - 1] + range.value));
-            });
+                labelData.push(labelData[labelData.length - 1] + range.value);
+            })
+            labelData=labelData.map(range=>String(range));
         }
         const currentValue = this.props.gauge.get('currentValue') || (!this.props.polling && this.props.value) || min;
         const buttonData = this.props.gauge.get('buttonData')
