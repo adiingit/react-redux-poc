@@ -68,7 +68,7 @@ export const fetchMachineConfig = (url) => {
         dispatch(fetchMachine(machine))
       })
       .catch(err => {
-        console.log(err)
+        console.log('Error:',err)
       })
   }
 }

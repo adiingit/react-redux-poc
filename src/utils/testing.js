@@ -4,8 +4,8 @@ import SICKMuiTheme from '../SICKMuiTheme'
 
 const options = {context: {muiTheme: getMuiTheme(SICKMuiTheme)}}
 
-export const mountWithContext = (component) => mount(component, options)
+export const mountWithContext = (component,moreOptions) => mount(component, Object.assign({},options,moreOptions));
 
-export const shallowWithContext = (component) => shallow(component, options)
+export const shallowWithContext = (component,moreOptions) => shallow(component, Object.assign({},options,moreOptions))
 
-export const renderWithContext = (component) => render(component, options)
+export const renderWithContext = (component,moreOptions) => render(component, Object.assign({},options,moreOptions))

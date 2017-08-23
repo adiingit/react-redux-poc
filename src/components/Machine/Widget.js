@@ -104,7 +104,7 @@ export class MachineWidget extends SICKComponent {
               updateUrl={sensor.url}
               color={sensorData?(sensorData[sensor.id] && sensorData[sensor.id].color):''} 
               location={{x:sensor.x,y:sensor.y}}
-              label={sensor.label}
+              label={String(sensor.label)}
               update={this.props.fetchSensorStatus}
               updateFreq={sensor.updateFreq} 
               onTouchStart={this.props.displaySensorValue}

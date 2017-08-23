@@ -71,7 +71,7 @@ app.get('/sensor/:sensor/status',(req,res)=>{
       id:req.params.sensor,
       idle:!health,
       status:health?status:undefined,
-      color: health?(status?theme.colors.greenA700:theme.colors.redA700):theme.colors.blueGrey50
+      color: health?(status?theme.colors.greenA700:theme.colors.redA700):theme.colors.grey100
   });
 });
 

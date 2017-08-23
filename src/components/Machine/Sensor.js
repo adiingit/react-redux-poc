@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover';
 
 
+
+
 var interval;
 
 /**
@@ -46,7 +48,7 @@ export default class Sensor extends SICKComponent {
       update : PropTypes.func.isRequired,
       updateFreq : PropTypes.number.isRequired,
       updateUrl : PropTypes.string.isRequired,
-      label : PropTypes.number.isRequired,
+      label : PropTypes.string.isRequired,
       idle : PropTypes.bool,
       status : PropTypes.bool,
       style : PropTypes.object
