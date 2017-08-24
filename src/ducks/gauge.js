@@ -19,7 +19,7 @@ export const FETCH_GAUGE_READING = 'FETCH_GAUGE_READING'
  * @type {string}
  */
 export const TOGGLE_GAUGE_READING = 'TOGGLE_GAUGE_READING'
-const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
+export const GAUGE_RANGE_CONFIG_RECEIVED = 'GAUGE_RANGE_CONFIG_RECEIVED'
 
 // ------------------------------------
 // Actions
@@ -86,7 +86,6 @@ const ACTION_HANDLERS = {
   [FETCH_GAUGE_READING]: (state,data) => {
     let nextState = state
     nextState = nextState.setIn(['currentValue'], data.reading);
-    //nextState = nextState.setIn(['raisedButton'], undefined);
     return nextState;
   }
 }

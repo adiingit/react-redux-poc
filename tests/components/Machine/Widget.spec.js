@@ -60,26 +60,6 @@ describe('Testing <Machine Widget/>', () => {
 				expect(machineComp.prop('sensors')).to.have.length(3);
 			});
 	  	});
-
-	  	//todo
-	  	it.skip('renders a machine widget - checks for update on sensor data change', () => {
-	  		store.dispatch(fetchMachineConfig(wrapper.prop('url')));
-	  		const config = wrapper.prop('machineConfig');
-	  		store.dispatch(fetchSensorStatus(config.get('url'))).then(()=>{
-				const sensors = wrapper.children('Sensor');
-				const sensorData = wrapper.prop('machineConfig').get('sensorData');
-				const machineComp = wrapper.find('Machine');
-				
-				expect(machineComp.exists()).to.be.true;
-				expect(config.get('machineName')).to.be.equal('01');
-				expect(machineComp.prop('image')).to.be.equal('images/Auto_pallet1.png');
-				expect(machineComp.prop('sensors')).to.have.length(3);
-			});
-	  		wrapper.setProps({url:'/new/url'});
-	  		expect(MachineWidget.prototype.componentWillReceiveProps).to.have.been.called;
-	  		expect(wrapper.instance().componentDidUpdate).to.have.been.called;
-	  		expect(wrapper.prop('fetchMachineConfig')).to.have.been.called;
-	  	});
 	});
 
 });	
