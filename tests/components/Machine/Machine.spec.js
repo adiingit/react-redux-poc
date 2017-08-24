@@ -74,7 +74,7 @@ describe('Testing <Machine />', () => {
 		it('renders a machine - checks for a Paper Component', () => {
 		    expect(wrapper.find('Paper').exists()).to.be.true;
 	  	});
-	  	it('renders a sensor - should not contain any sensor', () => {
+	  	it('renders a sensor - should contain sensors', () => {
 	  		expect(wrapper.find('Paper').children('Sensor')).to.have.length(2);
 	  	});
 	  	it('renders a sensor - should have a machine schematic image', () => {

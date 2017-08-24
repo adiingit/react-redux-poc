@@ -35,6 +35,12 @@ fetchMock.get('/gauge/ranges', (url) => {
     ]
 })
 
-
+fetchMock.get('/sensor/1/status', (url) => {
+    return {
+       id:1,
+       idle:true,
+       color:'#cacaca'
+    }
+})
 
 fetchMock.spy()

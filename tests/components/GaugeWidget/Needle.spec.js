@@ -7,7 +7,7 @@ import { shallowWithContext,mountWithContext,renderWithContext } from '../../../
 import Needle from '../../../src/components/GaugeWidget/Needle';
 
 describe('Testing <Needle />', () => {
-    describe('With default config', () => {
+    describe('With config', () => {
         let wrapper;
         beforeEach(() => {
             const updateFunction = sinon.spy();
@@ -22,7 +22,7 @@ describe('Testing <Needle />', () => {
                 mouseout={updateFunction}/>;
             wrapper = mountWithContext(needleComponent);
         });
-        describe("function", () => {
+        describe("for mouse event functions", () => {
             it('renders a needle - on mouseover of needle', () => {
                 wrapper.find('path').simulate('mouseover');
                 expect(wrapper.find('path').prop('onMouseOver')).to.have.been.called;
@@ -33,7 +33,7 @@ describe('Testing <Needle />', () => {
                 expect(wrapper.find('path').prop('onMouseOut')).to.have.been.called;
             });
         });
-        describe("Props", () => {
+        describe("for Props", () => {
             it('renders a needle - should have a needle value', function () {
                 expect(wrapper.props().value).to.equal(1);
             });
@@ -60,7 +60,7 @@ describe('Testing <Needle />', () => {
             });
         });
 
-        it('renders a g element - should have className needle', () => {
+        it('renders an element - should have className needle', () => {
             expect(wrapper.find('g.needle').exists()).to.equal(true);
         });
 

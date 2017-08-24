@@ -1,16 +1,16 @@
 import React from 'react';
 import configureStore from 'redux-mock-store'
-import { shallowWithContext,mountWithContext,renderWithContext } from '../../../src/utils/testing';
+import { shallowWithContext, mountWithContext, renderWithContext } from '../../../src/utils/testing';
 import { shallow, mount, render } from 'enzyme'
 import thunk from 'redux-thunk'
 import mockData from '../../mock/mockFetch'
-import {expect} from 'chai';
+import { expect } from 'chai';
 import sinon from 'sinon';
-import { Map, OrderedMap, Record ,List} from 'immutable';
-import {GaugeWidget} from '../../../src/components/GaugeWidget/Gauge';
+import { Map, OrderedMap, Record, List } from 'immutable';
+import { GaugeWidget } from '../../../src/components/GaugeWidget/Gauge';
 import Needle from '../../../src/components/GaugeWidget/Needle';
 import GaugeSvg from '../../../src/components/GaugeWidget/GaugeSvg';
-import {renderReading,fetchCurrentReading,getGaugeConfig} from '../../../src/ducks/gauge';
+import { renderReading, fetchCurrentReading, getGaugeConfig } from '../../../src/ducks/gauge';
 import Paper from 'material-ui/Paper';
 
 describe('Testing <Gauge Widget/>', () => {
@@ -18,38 +18,38 @@ describe('Testing <Gauge Widget/>', () => {
     const mockStore = configureStore([thunk]);
     let store;
     beforeEach(() => {
-        store = mockStore({gauge: Map()});
+        store = mockStore({ gauge: Map() });
     });
-    describe('With redux store', () => {
+    describe('Without redux store', () => {
         let wrapper, rangeData, labelData
         beforeEach(() => {
             const spyFunction = sinon.spy();
-            const widgetComponent = <GaugeWidget
-                configUrl={'/gauge/ranges'}
-                readingUrl={'/gauge/reading'}
-                polling={false}
-                value={185}
-                gauge={Map()}
-                getGaugeConfig={spyFunction}
-                renderReading={spyFunction}
-                fetchCurrentReading={spyFunction}/>
+            const widgetComponent = < GaugeWidget
+            configUrl = { '/gauge/ranges' }
+            readingUrl = { '/gauge/reading' }
+            polling = { false }
+            value = { 185 }
+            gauge = { Map() }
+            getGaugeConfig = { spyFunction }
+            renderReading = { spyFunction }
+            fetchCurrentReading = { spyFunction }
+            />
             wrapper = mount(widgetComponent);
             labelData = [0];
-            rangeData = [{"min": 0, "max": 25, "color": "#2962ff"}, {
+            rangeData = [{ "min": 0, "max": 25, "color": "#2962ff" }, {
                 "min": 25,
                 "max": 50,
                 "color": "#00c853"
-            }, {"min": 50, "max": 75, "color": "#ffd600"}, {"min": 75, "max": 200, "color": "#d50000"}]
-            wrapper.setProps({gauge: Map({'range': List(rangeData)})});
+            }, { "min": 50, "max": 75, "color": "#ffd600" }, { "min": 75, "max": 200, "color": "#d50000" }]
+            wrapper.setProps({ gauge: Map({ 'range': List(rangeData) }) });
         });
 
         it('renders a gauge - checks for a Paper Component', () => {
-            console.log(wrapper.debug());
             expect(wrapper.find(Paper).exists()).to.be.true;
         });
 
 
-    it('renders a GaugeSvg widget - checks for GaugeSvg Component', () => {
+        it('renders a GaugeSvg widget - checks for GaugeSvg Component', () => {
             expect(wrapper.find(GaugeSvg).exists()).to.be.true;
         });
         it('renders a GaugeSvg widget - checks for mapDispatchToProps', () => {
@@ -63,40 +63,41 @@ describe('Testing <Gauge Widget/>', () => {
         let wrapper, rangeData, labelData
         beforeEach(() => {
             const spyFunction = sinon.spy();
-            const widgetComponent = <GaugeWidget
-                configUrl={'/gauge/ranges'}
-                readingUrl={'/gauge/reading'}
-                polling={false}
-                value={185}
-                gauge={Map()}
-                getGaugeConfig={spyFunction}
-                renderReading={spyFunction}
-                fetchCurrentReading={spyFunction}/>
+            const widgetComponent = < GaugeWidget
+            configUrl = { '/gauge/ranges' }
+            readingUrl = { '/gauge/reading' }
+            polling = { false }
+            value = { 185 }
+            gauge = { Map() }
+            getGaugeConfig = { spyFunction }
+            renderReading = { spyFunction }
+            fetchCurrentReading = { spyFunction }
+            />
             wrapper = mount(widgetComponent, store);
             labelData = [0];
-            rangeData = [{"min": 0, "max": 25, "color": "#2962ff"}, {
+            rangeData = [{ "min": 0, "max": 25, "color": "#2962ff" }, {
                 "min": 25,
                 "max": 50,
                 "color": "#00c853"
-            }, {"min": 50, "max": 75, "color": "#ffd600"}, {"min": 75, "max": 200, "color": "#d50000"}]
-            wrapper.setProps({gauge: Map({'range': List(rangeData)})});
+            }, { "min": 50, "max": 75, "color": "#ffd600" }, { "min": 75, "max": 200, "color": "#d50000" }]
+            wrapper.setProps({ gauge: Map({ 'range': List(rangeData) }) });
         });
         describe("prop types required", () => {
 
-            it('should have an initial value', function () {
+            it('should have an initial value', function() {
 
                 expect(wrapper.prop('value')).to.equal(185);
             });
 
-            it('should have an initial polling', function () {
+            it('should have an initial polling', function() {
                 expect(wrapper.prop('polling')).to.equal(false);
             });
 
-            it('should have an initial readingUrl', function () {
+            it('should have an initial readingUrl', function() {
                 expect(wrapper.prop('readingUrl')).to.equal('/gauge/reading');
             });
 
-            it('should have an initial configUrl', function () {
+            it('should have an initial configUrl', function() {
 
                 store.dispatch(getGaugeConfig(wrapper.prop('configUrl'))).then(() => {
                     const gaugeComp = wrapper.find('GaugeSvg');
@@ -115,7 +116,7 @@ describe('Testing <Gauge Widget/>', () => {
                     gauge: Map({
                         'range': List(rangeData),
                         'currentValue': 84,
-                        'buttonData': {x: 841, y: 393, label: 84}
+                        'buttonData': { x: 841, y: 393, label: 84 }
                     })
                 });
             });
@@ -149,14 +150,14 @@ describe('Testing <Gauge Widget/>', () => {
             });
 
             it('should have default labelData', () => {
-                expect(wrapper.find('GaugeSvg').prop('labels')).to.deep.equal([ '0', '25', '50', '75', '200' ]);
+                expect(wrapper.find('GaugeSvg').prop('labels')).to.deep.equal(['0', '25', '50', '75', '200']);
             });
 
             it('should have default rangeData', () => {
                 expect(wrapper.find('GaugeSvg').prop('rangeData')).to.deep.equal([{
                     value: 25,
                     color: '#2962ff'
-                }, {value: 25, color: '#00c853'}, {value: 25, color: '#ffd600'}, {value: 125, color: '#d50000'}]);
+                }, { value: 25, color: '#00c853' }, { value: 25, color: '#ffd600' }, { value: 125, color: '#d50000' }]);
             })
 
             it('should have default min', () => {
@@ -165,12 +166,12 @@ describe('Testing <Gauge Widget/>', () => {
 
             describe("on modifying rangeData set", () => {
                 beforeEach(() => {
-                    rangeData = [{"min": 50, "max": 100, "color": "#2962ff"}, {
+                    rangeData = [{ "min": 50, "max": 100, "color": "#2962ff" }, {
                         "min": 100,
                         "max": 150,
                         "color": "#00c853"
-                    }, {"min": 150, "max": 200, "color": "#ffd600"}]
-                    wrapper.setProps({gauge: Map({'range': List(rangeData)})});
+                    }, { "min": 150, "max": 200, "color": "#ffd600" }]
+                    wrapper.setProps({ gauge: Map({ 'range': List(rangeData) }) });
                 });
 
                 it('prop labelData get changed', () => {
@@ -181,7 +182,7 @@ describe('Testing <Gauge Widget/>', () => {
                     expect(wrapper.find('GaugeSvg').prop('rangeData')).to.deep.equal([{
                         value: 50,
                         color: '#2962ff'
-                    }, {value: 50, color: '#00c853'}, {value: 50, color: '#ffd600'}]);
+                    }, { value: 50, color: '#00c853' }, { value: 50, color: '#ffd600' }]);
                 });
 
                 describe("minimum value", () => {
@@ -223,28 +224,25 @@ describe('Testing <Gauge Widget/>', () => {
             });
 
             it('on modifying current value props value get changed', () => {
-                wrapper.setProps({gauge: Map({'range': List(rangeData), 'currentValue': 21})});
+                wrapper.setProps({ gauge: Map({ 'range': List(rangeData), 'currentValue': 21 }) });
                 expect(wrapper.find('Needle').prop('value')).to.equal(21)
             });
 
             it('on setting polling to true', () => {
-                wrapper.setProps({polling: true});
+                wrapper.setProps({ polling: true });
                 expect(wrapper.find('Needle').prop('value')).to.equal(0)
             });
 
             it('on modifying rangeData set unitAngleRotation value get changed', () => {
-                rangeData = [{"min": 0, "max": 20, "color": "#2962ff"}, {
+                rangeData = [{ "min": 0, "max": 20, "color": "#2962ff" }, {
                     "min": 20,
                     "max": 40,
                     "color": "#00c853"
-                }, {"min": 40, "max": 100, "color": "#ffd600"}]
-                wrapper.setProps({gauge: Map({'range': List(rangeData)})});
+                }, { "min": 40, "max": 100, "color": "#ffd600" }]
+                wrapper.setProps({ gauge: Map({ 'range': List(rangeData) }) });
                 expect(wrapper.find('Needle').prop('unitAngleRotation')).to.equal(1);
             });
 
         });
     });
 });
-
-
-
