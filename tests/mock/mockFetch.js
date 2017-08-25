@@ -1,5 +1,6 @@
 import fetchMock from 'fetch-mock'
 import { systemList } from './data/systemList.json'
+const theme = require('material-ui/styles')
 
 const restBaseUrl = window.location.origin
 
@@ -19,5 +20,21 @@ fetchMock.get('/machine/1', (url) => {
         updateFreq: 2
     }
 })
+
+fetchMock.get('/gauge/reading', (url) => {
+    return 185
+})
+
+
+fetchMock.get('/gauge/ranges', (url) => {
+    return [
+        {min:0, max:25, color:theme.colors.blueA700},
+        {min:25, max:50, color:theme.colors.greenA700},
+        {min:50, max:75, color:theme.colors.yellowA700},
+        {min:75, max:200, color:theme.colors.redA700}
+    ]
+})
+
+
 
 fetchMock.spy()
