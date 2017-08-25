@@ -94,7 +94,12 @@ describe('Testing <Gauge Widget/>', () => {
             });
 
             it('should have an initial readingUrl', function() {
-                expect(wrapper.prop('readingUrl')).to.equal('/gauge/reading');
+                store.dispatch(getGaugeConfig(wrapper.prop('readingUrl'))).then(() => {
+                    const gaugeComp = wrapper.find('GaugeSvg');
+
+                    expect(gaugeComp.exists()).to.be.true;
+                    expect(gaugeComp.prop('value')).to.be.equal(185);
+                });
             });
 
             it('should have an initial configUrl', function() {

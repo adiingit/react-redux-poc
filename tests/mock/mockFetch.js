@@ -22,7 +22,7 @@ fetchMock.get('/machine/1', (url) => {
 })
 
 fetchMock.get('/gauge/reading', (url) => {
-    return 185
+    return '185'
 })
 
 
